@@ -1,0 +1,13 @@
+.TopNav .search-opener svg {
+  margin-right: 1ch;
+  opacity: 0.6;
+  vertical-align: bottom;
+}
+
+.TopNav .search-opener:focus {
+  outline: none;
+}
+
+.TopNav .search-opener:hover svg {
+  opacity: 1;
+}

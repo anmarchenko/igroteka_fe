@@ -1,0 +1,53 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import { Link } from 'react-router-dom';
+import {
+  UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
+} from 'reactstrap';
+
+import Avatar from './Avatar';
+
+import './UserMenu.css';
+
+export const UserMenu = ({ user, signOut }) => (
+  <UncontrolledDropdown nav className="UserMenu">
+    <DropdownToggle className="nav-link" tag="a">
+      <Avatar {...user} />
+    </DropdownToggle>
+    <DropdownMenu right>
+      <DropdownItem className="user-link" tag={Link} to={`/users/${user.id}/show`}>
+        My profile
+      </DropdownItem>
+      <DropdownItem className="user-link" tag={Link} to="/users/edit">
+        Change password
+      </DropdownItem>
+      <DropdownItem divider />
+      <DropdownItem className="user-link" onClick={signOut}>
+        Sign out
+      </DropdownItem>
+    </DropdownMenu>
+  </UncontrolledDropdown>
+);
+
+UserMenu.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    avatar: PropTypes.shape({
+      thumb: PropTypes.string,
+    }),
+    initials: PropTypes.string,
+    color: PropTypes.string,
+  }),
+  signOut: PropTypes.func.isRequired,
+};
+
+UserMenu.defaultProps = {
+  user: {
+    avatar: {
+      thumb: null,
+    },
+  },
+};
+
+export default UserMenu;

@@ -1,0 +1,13 @@
+.UserMenu {
+  cursor: pointer;
+}
+
+.UserMenu .dropdown-menu {
+  position: absolute;
+}
+
+.UserMenu .dropdown-item {
+  cursor: pointer;
+  padding-bottom: 7px;
+  padding-top: 7px;
+}
