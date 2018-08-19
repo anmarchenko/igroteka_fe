@@ -1,0 +1,18 @@
+.BacklogFilters {
+  display: flex;
+  flex-direction: row;
+}
+
+.BacklogFilter {
+  margin-right: 2ch;
+}
+
+@media (max-width: 768px) {
+  .BacklogFilters {
+    flex-direction: column;
+  }
+
+  .BacklogFilter {
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,18 @@
+.BacklogEntries-empty {
+  font-size: 1.5em;
+  color: rgba(0, 0, 0, 0.44);
+}
+
+.BacklogEntries .game-name-column {
+  min-width: 200px;
+}
+
+.BacklogEntries .game-poster-column {
+  width: 120px;
+}
+
+@media (max-width: 768px) {
+  .BacklogEntries .game-name-column {
+    min-width: 100px;
+  }
+}
