@@ -1,0 +1,58 @@
+.GlobalSearch {
+  background: white;
+  min-height: 100%;
+  padding-top: 2em;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10000;
+}
+
+.GlobalSearch input.form-control {
+  border: 0;
+  font-size: 5em;
+  margin-top: 0.5em;
+  height: inherit;
+}
+
+.GlobalSearch input.form-control:focus {
+  border: 0;
+  box-shadow: none;
+}
+
+.GlobalSearch .dropdown-menu {
+  border: 0;
+  margin-top: 1em;
+  width: 100%;
+}
+
+.GlobalSearch .SearchClose {
+  color: black;
+  opacity: 0.5;
+}
+
+.GlobalSearch .SearchClose:hover {
+  opacity: 1;
+}
+
+.GlobalSearch .SearchClose:focus {
+  outline: none;
+}
+
+.GlobalSearch .GlobalSearchLoading,
+.Typeahead-empty {
+  margin-top: 1em;
+  font-size: 2em;
+  color: rgba(0, 0, 0, 0.44);
+}
+
+@media (max-width: 573px) {
+  .GlobalSearch input {
+    font-size: 2em;
+  }
+
+  .GlobalSearch .SearchClose img {
+    width: 2em;
+  }
+}

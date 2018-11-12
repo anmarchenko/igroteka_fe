@@ -38,6 +38,9 @@ const Api = {
       .join('&');
     return axios.get(`${SKARO_HOST}/api/backlog_entries?${queryString}`);
   },
+  search(term) {
+    return axios.get(`${SKARO_HOST}/api/games?term=${encodeURIComponent(term)}`);
+  },
 };
 
 export default Api;

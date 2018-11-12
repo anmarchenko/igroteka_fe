@@ -9,6 +9,8 @@ import { Helmet } from 'react-helmet';
 import { SIGN_IN_REQUESTED } from '../store/login';
 import { VALIDATION_ERRORS } from '../constants';
 
+/* eslint-disable jsx-a11y/label-has-associated-control */
+
 export class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -39,27 +41,19 @@ export class Login extends React.Component {
     return (
       <div className="container">
         <Helmet>
-          <title>
-Login | Igroteka
-          </title>
+          <title>Login | Igroteka</title>
         </Helmet>
         <div className="row justify-content-center">
           <div className="col-12 col-lg-8 col-xl-6">
             <Form schema={this.loginSchema} onSubmit={this.submit} className="login-form">
               <div className="form-group">
-                <label htmlFor="email">
-Email
-                </label>
+                <label htmlFor="email">Email</label>
                 <Form.Field name="email" type="email" className="form-control" />
-                <span className="error-message">
-                  {errors.error}
-                </span>
+                <span className="error-message">{errors.error}</span>
                 <Form.Message htmlFor="email" className="error-message" />
               </div>
               <div className="form-group">
-                <label htmlFor="password">
-Password
-                </label>
+                <label htmlFor="password">Password</label>
                 <Form.Field name="password" type="password" className="form-control" />
                 <Form.Message htmlFor="password" className="error-message" />
               </div>
@@ -75,6 +69,8 @@ Password
     );
   }
 }
+
+/* eslint-enable jsx-a11y/label-has-associated-control */
 
 Login.propTypes = {
   // TODO: refactor this

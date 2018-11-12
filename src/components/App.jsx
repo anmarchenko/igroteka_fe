@@ -13,6 +13,7 @@ import SessionContainer from './SessionContainer';
 import NotFound from './NotFound';
 import TopNav from './TopNav';
 import Notifications from './Notifications';
+import GlobalSearch from './GlobalSearch';
 
 import store from '../store';
 import history from '../store/history';
@@ -28,7 +29,10 @@ export const App = () => (
             <Redirect exact from="/" to="/collections/wishlist" />
 
             <GuestRoute path="/sign_in" component={Login} />
+
+            <PrivateRoute path="/search" component={GlobalSearch} />
             <PrivateRoute path="/collections/:status" component={MyBacklog} />
+
             <Route component={NotFound} />
           </Switch>
 

@@ -11,6 +11,7 @@
     "immutable": "^3.8.2",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
+    "react-debounce-input": "^3.2.0",
     "react-dom": "^16.4.2",
     "react-feather": "^1.1.1",
     "react-formal": "^0.28.5",

@@ -1,0 +1,56 @@
+.GameSearchItem {
+  display: flex;
+  flex-flow: row;
+  align-items: flex-start;
+  align-content: flex-start;
+
+  padding-bottom: 10px;
+  padding-top: 10px;
+  min-height: 150px;
+}
+
+.GameSearchItem .game-info {
+  vertical-align: top;
+}
+
+.GameSearchItem .game-description {
+  font-size: 1.2em;
+  color: rgba(0, 0, 0, 0.44);
+  margin-bottom: 0.5em;
+  white-space: normal;
+}
+
+.GameSearchItem .game-platforms {
+  white-space: normal;
+}
+
+.GameSearchItem .game-name small {
+  color: rgba(0, 0, 0, 0.44);
+  margin-left: 1ch;
+}
+
+.GameSearchItem .GamePoster {
+  margin-right: 3ch;
+}
+
+@media (max-width: 573px) {
+  .GameSearchItem {
+    min-height: 75px;
+  }
+
+  .GameSearchItem .game-poster {
+    width: 50px;
+    margin-right: 2ch;
+  }
+
+  .GameSearchItem .game-description {
+    display: none;
+  }
+  .GameSearchItem .game-platforms {
+    color: rgba(0, 0, 0, 0.44);
+  }
+  .GameSearchItem .game-name {
+    font-size: 1em;
+    white-space: normal;
+  }
+}
