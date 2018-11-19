@@ -48,7 +48,7 @@
 }
 
 @media (max-width: 573px) {
-  .GlobalSearch input {
+  .GlobalSearch input.form-control {
     font-size: 2em;
   }
 
