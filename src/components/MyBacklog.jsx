@@ -98,6 +98,7 @@ export class MyBacklog extends Component {
       entries,
       page,
       totalPages,
+      totalCount,
       status,
       filters,
     } = this.props;
@@ -109,9 +110,7 @@ export class MyBacklog extends Component {
     return (
       <div className="container">
         <Helmet>
-          <title>
-            {`${selectedStatus.label} | Igroteka`}
-          </title>
+          <title>{`${selectedStatus.label} | Igroteka`}</title>
         </Helmet>
         <div className="MyBacklog">
           <MyBacklogNav />
@@ -128,6 +127,7 @@ export class MyBacklog extends Component {
               entries={entries}
               page={page}
               totalPages={totalPages}
+              totalCount={totalCount}
               status={status}
               fetching={fetching}
               onPaginate={this.paginate}
@@ -167,6 +167,7 @@ MyBacklog.propTypes = {
   fetching: PropTypes.bool.isRequired,
   page: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
+  totalCount: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
 
   currentUser: PropTypes.shape({
@@ -187,6 +188,7 @@ const mapStateToProps = ({ session, myBacklog }, ownProps) => ({
 
   fetching: myBacklog.fetching,
   totalPages: myBacklog.totalPages,
+  totalCount: myBacklog.totalCount,
   page: myBacklog.page,
   status: ownProps.match.params.status,
 

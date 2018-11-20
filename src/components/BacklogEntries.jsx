@@ -8,14 +8,18 @@ import { BACKLOG_TABLE_COLUMNS } from '../constants';
 import './BacklogEntries.css';
 
 const BacklogEntries = ({
-  entries, status, fetching, totalPages, page, onPaginate,
+  entries,
+  status,
+  fetching,
+  totalPages,
+  totalCount,
+  page,
+  onPaginate,
 }) => {
   if (!entries || entries.length === 0) {
     return (
       <div className="row BacklogEntries-empty">
-        <div className="col-12">
-Collection is empty
-        </div>
+        <div className="col-12">Collection is empty</div>
       </div>
     );
   }
@@ -23,29 +27,23 @@ Collection is empty
   return (
     <div className="row">
       <div className="col-12">
-        {!fetching
-          && totalPages > 1 && (
-            <Pagination page={page} totalPages={totalPages} onPaginate={onPaginate} />
+        {!fetching && (
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            totalCount={totalCount}
+            onPaginate={onPaginate}
+          />
         )}
         <table className="table BacklogEntries">
           <thead className="thead-default">
             <tr>
-              <th className="game-poster-column d-none d-sm-table-cell">
-Poster
-              </th>
-              <th className="game-name-column">
-Name
-              </th>
+              <th className="game-poster-column d-none d-sm-table-cell">Poster</th>
+              <th className="game-name-column">Name</th>
               {columns.includes('expectationRating') && (
-                <th className="game-expectation-rating-column">
-Exp
-                </th>
+                <th className="game-expectation-rating-column">Exp</th>
               )}
-              {columns.includes('finished') && (
-              <th className="game-finished-column">
-Finished
-              </th>
-              )}
+              {columns.includes('finished') && <th className="game-finished-column">Finished</th>}
             </tr>
           </thead>
           <tbody>
@@ -54,10 +52,7 @@ Finished
             ))}
           </tbody>
         </table>
-        {!fetching
-          && totalPages > 1 && (
-            <Pagination page={page} totalPages={totalPages} onPaginate={onPaginate} />
-        )}
+        {!fetching && <Pagination page={page} totalPages={totalPages} onPaginate={onPaginate} />}
       </div>
     </div>
   );
@@ -84,6 +79,7 @@ BacklogEntries.propTypes = {
   fetching: PropTypes.bool.isRequired,
   page: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
+  totalCount: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
   onPaginate: PropTypes.func.isRequired,
 };

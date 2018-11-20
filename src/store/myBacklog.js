@@ -13,8 +13,10 @@ const sorting = {
 const initialState = {
   entries: [],
   fetching: true,
+
   page: 1,
   totalPages: 1,
+  totalCount: 0,
 
   availablePlatforms: [],
   ownedPlatforms: [],
@@ -46,8 +48,9 @@ export const OWNED_PLATFORMS_REQUESTED = 'OWNED_PLATFORMS_REQUESTED';
 export const OWNED_PLATFORMS_RECEIVED = 'OWNED_PLATFORMS_RECEIVED';
 
 const paginationAction = data => ({
-  page: data.page,
-  totalPages: data.total_pages,
+  page: data.meta.page,
+  totalPages: data.meta.total_pages,
+  totalCount: data.meta.total_count,
 });
 
 function* fetchAvailablePlatforms({ userId, status }) {
@@ -90,7 +93,7 @@ function* fetchEntries({ filters }) {
     });
     yield put({
       type: BACKLOG_ENTRIES_RECEIVED,
-      entries: response.data.entries,
+      entries: response.data.data,
       ...paginationAction(response.data),
     });
   } catch (error) {
@@ -107,6 +110,7 @@ export function* myBacklogWatch() {
 const paginationReducer = action => ({
   page: action.page,
   totalPages: action.totalPages,
+  totalCount: action.totalCount,
   hasMore: action.hasMore,
 });
 
