@@ -1,5 +1,4 @@
 import React from 'react';
-import Form from 'react-formal';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -11,12 +10,33 @@ import { VALIDATION_ERRORS } from '../constants';
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
+const yupToFormErrors = (yupException) => {
+  const errors = {};
+  if (yupException.inner.length === 0) {
+    errors[yupException.path] = yupException.message;
+    return errors;
+  }
+  yupException.inner.forEach((err) => {
+    if (!errors[err.path]) {
+      errors[err.path] = err.message;
+    }
+  });
+  return errors;
+};
+
 export class Login extends React.Component {
   constructor(props) {
     super(props);
+    this.handleChange = this.handleChange.bind(this);
     this.submit = this.submit.bind(this);
 
     const { required } = VALIDATION_ERRORS;
+
+    this.state = {
+      email: '',
+      password: '',
+      errors: {},
+    };
 
     this.loginSchema = yup.object().shape({
       email: yup
@@ -30,13 +50,36 @@ export class Login extends React.Component {
     });
   }
 
-  submit(formValue) {
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+      errors: {},
+    });
+  }
+
+  submit(e) {
+    if (e && e.preventDefault) e.preventDefault();
+
+    const { email, password } = this.state;
     const { signIn } = this.props;
-    signIn(formValue.email, formValue.password);
+    const component = this;
+
+    this.loginSchema.validate({ email, password }, { abortEarly: false }).then(
+      (formValue) => {
+        signIn(formValue.email, formValue.password);
+      },
+      (exception) => {
+        if (exception.name !== 'ValidationError') throw exception;
+        component.setState({
+          errors: yupToFormErrors(exception),
+        });
+      },
+    );
   }
 
   render() {
-    const { errors } = this.props;
+    const { email, password, errors } = this.state;
+    const { backendErrors } = this.props;
 
     return (
       <div className="container">
@@ -45,24 +88,37 @@ export class Login extends React.Component {
         </Helmet>
         <div className="row justify-content-center">
           <div className="col-12 col-lg-8 col-xl-6">
-            <Form schema={this.loginSchema} onSubmit={this.submit} className="login-form">
+            <form onSubmit={this.submit} className="login-form">
               <div className="form-group">
                 <label htmlFor="email">Email</label>
-                <Form.Field name="email" type="email" className="form-control" />
-                <span className="error-message">{errors.error}</span>
-                <Form.Message htmlFor="email" className="error-message" />
+                <input
+                  name="email"
+                  type="email"
+                  className="form-control"
+                  value={email}
+                  onChange={this.handleChange}
+                />
+                <span className="error-message">{backendErrors.error}</span>
+
+                <span className="error-message">{errors.email}</span>
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <Form.Field name="password" type="password" className="form-control" />
-                <Form.Message htmlFor="password" className="error-message" />
+                <input
+                  name="password"
+                  type="password"
+                  className="form-control"
+                  value={password}
+                  onChange={this.handleChange}
+                />
+                <span className="error-message">{errors.password}</span>
               </div>
               <div className="form-group">
-                <Form.Button type="submit" className="btn btn-outline-success btn-lg btn-block">
+                <button type="submit" className="btn btn-outline-success btn-lg btn-block">
                   Sign in
-                </Form.Button>
+                </button>
               </div>
-            </Form>
+            </form>
           </div>
         </div>
       </div>
@@ -74,13 +130,13 @@ export class Login extends React.Component {
 
 Login.propTypes = {
   // TODO: refactor this
-  errors: PropTypes.shape({
+  backendErrors: PropTypes.shape({
     error: PropTypes.string,
   }).isRequired,
   signIn: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({ errors: state.session.errors });
+const mapStateToProps = state => ({ backendErrors: state.session.errors });
 
 const mapDispatchToProps = dispatch => ({
   signIn(email, password) {

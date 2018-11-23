@@ -22,7 +22,6 @@ const initialState = {
   ownedPlatforms: [],
 
   filters: {
-    userId: null,
     status: null,
     page: 1,
     pageSize: 50,
@@ -53,9 +52,9 @@ const paginationAction = data => ({
   totalCount: data.meta.total_count,
 });
 
-function* fetchAvailablePlatforms({ userId, status }) {
+function* fetchAvailablePlatforms({ status }) {
   try {
-    const response = yield call(Api.fetchAvailablePlatforms, userId, status);
+    const response = yield call(Api.fetchAvailablePlatforms, status);
     yield put({
       type: AVAILABLE_PLATFORMS_RECEIVED,
       availablePlatforms: response.data,
@@ -65,9 +64,9 @@ function* fetchAvailablePlatforms({ userId, status }) {
   }
 }
 
-function* fetchOwnedPlatforms({ userId, status }) {
+function* fetchOwnedPlatforms({ status }) {
   try {
-    const response = yield call(Api.fetchOwnedPlatforms, userId, status);
+    const response = yield call(Api.fetchOwnedPlatforms, status);
     yield put({
       type: OWNED_PLATFORMS_RECEIVED,
       ownedPlatforms: response.data,
@@ -81,10 +80,9 @@ function* fetchEntries({ filters }) {
   yield put({ type: BACKLOG_ENTRIES_FETCHING, filters });
   yield put({
     type: AVAILABLE_PLATFORMS_REQUESTED,
-    userId: filters.userId,
     status: filters.status,
   });
-  yield put({ type: OWNED_PLATFORMS_REQUESTED, userId: filters.userId, status: filters.status });
+  yield put({ type: OWNED_PLATFORMS_REQUESTED, status: filters.status });
 
   try {
     const response = yield call(Api.fetchBacklogEntries, {

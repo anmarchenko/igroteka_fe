@@ -13,25 +13,22 @@ const Api = {
   logout() {
     return axios.delete(`${SKARO_HOST}/api/sessions`);
   },
-  fetchOwnedPlatforms(userId, status) {
-    return axios.get(
-      `${SKARO_HOST}/api/available_platforms/owned?user_id=${userId}&status=${status}`,
-    );
+  fetchOwnedPlatforms(status) {
+    return axios.get(`${SKARO_HOST}/api/available_platforms/owned?status=${status}`);
   },
-  fetchAvailablePlatforms(userId, status) {
-    return axios.get(`${SKARO_HOST}/api/available_platforms?user_id=${userId}&status=${status}`);
+  fetchAvailablePlatforms(status) {
+    return axios.get(`${SKARO_HOST}/api/available_platforms?status=${status}`);
   },
   fetchBacklogEntries(filters = {}) {
     // remove nulls and join query
     const queryString = [
-      filters.page ? `filter[page]=${filters.page}` : null,
-      filters.userId ? `user_id=${filters.userId}` : null,
-      filters.status ? `filter[status]=${filters.status}` : null,
-      filters.pageSize ? `filter[page_size]=${filters.pageSize}` : null,
-      filters.sort ? `filter[sort]=${filters.sort}` : null,
-      filters.ownedPlatformId ? `filter[owned_platform_id]=${filters.ownedPlatformId}` : null,
+      filters.page ? `filters[page]=${filters.page}` : null,
+      filters.pageSize ? `filters[page_size]=${filters.pageSize}` : 50,
+      filters.status ? `filters[status]=${filters.status}` : null,
+      filters.sort ? `filters[sort]=${filters.sort}` : null,
+      filters.ownedPlatformId ? `filters[owned_platform_id]=${filters.ownedPlatformId}` : null,
       filters.availablePlatformId
-        ? `filter[available_platform_id]=${filters.availablePlatformId}`
+        ? `filters[available_platform_id]=${filters.availablePlatformId}`
         : null,
     ]
       .filter(q => q)

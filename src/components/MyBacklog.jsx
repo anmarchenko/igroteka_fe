@@ -26,23 +26,13 @@ export class MyBacklog extends Component {
   }
 
   componentDidMount() {
-    const { currentUser } = this.props;
-    if (currentUser) {
-      this.load(currentUser.id);
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { currentUser } = this.props;
-    if (!currentUser && nextProps.currentUser) {
-      this.load(nextProps.currentUser.id);
-    }
+    this.load();
   }
 
   componentDidUpdate(nextProps) {
-    const { status, currentUser } = this.props;
+    const { status } = this.props;
     if (nextProps.status !== status) {
-      this.load(currentUser.id);
+      this.load();
     }
   }
 
@@ -55,11 +45,10 @@ export class MyBacklog extends Component {
     });
   }
 
-  load(userId) {
+  load() {
     const { status } = this.props;
 
     this.fetch({
-      userId,
       page: 1,
       status,
       availablePlatformId: null,
@@ -92,7 +81,6 @@ export class MyBacklog extends Component {
   render() {
     const {
       fetching,
-      currentUser,
       availablePlatforms,
       ownedPlatforms,
       entries,
@@ -103,7 +91,7 @@ export class MyBacklog extends Component {
       filters,
     } = this.props;
 
-    const ready = !fetching && !!currentUser && !!currentUser.id;
+    const ready = !fetching;
     const shownFilters = BACKLOG_FILTERS[status] || [];
     const selectedStatus = backlogStatusById(status) || {};
 
@@ -170,20 +158,15 @@ MyBacklog.propTypes = {
   totalCount: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
 
-  currentUser: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-  }),
-
   fetchEntries: PropTypes.func.isRequired,
 };
 
 MyBacklog.defaultProps = {
-  currentUser: null,
   availablePlatforms: [],
   ownedPlatforms: [],
 };
 
-const mapStateToProps = ({ session, myBacklog }, ownProps) => ({
+const mapStateToProps = ({ myBacklog }, ownProps) => ({
   entries: myBacklog.entries,
 
   fetching: myBacklog.fetching,
@@ -191,8 +174,6 @@ const mapStateToProps = ({ session, myBacklog }, ownProps) => ({
   totalCount: myBacklog.totalCount,
   page: myBacklog.page,
   status: ownProps.match.params.status,
-
-  currentUser: session.currentUser,
 
   filters: myBacklog.filters,
   availablePlatforms: myBacklog.availablePlatforms,
