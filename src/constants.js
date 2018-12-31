@@ -44,7 +44,7 @@ export const BACKLOG_STATUSES = [
 ];
 
 export const BACKLOG_FILTERS = {
-  wishlist: ['available'],
+  wishlist: ['available', 'played'],
   backlog: ['available', 'played'],
   playing: [],
   beaten: ['played'],

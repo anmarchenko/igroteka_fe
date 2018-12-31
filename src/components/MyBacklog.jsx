@@ -153,7 +153,7 @@ export class MyBacklog extends Component {
           <MyBacklogNav />
           <div className="row">
             <div className="col-12">
-              {totalCount != null && (
+              {totalCount != null && totalCount !== 0 && (
                 <p className="text-secondary">
                   Showing&nbsp;
                   {totalCount}

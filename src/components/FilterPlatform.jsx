@@ -28,18 +28,12 @@ export const FilterPlatform = ({ platforms, selectedPlatformName, onChange }) =>
   if (!platforms || platforms.length === 0) {
     return <span />;
   }
+  const importantPlatforms = selectImportantPlatforms(platforms);
+  const restPlatforms = selectRestPlatforms(platforms);
   return (
     <UncontrolledButtonDropdown>
-      {!selectedPlatformName && (
-      <DropdownToggle caret>
-Select platform
-      </DropdownToggle>
-      )}
-      {selectedPlatformName && (
-      <DropdownToggle caret>
-        {selectedPlatformName}
-      </DropdownToggle>
-      )}
+      {!selectedPlatformName && <DropdownToggle caret>Select platform</DropdownToggle>}
+      {selectedPlatformName && <DropdownToggle caret>{selectedPlatformName}</DropdownToggle>}
       <DropdownMenu>
         {selectedPlatformName && (
           <DropdownItem onClick={() => onChange({ id: null, name: null })}>
@@ -47,9 +41,9 @@ Select platform
           </DropdownItem>
         )}
         {selectedPlatformName && <DropdownItem divider />}
-        {renderPlatforms(selectImportantPlatforms(platforms), onChange)}
-        <DropdownItem divider />
-        {renderPlatforms(selectRestPlatforms(platforms), onChange)}
+        {renderPlatforms(importantPlatforms, onChange)}
+        {importantPlatforms.length > 0 && restPlatforms.length > 0 && <DropdownItem divider />}
+        {renderPlatforms(restPlatforms, onChange)}
       </DropdownMenu>
     </UncontrolledButtonDropdown>
   );
