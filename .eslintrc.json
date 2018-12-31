@@ -27,16 +27,7 @@
     "no-unused-vars": "warn",
     "constructor-super": "warn",
     "valid-typeof": "warn",
-    "jsx-a11y/label-has-for": [
-      2,
-      {
-        "components": ["label"],
-        "required": {
-          "every": ["id"]
-        },
-        "allowChildren": false
-      }
-    ]
+    "jsx-a11y/label-has-for": 0
   },
   "extends": ["airbnb"],
   "plugins": ["react"]

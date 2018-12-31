@@ -23,7 +23,7 @@ const Api = {
     // remove nulls and join query
     const queryString = [
       filters.page ? `filters[page]=${filters.page}` : null,
-      filters.pageSize ? `filters[page_size]=${filters.pageSize}` : 50,
+      filters.pageSize ? `filters[page_size]=${filters.pageSize}` : null,
       filters.status ? `filters[status]=${filters.status}` : null,
       filters.sort ? `filters[sort]=${filters.sort}` : null,
       filters.ownedPlatformId ? `filters[owned_platform_id]=${filters.ownedPlatformId}` : null,

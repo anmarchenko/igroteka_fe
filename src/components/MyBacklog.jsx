@@ -11,14 +11,70 @@ import BacklogEntries from './BacklogEntries';
 
 import { BACKLOG_FILTERS } from '../constants';
 import { backlogStatusById } from '../utils';
+import history from '../store/history';
 
 import { BACKLOG_ENTRIES_FETCHING_REQUESTED } from '../store/myBacklog';
+
+const ALL_FILTERS = [
+  'status',
+  'page',
+  'pageSize',
+  'sort',
+  'ownedPlatformId',
+  'ownedPlatformName',
+  'availablePlatformId',
+  'availablePlatformName',
+];
+
+const URL_FILTERS = [
+  'page',
+  'ownedPlatformId',
+  'ownedPlatformName',
+  'availablePlatformId',
+  'availablePlatformName',
+];
+
+const DEFAULTS = {
+  page: 1,
+  pageSize: 50,
+  sort: 'asc:inserted_at',
+
+  ownedPlatformId: null,
+  ownedPlatformName: null,
+
+  availablePlatformId: null,
+  availablePlatformName: null,
+};
+
+const filtersChanged = (prev, next) => ALL_FILTERS.some(k => prev[k] !== next[k]);
+
+const queryStringToFilters = (queryString) => {
+  const queryParams = new URLSearchParams(queryString);
+
+  return [...queryParams.keys()].reduce((acc, key) => {
+    if (URL_FILTERS.includes(key)) {
+      return Object.assign(acc, { [key]: queryParams.get(key) });
+    }
+    return acc;
+  }, {});
+};
+
+const filtersToQueryString = (filters) => {
+  const urlFilters = URL_FILTERS.reduce((acc, key) => {
+    const value = filters[key];
+    if (value !== null && value !== undefined) {
+      return Object.assign(acc, { [key]: value });
+    }
+    return acc;
+  }, {});
+
+  return new URLSearchParams(urlFilters).toString();
+};
 
 export class MyBacklog extends Component {
   constructor(props) {
     super(props);
 
-    this.fetch = this.fetch.bind(this);
     this.paginate = this.paginate.bind(this);
     this.load = this.load.bind(this);
     this.filterAvailablePlatform = this.filterAvailablePlatform.bind(this);
@@ -30,40 +86,33 @@ export class MyBacklog extends Component {
   }
 
   componentDidUpdate(nextProps) {
-    const { status } = this.props;
-    if (nextProps.status !== status) {
+    const { filters } = this.props;
+    if (filtersChanged(filters, nextProps.filters)) {
       this.load();
     }
   }
 
-  fetch(newFilters) {
-    const { fetchEntries, filters } = this.props;
-
-    fetchEntries({
-      ...filters,
-      ...newFilters,
-    });
+  applyFilters(newFilters) {
+    const { filters } = this.props;
+    history.push(
+      `/collections/${filters.status}?${filtersToQueryString({
+        ...filters,
+        ...newFilters,
+      })}`,
+    );
   }
 
   load() {
-    const { status } = this.props;
-
-    this.fetch({
-      page: 1,
-      status,
-      availablePlatformId: null,
-      availablePlatformName: null,
-      ownedPlatformId: null,
-      ownedPlatformName: null,
-    });
+    const { fetchEntries, filters } = this.props;
+    fetchEntries(filters);
   }
 
   paginate(page) {
-    this.fetch({ page });
+    this.applyFilters({ page });
   }
 
   filterAvailablePlatform({ id, name }) {
-    this.fetch({
+    this.applyFilters({
       availablePlatformId: id,
       availablePlatformName: name,
       page: 1,
@@ -71,7 +120,7 @@ export class MyBacklog extends Component {
   }
 
   filterOwnedPlatform({ id, name }) {
-    this.fetch({
+    this.applyFilters({
       ownedPlatformId: id,
       ownedPlatformName: name,
       page: 1,
@@ -84,12 +133,12 @@ export class MyBacklog extends Component {
       availablePlatforms,
       ownedPlatforms,
       entries,
-      page,
       totalPages,
       totalCount,
-      status,
       filters,
     } = this.props;
+
+    const { status, page } = filters;
 
     const ready = !fetching;
     const shownFilters = BACKLOG_FILTERS[status] || [];
@@ -102,6 +151,17 @@ export class MyBacklog extends Component {
         </Helmet>
         <div className="MyBacklog">
           <MyBacklogNav />
+          <div className="row">
+            <div className="col-12">
+              {totalCount != null && (
+                <p className="text-secondary">
+                  Showing&nbsp;
+                  {totalCount}
+                  &nbsp;results
+                </p>
+              )}
+            </div>
+          </div>
           <BacklogFilters
             shownFilters={shownFilters}
             filters={filters}
@@ -113,7 +173,7 @@ export class MyBacklog extends Component {
           <ReactPlaceholder showLoadingAnimation color="#ddd" ready={ready} type="text" rows={5}>
             <BacklogEntries
               entries={entries}
-              page={page}
+              page={parseInt(page, 10)}
               totalPages={totalPages}
               totalCount={totalCount}
               status={status}
@@ -131,7 +191,7 @@ MyBacklog.propTypes = {
   entries: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 
   filters: PropTypes.shape({
-    page: PropTypes.number,
+    page: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     status: PropTypes.string,
     ownedPlatformId: PropTypes.number,
     ownedPlatformName: PropTypes.string,
@@ -153,10 +213,8 @@ MyBacklog.propTypes = {
   ),
 
   fetching: PropTypes.bool.isRequired,
-  page: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
   totalCount: PropTypes.number.isRequired,
-  status: PropTypes.string.isRequired,
 
   fetchEntries: PropTypes.func.isRequired,
 };
@@ -172,10 +230,12 @@ const mapStateToProps = ({ myBacklog }, ownProps) => ({
   fetching: myBacklog.fetching,
   totalPages: myBacklog.totalPages,
   totalCount: myBacklog.totalCount,
-  page: myBacklog.page,
-  status: ownProps.match.params.status,
 
-  filters: myBacklog.filters,
+  filters: {
+    ...DEFAULTS,
+    ...queryStringToFilters(ownProps.location.search),
+    ...{ status: ownProps.match.params.status },
+  },
   availablePlatforms: myBacklog.availablePlatforms,
   ownedPlatforms: myBacklog.ownedPlatforms,
 });

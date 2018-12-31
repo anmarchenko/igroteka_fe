@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 
 import { Pagination as BootstrapPagination, PaginationItem, PaginationLink } from 'reactstrap';
 
-export const Pagination = ({
-  page, totalPages, totalCount, onPaginate,
-}) => (
+export const Pagination = ({ page, totalPages, onPaginate }) => (
   <div className="row">
-    <div className="col-12 col-sm-6">
+    <div className="col-12">
       {totalPages > 1 && (
         <BootstrapPagination>
           {page > 1 && (
@@ -68,27 +66,13 @@ export const Pagination = ({
         </BootstrapPagination>
       )}
     </div>
-    <div className="col-12 col-sm-6">
-      {totalCount != null && (
-        <p className="text-secondary float-sm-right">
-          Showing&nbsp;
-          {totalCount}
-          &nbsp;results
-        </p>
-      )}
-    </div>
   </div>
 );
 
 Pagination.propTypes = {
   page: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
-  totalCount: PropTypes.number,
   onPaginate: PropTypes.func.isRequired,
-};
-
-Pagination.defaultProps = {
-  totalCount: null,
 };
 
 export default Pagination;

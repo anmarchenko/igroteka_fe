@@ -32,6 +32,12 @@
   opacity: 0.5;
 }
 
+.GlobalSearch .SearchClose {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
 .GlobalSearch .SearchClose:hover {
   opacity: 1;
 }

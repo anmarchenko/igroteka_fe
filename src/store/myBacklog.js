@@ -11,28 +11,15 @@ const sorting = {
 };
 
 const initialState = {
-  entries: [],
   fetching: true,
 
+  entries: [],
   page: 1,
   totalPages: 1,
   totalCount: 0,
 
   availablePlatforms: [],
   ownedPlatforms: [],
-
-  filters: {
-    status: null,
-    page: 1,
-    pageSize: 50,
-    sort: 'asc:inserted_at',
-
-    ownedPlatformId: null,
-    ownedPlatformName: null,
-
-    availablePlatformId: null,
-    availablePlatformName: null,
-  },
 };
 
 export const BACKLOG_ENTRIES_FETCHING_REQUESTED = 'BACKLOG_ENTRIES_FETCHING_REQUESTED';
@@ -77,7 +64,7 @@ function* fetchOwnedPlatforms({ status }) {
 }
 
 function* fetchEntries({ filters }) {
-  yield put({ type: BACKLOG_ENTRIES_FETCHING, filters });
+  yield put({ type: BACKLOG_ENTRIES_FETCHING });
   yield put({
     type: AVAILABLE_PLATFORMS_REQUESTED,
     status: filters.status,
@@ -115,7 +102,7 @@ const paginationReducer = action => ({
 export const myBacklogReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case BACKLOG_ENTRIES_FETCHING:
-      return { ...state, fetching: true, filters: action.filters };
+      return { ...state, fetching: true };
     case BACKLOG_ENTRIES_RECEIVED:
       return {
         ...state,

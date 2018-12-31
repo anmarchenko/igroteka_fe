@@ -26,9 +26,9 @@ export const GlobalSearch = ({ items, search, loading }) => (
   <div className="GlobalSearch">
     <div className="container">
       <div className="text-right">
-        <a className="SearchClose" role="button" tabIndex="0" onClick={onClose}>
+        <button type="button" className="SearchClose" tabIndex="0" onClick={onClose}>
           <X width="48" height="48" />
-        </a>
+        </button>
       </div>
       <Typeahead
         autoFocus
