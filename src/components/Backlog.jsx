@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import ReactPlaceholder from 'react-placeholder';
 import { Helmet } from 'react-helmet';
 
-import MyBacklogNav from './MyBacklogNav';
+import BacklogNav from './BacklogNav';
 import BacklogFilters from './BacklogFilters';
-import BacklogEntries from './BacklogEntries';
+import BacklogList from './BacklogList';
 
 import { BACKLOG_FILTERS } from '../constants';
 import { backlogStatusById } from '../utils';
@@ -71,7 +71,7 @@ const filtersToQueryString = (filters) => {
   return new URLSearchParams(urlFilters).toString();
 };
 
-export class MyBacklog extends Component {
+export class Backlog extends Component {
   constructor(props) {
     super(props);
 
@@ -149,8 +149,8 @@ export class MyBacklog extends Component {
         <Helmet>
           <title>{`${selectedStatus.label} | Igroteka`}</title>
         </Helmet>
-        <div className="MyBacklog">
-          <MyBacklogNav />
+        <div className="Backlog">
+          <BacklogNav />
           <div className="row">
             <div className="col-12">
               {totalCount != null && totalCount !== 0 && (
@@ -171,12 +171,11 @@ export class MyBacklog extends Component {
             onOwnedPlatformChanged={this.filterOwnedPlatform}
           />
           <ReactPlaceholder showLoadingAnimation color="#ddd" ready={ready} type="text" rows={5}>
-            <BacklogEntries
+            <BacklogList
               entries={entries}
               page={parseInt(page, 10)}
               totalPages={totalPages}
               totalCount={totalCount}
-              status={status}
               fetching={fetching}
               onPaginate={this.paginate}
             />
@@ -187,7 +186,7 @@ export class MyBacklog extends Component {
   }
 }
 
-MyBacklog.propTypes = {
+Backlog.propTypes = {
   entries: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 
   filters: PropTypes.shape({
@@ -219,7 +218,7 @@ MyBacklog.propTypes = {
   fetchEntries: PropTypes.func.isRequired,
 };
 
-MyBacklog.defaultProps = {
+Backlog.defaultProps = {
   availablePlatforms: [],
   ownedPlatforms: [],
 };
@@ -247,4 +246,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(MyBacklog);
+)(Backlog);

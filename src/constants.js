@@ -50,11 +50,4 @@ export const BACKLOG_FILTERS = {
   beaten: ['played'],
 };
 
-export const BACKLOG_TABLE_COLUMNS = {
-  wishlist: ['released', 'note', 'expectationRating'],
-  backlog: ['released', 'platform', 'expectationRating'],
-  playing: ['released', 'platform'],
-  beaten: ['released', 'platform', 'score', 'finished'],
-};
-
 export default VALIDATION_ERRORS;

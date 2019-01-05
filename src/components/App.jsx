@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 
 import Login from './Login';
-import MyBacklog from './MyBacklog';
+import Backlog from './Backlog';
 import GuestRoute from './GuestRoute';
 import PrivateRoute from './PrivateRoute';
 import SessionContainer from './SessionContainer';
@@ -31,7 +31,7 @@ export const App = () => (
             <GuestRoute path="/sign_in" component={Login} />
 
             <PrivateRoute path="/search" component={GlobalSearch} />
-            <PrivateRoute path="/collections/:status" component={MyBacklog} />
+            <PrivateRoute path="/collections/:status" component={Backlog} />
 
             <Route component={NotFound} />
           </Switch>

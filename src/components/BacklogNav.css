@@ -1,13 +1,13 @@
-.MyBacklogNav ul {
+.BacklogNav ul {
   padding-left: 0px;
 }
 
-.MyBacklogNav .nav {
+.BacklogNav .nav {
   margin-bottom: 1em;
 }
 
 @media (max-width: 768px) {
-  .MyBacklogNav li {
+  .BacklogNav li {
     width: 25%;
     text-align: center;
   }

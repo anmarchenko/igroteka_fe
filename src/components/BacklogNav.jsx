@@ -4,10 +4,10 @@ import { NavLink } from 'react-router-dom';
 import BacklogStatusLabel from './BacklogStatusLabel';
 import { BACKLOG_STATUSES } from '../constants';
 
-import './MyBacklogNav.css';
+import './BacklogNav.css';
 
-const MyBacklogNav = () => (
-  <div className="row MyBacklogNav">
+const BacklogNav = () => (
+  <div className="row BacklogNav">
     <div className="col-12">
       <ul className="nav nav-tabs">
         {BACKLOG_STATUSES.map(status => (
@@ -22,4 +22,4 @@ const MyBacklogNav = () => (
   </div>
 );
 
-export default MyBacklogNav;
+export default BacklogNav;

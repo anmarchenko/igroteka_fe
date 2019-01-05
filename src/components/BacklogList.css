@@ -1,0 +1,10 @@
+.BacklogList-empty {
+  font-size: 1.5em;
+  color: rgba(0, 0, 0, 0.44);
+}
+
+.BacklogList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

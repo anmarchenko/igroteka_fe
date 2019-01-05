@@ -2,28 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Pagination from './Pagination';
-import BacklogEntry from './BacklogEntry';
-import { BACKLOG_TABLE_COLUMNS } from '../constants';
+import BacklogItem from './BacklogItem';
 
-import './BacklogEntries.css';
+import './BacklogList.css';
 
-const BacklogEntries = ({
-  entries,
-  status,
-  fetching,
-  totalPages,
-  totalCount,
-  page,
-  onPaginate,
+const BacklogList = ({
+  entries, fetching, totalPages, totalCount, page, onPaginate,
 }) => {
   if (!entries || entries.length === 0) {
     return (
-      <div className="row BacklogEntries-empty">
+      <div className="row BacklogList-empty">
         <div className="col-12">Collection is empty</div>
       </div>
     );
   }
-  const columns = BACKLOG_TABLE_COLUMNS[status] || [];
   return (
     <div className="row">
       <div className="col-12">
@@ -35,30 +27,18 @@ const BacklogEntries = ({
             onPaginate={onPaginate}
           />
         )}
-        <table className="table BacklogEntries">
-          <thead className="thead-default">
-            <tr>
-              <th className="game-poster-column d-none d-sm-table-cell">Poster</th>
-              <th className="game-name-column">Name</th>
-              {columns.includes('expectationRating') && (
-                <th className="game-expectation-rating-column">Exp</th>
-              )}
-              {columns.includes('finished') && <th className="game-finished-column">Finished</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {entries.map(entry => (
-              <BacklogEntry key={entry.game_id} entry={entry} />
-            ))}
-          </tbody>
-        </table>
+        <ul className="BacklogList">
+          {entries.map(entry => (
+            <BacklogItem key={entry.game_id} entry={entry} />
+          ))}
+        </ul>
         {!fetching && <Pagination page={page} totalPages={totalPages} onPaginate={onPaginate} />}
       </div>
     </div>
   );
 };
 
-BacklogEntries.propTypes = {
+BacklogList.propTypes = {
   entries: PropTypes.arrayOf(
     PropTypes.shape({
       game_id: PropTypes.number,
@@ -80,8 +60,7 @@ BacklogEntries.propTypes = {
   page: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
   totalCount: PropTypes.number.isRequired,
-  status: PropTypes.string.isRequired,
   onPaginate: PropTypes.func.isRequired,
 };
 
-export default BacklogEntries;
+export default BacklogList;
