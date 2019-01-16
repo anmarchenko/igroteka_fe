@@ -26,7 +26,7 @@ const formatObjects = (objects) => {
 const placeholder = (
   <div className="container GamePage">
     <div className="row GamePage-header">
-      <div className="col-12 col-md-2 hidden-xs-down">
+      <div className="col-12 col-md-2 d-none d-sm-block">
         <RectShape showLoadingAnimation color="#ddd" style={{ width: 160, height: 200 }} />
       </div>
       <div className="col-12 col-md-6">
@@ -66,7 +66,7 @@ export class GamePage extends Component {
             <Helmet>
               <title>{`${game.name} | Igroteka`}</title>
             </Helmet>
-            <div className="col-12 col-md-2 hidden-xs-down">
+            <div className="col-12 col-md-2 d-none d-sm-block">
               {game.poster && <Poster url={game.poster.medium_url} />}
             </div>
             <div className="col-12 col-md-6">

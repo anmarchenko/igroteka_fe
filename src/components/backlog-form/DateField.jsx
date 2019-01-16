@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Flatpickr from 'react-flatpickr';
+import 'flatpickr/dist/themes/light.css';
 
 export const DateField = ({ value, onChange, label }) => (
   <div className="form-group backlog-finished-date">

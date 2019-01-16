@@ -2,9 +2,3 @@
   margin-right: 0.5ch;
   vertical-align: bottom;
 }
-
-@media (max-width: 768px) {
-  .BacklogStatusLabel-text {
-    display: none;
-  }
-}

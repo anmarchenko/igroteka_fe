@@ -126,10 +126,17 @@ export class Form extends Component {
                 <DateField
                   label="Finished"
                   value={backlogEntry.finished_at}
-                  onChange={date => updateBacklog({
-                    finished_at: dayjs(date[0]).format('YYYY-MM-DD'),
-                  })
-                  }
+                  onChange={(date) => {
+                    if (date.length > 0) {
+                      updateBacklog({
+                        finished_at: dayjs(date[0]).format('YYYY-MM-DD'),
+                      });
+                    } else {
+                      updateBacklog({
+                        finished_at: null,
+                      });
+                    }
+                  }}
                 />
               </div>
             )}
