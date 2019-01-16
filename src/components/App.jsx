@@ -14,6 +14,7 @@ import NotFound from './NotFound';
 import TopNav from './TopNav';
 import Notifications from './Notifications';
 import GlobalSearch from './GlobalSearch';
+import GamePage from './GamePage';
 
 import store from '../store';
 import history from '../store/history';
@@ -32,6 +33,7 @@ export const App = () => (
 
             <PrivateRoute path="/search" component={GlobalSearch} />
             <PrivateRoute path="/collections/:status" component={Backlog} />
+            <PrivateRoute path="/games/:gameId/show" component={GamePage} />
 
             <Route component={NotFound} />
           </Switch>

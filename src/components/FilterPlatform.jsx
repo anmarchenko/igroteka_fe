@@ -32,7 +32,7 @@ export const FilterPlatform = ({ platforms, selectedPlatformName, onChange }) =>
   const restPlatforms = selectRestPlatforms(platforms);
   return (
     <UncontrolledButtonDropdown>
-      {!selectedPlatformName && <DropdownToggle caret>Select platform</DropdownToggle>}
+      {!selectedPlatformName && <DropdownToggle caret>Select...</DropdownToggle>}
       {selectedPlatformName && <DropdownToggle caret>{selectedPlatformName}</DropdownToggle>}
       <DropdownMenu>
         {selectedPlatformName && (

@@ -1,0 +1,40 @@
+.GamePage {
+  margin-bottom: 10em;
+}
+
+.GamePage-header .GamePoster {
+  width: initial;
+  max-width: 100%;
+  max-height: 600px;
+}
+
+.GamePage-short-description {
+  margin-bottom: 0.5em;
+  color: rgba(0, 0, 0, 0.44);
+}
+
+.GamePage-release-date {
+  font-size: 1.2em;
+  line-height: 1.5em;
+  margin-bottom: 0.2em;
+}
+
+.GamePage-platforms {
+  font-size: 1em;
+  line-height: 1.5em;
+  margin-bottom: 0.2em;
+}
+
+.GamePage-info div {
+  margin-bottom: 0.5em;
+}
+
+.GamePage-extended {
+  margin-top: 1em;
+}
+
+.GamePage-extended-header {
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+}

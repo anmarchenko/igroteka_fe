@@ -14,39 +14,31 @@ const BacklogFilters = ({
 }) => (
   <div className="row">
     <div className="col-12 BacklogFilters">
-      {shownFilters.includes('available')
-        && availablePlatforms
-        && availablePlatforms.length > 0 && (
-          <div className="BacklogFilter">
-            <div className="form-group">
-              <label htmlFor="backlog_available_platform_filter">
-Available on
-              </label>
-              <br />
-              <FilterPlatform
-                onChange={onAvailablePlatformChanged}
-                platforms={availablePlatforms}
-                selectedPlatformName={availablePlatformName}
-              />
-            </div>
+      {shownFilters.includes('available') && availablePlatforms && availablePlatforms.length > 0 && (
+        <div className="BacklogFilter">
+          <div className="form-group">
+            <label htmlFor="backlog_available_platform_filter">Platform</label>
+            <br />
+            <FilterPlatform
+              onChange={onAvailablePlatformChanged}
+              platforms={availablePlatforms}
+              selectedPlatformName={availablePlatformName}
+            />
           </div>
+        </div>
       )}
-      {shownFilters.includes('played')
-        && ownedPlatforms
-        && ownedPlatforms.length > 0 && (
-          <div className="BacklogFilter">
-            <div className="form-group">
-              <label htmlFor="backlog_owned_platform_filter">
-Played on
-              </label>
-              <br />
-              <FilterPlatform
-                onChange={onOwnedPlatformChanged}
-                platforms={ownedPlatforms}
-                selectedPlatformName={ownedPlatformName}
-              />
-            </div>
+      {shownFilters.includes('played') && ownedPlatforms && ownedPlatforms.length > 0 && (
+        <div className="BacklogFilter">
+          <div className="form-group">
+            <label htmlFor="backlog_owned_platform_filter">My platform</label>
+            <br />
+            <FilterPlatform
+              onChange={onOwnedPlatformChanged}
+              platforms={ownedPlatforms}
+              selectedPlatformName={ownedPlatformName}
+            />
           </div>
+        </div>
       )}
     </div>
   </div>

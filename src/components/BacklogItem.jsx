@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
 
-import dayjs from 'dayjs';
-
 import Poster from './Poster';
-import { yearFromDate } from '../utils';
+import { yearFromDate, renderDate } from '../utils';
 
 import './BacklogItem.css';
 
@@ -49,13 +47,6 @@ const renderExpectationRating = score => (
     {expectationRatingText[score]}
   </span>
 );
-
-const renderDate = (date) => {
-  if (!date || date === '') {
-    return 'TBD';
-  }
-  return dayjs(date).format('MMM, D YYYY');
-};
 
 export const BacklogItem = (props) => {
   const { entry } = props;

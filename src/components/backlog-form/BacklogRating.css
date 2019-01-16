@@ -1,0 +1,17 @@
+.BacklogRating-remove {
+  cursor: pointer;
+  margin-left: 0.5ch;
+}
+
+.BacklogRating-remove svg {
+  vertical-align: bottom;
+  opacity: 0.6;
+}
+
+.BacklogRating-remove:hover svg {
+  opacity: 1;
+}
+
+.BacklogRating-remove:focus {
+  outline: none;
+}

@@ -17,4 +17,11 @@ export const yearFromDate = (date) => {
   return dayjs(date).format('YYYY');
 };
 
+export const renderDate = (date) => {
+  if (!date || date === '') {
+    return 'TBD';
+  }
+  return dayjs(date).format('MMM D, YYYY');
+};
+
 export default selectImportantPlatforms;
