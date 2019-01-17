@@ -7,22 +7,9 @@ import { Helmet } from 'react-helmet';
 
 import { SIGN_IN_REQUESTED } from '../store/login';
 import { VALIDATION_ERRORS } from '../constants';
+import { yupToFormErrors } from '../utils';
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
-
-const yupToFormErrors = (yupException) => {
-  const errors = {};
-  if (yupException.inner.length === 0) {
-    errors[yupException.path] = yupException.message;
-    return errors;
-  }
-  yupException.inner.forEach((err) => {
-    if (!errors[err.path]) {
-      errors[err.path] = err.message;
-    }
-  });
-  return errors;
-};
 
 export class Login extends React.Component {
   constructor(props) {

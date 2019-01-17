@@ -16,10 +16,10 @@ export const UserMenu = ({ user, signOut }) => (
       <Avatar {...user} />
     </DropdownToggle>
     <DropdownMenu right>
-      <DropdownItem className="user-link" tag={Link} to={`/users/${user.id}/show`}>
+      <DropdownItem className="user-link" tag={Link} to="/profile">
         My profile
       </DropdownItem>
-      <DropdownItem className="user-link" tag={Link} to="/users/edit">
+      <DropdownItem className="user-link" tag={Link} to="/change_password">
         Change password
       </DropdownItem>
       <DropdownItem divider />

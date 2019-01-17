@@ -6,7 +6,7 @@ import Api from '../api';
 const sorting = {
   wishlist: 'desc:expectation_rating',
   backlog: 'desc:expectation_rating',
-  playing: 'asc:inserted_at',
+  playing: 'desc:game_release_date',
   beaten: 'desc:finished_at',
 };
 

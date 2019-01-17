@@ -15,6 +15,8 @@ import TopNav from './TopNav';
 import Notifications from './Notifications';
 import GlobalSearch from './GlobalSearch';
 import GamePage from './GamePage';
+import MyProfile from './MyProfile';
+import ChangePassword from './ChangePassword';
 
 import store from '../store';
 import history from '../store/history';
@@ -34,6 +36,8 @@ export const App = () => (
             <PrivateRoute path="/search" component={GlobalSearch} />
             <PrivateRoute path="/collections/:status" component={Backlog} />
             <PrivateRoute path="/games/:gameId/show" component={GamePage} />
+            <PrivateRoute path="/profile" component={MyProfile} />
+            <PrivateRoute path="/change_password" component={ChangePassword} />
 
             <Route component={NotFound} />
           </Switch>

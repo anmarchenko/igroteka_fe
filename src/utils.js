@@ -24,4 +24,18 @@ export const renderDate = (date) => {
   return dayjs(date).format('MMM D, YYYY');
 };
 
+export const yupToFormErrors = (yupException) => {
+  const errors = {};
+  if (yupException.inner.length === 0) {
+    errors[yupException.path] = yupException.message;
+    return errors;
+  }
+  yupException.inner.forEach((err) => {
+    if (!errors[err.path]) {
+      errors[err.path] = err.message;
+    }
+  });
+  return errors;
+};
+
 export default selectImportantPlatforms;

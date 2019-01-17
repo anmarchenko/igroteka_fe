@@ -11,6 +11,7 @@ const initialState = {
 };
 
 export const CURRENT_USER_REQUESTED = 'CURRENT_USER_REQUESTED';
+export const CURRENT_USER_REPLACE = 'CURRENT_USER_REPLACE';
 export const SIGN_IN_REQUESTED = 'SIGN_IN_REQUESTED';
 export const SIGN_OUT_REQUESTED = 'SIGN_OUT_REQUESTED';
 
@@ -19,6 +20,14 @@ export const AUTH_FAILED = 'SIGN_IN_FAILED';
 export const CLEAR_AUTH_ERRORS = 'CLEAR_AUTH_ERRORS';
 export const SIGNED_OUT = 'SIGNED_OUT';
 
+function* replaceCurrentUser({ user }) {
+  localStorage.setItem('currentUser', JSON.stringify(user));
+  yield put({
+    type: SET_CURRENT_USER,
+    currentUser: user,
+  });
+}
+
 function* fetchCurrentUser() {
   if (localStorage.getItem('currentUser')) {
     yield put({
@@ -26,14 +35,9 @@ function* fetchCurrentUser() {
       currentUser: JSON.parse(localStorage.getItem('currentUser')),
     });
   }
-
   try {
     const response = yield call(Api.currentUser);
-    localStorage.setItem('currentUser', JSON.stringify(response.data));
-    yield put({
-      type: SET_CURRENT_USER,
-      currentUser: response.data,
-    });
+    yield* replaceCurrentUser({ user: response.data });
   } catch (error) {
     yield* handle(error);
   }
@@ -44,6 +48,7 @@ function* signIn({ email, password }) {
     const {
       data: { jwt, user },
     } = yield call(Api.login, email, password);
+
     localStorage.setItem('phoenixAuthToken', jwt);
     localStorage.setItem('currentUser', JSON.stringify(user));
 
@@ -76,6 +81,7 @@ function* signOut() {
 
 export function* loginWatch() {
   yield takeLatest(CURRENT_USER_REQUESTED, fetchCurrentUser);
+  yield takeLatest(CURRENT_USER_REPLACE, replaceCurrentUser);
   yield takeLatest(SIGN_IN_REQUESTED, signIn);
   yield takeLatest(SIGN_OUT_REQUESTED, signOut);
 }

@@ -69,6 +69,16 @@ const Api = {
   deleteBacklogEntry(gameId) {
     return axios.delete(`${SKARO_HOST}/api/backlog_entries/${gameId}`);
   },
+  updateProfile(userId, params) {
+    return axios.put(`${SKARO_HOST}/api/users/${userId}`, {
+      user: params,
+    });
+  },
+  updatePassword(userId, params) {
+    return axios.put(`${SKARO_HOST}/api/users/${userId}/update_password`, {
+      user: params,
+    });
+  },
 };
 
 export default Api;
