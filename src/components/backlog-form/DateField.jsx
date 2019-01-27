@@ -11,7 +11,7 @@ export const DateField = ({ value, onChange, label }) => (
     <Flatpickr
       className="form-control"
       onChange={onChange}
-      options={{ altInput: true, locale: { firstDayOfWeek: 1 } }}
+      options={{ altInput: true, locale: { firstDayOfWeek: 1 }, disableMobile: true }}
       value={value}
       placeholder="Select date"
     />
