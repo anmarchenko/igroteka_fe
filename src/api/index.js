@@ -2,6 +2,7 @@ import axios from 'axios';
 import dayjs from 'dayjs';
 
 const SKARO_HOST = 'https://skaro.hmstr.rocks';
+// const SKARO_HOST = 'http://localhost:4000';
 
 const Api = {
   currentUser() {
@@ -10,9 +11,6 @@ const Api = {
   login(email, password) {
     const data = { session: { email, password } };
     return axios.post(`${SKARO_HOST}/api/sessions`, data);
-  },
-  logout() {
-    return axios.delete(`${SKARO_HOST}/api/sessions`);
   },
   fetchOwnedPlatforms(status) {
     return axios.get(`${SKARO_HOST}/api/available_platforms/owned?status=${status}`);

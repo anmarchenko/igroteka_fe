@@ -72,8 +72,6 @@ function* signOut() {
     key: 'sign_out_success',
   });
 
-  yield call(Api.logout);
-
   localStorage.removeItem('phoenixAuthToken');
   localStorage.removeItem('currentUser');
   history.push('/');
