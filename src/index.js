@@ -9,7 +9,10 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 
 axios.interceptors.request.use((config) => {
-  config.headers.Authorization = localStorage.getItem('phoenixAuthToken'); // eslint-disable-line no-param-reassign
+  const token = localStorage.getItem('phoenixAuthToken');
+  if (token) {
+    config.headers.Authorization = token; // eslint-disable-line no-param-reassign
+  }
   return config;
 });
 

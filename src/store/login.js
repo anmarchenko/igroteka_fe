@@ -58,7 +58,7 @@ function* signIn({ email, password }) {
       message: 'Successfully signed in',
       key: 'sign_in_success',
     });
-    history.goBack();
+    history.push('/');
   } catch (error) {
     yield* handle(error, AUTH_FAILED);
   }
