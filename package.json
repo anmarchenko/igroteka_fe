@@ -20,7 +20,7 @@
     "react-notification": "^6.8.2",
     "react-placeholder": "^3.0.1",
     "react-rating": "^1.6.2",
-    "react-redux": "^6.0.0",
+    "react-redux": "^7.0.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.3",
