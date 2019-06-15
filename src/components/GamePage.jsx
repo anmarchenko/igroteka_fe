@@ -88,8 +88,6 @@ export class GamePage extends Component {
                 <GamePageInfoBlock header="Developers" text={formatObjects(game.developers)} />
                 <GamePageInfoBlock header="Publishers" text={formatObjects(game.publishers)} />
                 <GamePageInfoBlock header="Franchises" text={formatObjects(game.franchises)} />
-                <GamePageInfoBlock header="Genres" text={formatObjects(game.genres)} />
-                <GamePageInfoBlock header="Themes" text={formatObjects(game.themes)} />
               </div>
             </div>
           </div>
