@@ -1,8 +1,8 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
 
-const SKARO_HOST = 'https://skaro.hmstr.rocks';
-// const SKARO_HOST = 'http://localhost:4000';
+// const SKARO_HOST = 'https://skaro.hmstr.rocks';
+const SKARO_HOST = 'http://localhost:4000';
 
 const Api = {
   currentUser() {

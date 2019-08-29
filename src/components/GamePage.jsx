@@ -20,7 +20,7 @@ import './GamePage.css';
 
 const formatObjects = (objects) => {
   if (!objects) return null;
-  return objects.map(obj => obj.name).join(', ');
+  return objects.map((obj) => obj.name).join(', ');
 };
 
 const placeholder = (
@@ -73,7 +73,6 @@ export class GamePage extends Component {
               <h2>{game.name}</h2>
               <div className="GamePage-release-date">{renderDate(game.release_date)}</div>
               <div className="GamePage-platforms">{formatObjects(game.platforms)}</div>
-              <div className="GamePage-short-description">{game.short_description}</div>
               <div className="GamePage-info">
                 {game.name && <YoutubeLink name={game.name} type="Walkthrough" />}
                 {game.name && <YoutubeLink name={game.name} type="Trailer" />}
@@ -89,6 +88,7 @@ export class GamePage extends Component {
                 <GamePageInfoBlock header="Publishers" text={formatObjects(game.publishers)} />
                 <GamePageInfoBlock header="Franchises" text={formatObjects(game.franchises)} />
               </div>
+              <div className="GamePage-short-description">{game.short_description}</div>
             </div>
           </div>
         </div>
@@ -168,8 +168,8 @@ const mapStateToProps = (state, ownProps) => ({
   currentUser: state.session.currentUser,
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchGame: gameId => dispatch({ type: GAME_FETCH_REQUESTED, gameId }),
+const mapDispatchToProps = (dispatch) => ({
+  fetchGame: (gameId) => dispatch({ type: GAME_FETCH_REQUESTED, gameId }),
 });
 
 export default connect(
