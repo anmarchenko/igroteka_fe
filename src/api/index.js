@@ -30,7 +30,7 @@ const Api = {
         ? `filters[available_platform_id]=${filters.availablePlatformId}`
         : null,
     ]
-      .filter(q => q)
+      .filter((q) => q)
       .join('&');
     return axios.get(`${SKARO_HOST}/api/backlog_entries?${queryString}`);
   },
@@ -54,7 +54,7 @@ const Api = {
       poster_thumb_url: (game.poster || {}).thumb_url,
     };
 
-    const platforms = game.platforms.map(platform => ({
+    const platforms = game.platforms.map((platform) => ({
       platform_id: platform.id,
       platform_name: platform.name,
     }));

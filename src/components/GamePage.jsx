@@ -74,6 +74,11 @@ export class GamePage extends Component {
               <div className="GamePage-release-date">{renderDate(game.release_date)}</div>
               <div className="GamePage-platforms">{formatObjects(game.platforms)}</div>
               <div className="GamePage-info">
+                <GamePageInfoBlock header="Developers" text={formatObjects(game.developers)} />
+                <GamePageInfoBlock header="Publishers" text={formatObjects(game.publishers)} />
+                <GamePageInfoBlock header="Franchises" text={formatObjects(game.franchises)} />
+              </div>
+              <div className="GamePage-info">
                 {game.name && <YoutubeLink name={game.name} type="Walkthrough" />}
                 {game.name && <YoutubeLink name={game.name} type="Trailer" />}
               </div>
@@ -82,12 +87,8 @@ export class GamePage extends Component {
           </div>
           <div className="row GamePage-extended">
             <div className="col-12">
-              <h3 className="GamePage-extended-header">Information</h3>
-              <div className="GamePage-info">
-                <GamePageInfoBlock header="Developers" text={formatObjects(game.developers)} />
-                <GamePageInfoBlock header="Publishers" text={formatObjects(game.publishers)} />
-                <GamePageInfoBlock header="Franchises" text={formatObjects(game.franchises)} />
-              </div>
+              <h3 className="GamePage-extended-header">Extended info</h3>
+              <h4 className="GamePage-short-description-header">Description</h4>
               <div className="GamePage-short-description">{game.short_description}</div>
             </div>
           </div>
@@ -144,6 +145,9 @@ GamePage.propTypes = {
         thumb_url: PropTypes.string,
       }),
     ),
+    poster: PropTypes.shape({
+      medium_url: PropTypes.string,
+    }),
   }),
 
   gameId: PropTypes.string.isRequired,

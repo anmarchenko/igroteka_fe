@@ -8,8 +8,12 @@
   max-height: 600px;
 }
 
+.GamePage-short-description-header {
+  margin-top: 1em;
+}
+
 .GamePage-short-description {
-  margin-top: 0.5em;
+  margin-top: 1em;
 }
 
 .GamePage-release-date {
