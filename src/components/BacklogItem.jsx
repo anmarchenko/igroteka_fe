@@ -42,7 +42,7 @@ const backgroundStyleScore = (score) => {
   return { backgroundColor: scoreColors[score] };
 };
 
-const renderExpectationRating = score => (
+const renderExpectationRating = (score) => (
   <span className={`badge badge-pill ${expectationRatingStyle[score]}`}>
     {expectationRatingText[score]}
   </span>
@@ -96,6 +96,7 @@ BacklogItem.propTypes = {
 
     note: PropTypes.string,
     score: PropTypes.number,
+    expectation_rating: PropTypes.number,
     owned_platform_name: PropTypes.string,
     finished_at: PropTypes.string,
 

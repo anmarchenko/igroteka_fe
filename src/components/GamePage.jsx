@@ -17,6 +17,7 @@ import YoutubeLink from './YoutubeLink';
 import { GAME_FETCH_REQUESTED } from '../store/gamePage';
 
 import './GamePage.css';
+import CriticsRating from './CriticsRating';
 
 const formatObjects = (objects) => {
   if (!objects) return null;
@@ -71,6 +72,10 @@ export class GamePage extends Component {
             </div>
             <div className="col-12 col-md-6">
               <h2>{game.name}</h2>
+              <div className="GamePage-visual-info pull-right">
+                {game.rating
+                  && <CriticsRating rating={game.rating} ratings_count={game.ratings_count} />}
+              </div>
               <div className="GamePage-release-date">{renderDate(game.release_date)}</div>
               <div className="GamePage-platforms">{formatObjects(game.platforms)}</div>
               <div className="GamePage-info">
@@ -103,6 +108,8 @@ GamePage.propTypes = {
     name: PropTypes.string,
     release_date: PropTypes.string,
     short_description: PropTypes.string,
+    rating: PropTypes.number,
+    ratings_count: PropTypes.number,
     platforms: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
