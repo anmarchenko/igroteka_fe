@@ -57,8 +57,8 @@ export const App = () => (
           <p>
             Powered by
             {' '}
-            <a href="https://giantbomb.com" target="_blank" rel="noopener noreferrer">
-              Giantbomb
+            <a href="https://igdb.com" target="_blank" rel="noopener noreferrer">
+              IGDB
             </a>
           </p>
         </div>
