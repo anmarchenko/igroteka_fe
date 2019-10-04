@@ -71,8 +71,8 @@ export class GamePage extends Component {
               {game.poster && <Poster url={game.poster.medium_url} />}
             </div>
             <div className="col-12 col-md-6">
-              <h2>{game.name}</h2>
-              <div className="GamePage-visual-info pull-right">
+              <div className="GamePage-header-top">
+                <div className="GamePage-game-name">{game.name}</div>
                 {game.rating
                   && <CriticsRating rating={game.rating} ratings_count={game.ratings_count} />}
               </div>
