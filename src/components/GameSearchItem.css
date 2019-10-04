@@ -24,6 +24,14 @@
   white-space: normal;
 }
 
+.GameSearchItem .game-name {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  font-weight: 500;
+  display: inline;
+  margin-right: 1rem;
+}
+
 .GameSearchItem .game-name small {
   color: rgba(0, 0, 0, 0.44);
   margin-left: 1ch;

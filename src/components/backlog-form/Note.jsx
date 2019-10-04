@@ -16,7 +16,7 @@ export class Note extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { note } = this.props;
     this.setState({ note: note || '' });
   }

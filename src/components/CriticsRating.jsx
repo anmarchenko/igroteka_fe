@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -37,12 +38,12 @@ const backgroundColor = (rating) => {
 const backgroundStyle = (rating) => {
   if (!rating) return null;
   return { backgroundColor: backgroundColor(rating) };
-}
+};
 
 const CriticsRating = ({ rating, ratings_count }) => (
-  <p className="CriticsRating" style={backgroundStyle(rating)} title={`Based on ${ratings_count} ratings`}>
+  <div className="CriticsRating" style={backgroundStyle(rating)} title={`Based on ${ratings_count} ratings`}>
     {Math.round(rating)}
-  </p>
+  </div>
 );
 
 CriticsRating.propTypes = {
