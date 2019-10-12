@@ -85,7 +85,7 @@ export class GamePage extends Component {
               </div>
               <div className="GamePage-info">
                 {game.name && <YoutubeLink name={game.name} type="Walkthrough" />}
-                {game.name && <YoutubeLink name={game.name} type="Trailer" />}
+                {game.name && <YoutubeLink name={game.name} type="Review" />}
               </div>
             </div>
             <div className="col-12 col-md-4">{currentUser && <Form game={game} />}</div>

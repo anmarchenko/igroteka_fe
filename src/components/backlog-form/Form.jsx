@@ -22,7 +22,7 @@ import { BACKLOG_FIELDS } from '../../constants';
 
 import './Form.css';
 
-const isInBacklog = entry => !!entry.id;
+const isInBacklog = (entry) => !!entry.id;
 
 export class Form extends Component {
   constructor(props) {
@@ -91,7 +91,7 @@ export class Form extends Component {
                   label="Expectation score"
                   value={backlogEntry.expectation_rating}
                   color="blue"
-                  onChange={rate => updateBacklog({ expectation_rating: rate })}
+                  onChange={(rate) => updateBacklog({ expectation_rating: rate })}
                 />
               </div>
             )}
@@ -104,8 +104,7 @@ export class Form extends Component {
                   onChange={(platformId, platformName) => updateBacklog({
                     owned_platform_id: platformId,
                     owned_platform_name: platformName,
-                  })
-                  }
+                  })}
                   platforms={game.platforms}
                 />
               </div>
@@ -116,7 +115,7 @@ export class Form extends Component {
                   label="Score"
                   value={backlogEntry.score}
                   color="yellow"
-                  onChange={rate => updateBacklog({ score: rate })}
+                  onChange={(rate) => updateBacklog({ score: rate })}
                   max={10}
                 />
               </div>
@@ -145,7 +144,7 @@ export class Form extends Component {
                 <Note
                   label="Note"
                   note={backlogEntry.note}
-                  onChange={note => updateBacklog({ note })}
+                  onChange={(note) => updateBacklog({ note })}
                 />
               </div>
             )}
@@ -177,7 +176,15 @@ Form.propTypes = {
   }).isRequired,
 
   backlogFetching: PropTypes.bool.isRequired,
-  backlogEntry: PropTypes.shape({}).isRequired,
+  backlogEntry: PropTypes.shape({
+    expectation_rating: PropTypes.number,
+    score: PropTypes.number,
+    status: PropTypes.string,
+    note: PropTypes.string,
+    owned_platform_id: PropTypes.number,
+    owned_platform_name: PropTypes.string,
+    finished_at: PropTypes.string,
+  }).isRequired,
 
   fetchBacklog: PropTypes.func.isRequired,
   addToBacklog: PropTypes.func.isRequired,
@@ -185,18 +192,18 @@ Form.propTypes = {
   removeFromBacklog: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   backlogEntry: state.backlogForm.backlogEntry,
   backlogFetching: state.backlogForm.fetching,
 
   currentUser: state.session.currentUser,
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchBacklog: gameId => dispatch({ type: BACKLOG_ENTRY_FETCH_REQUESTED, gameId }),
+const mapDispatchToProps = (dispatch) => ({
+  fetchBacklog: (gameId) => dispatch({ type: BACKLOG_ENTRY_FETCH_REQUESTED, gameId }),
   addToBacklog: (status, game) => dispatch({ type: BACKLOG_ENTRY_ADD, status, game }),
   updateBacklog: (gameId, p) => dispatch({ type: BACKLOG_ENTRY_UPDATE, gameId, entryParams: p }),
-  removeFromBacklog: gameId => dispatch({ type: BACKLOG_ENTRY_DELETE, gameId }),
+  removeFromBacklog: (gameId) => dispatch({ type: BACKLOG_ENTRY_DELETE, gameId }),
 });
 
 export default connect(
