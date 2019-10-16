@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import ReactPlaceholder from 'react-placeholder';
 import { TextBlock, TextRow, RectShape } from 'react-placeholder/lib/placeholders';
 import { Helmet } from 'react-helmet';
+import { Info } from 'react-feather';
 
 import { renderDate } from '../utils';
 import Poster from './Poster';
@@ -13,6 +14,7 @@ import Poster from './Poster';
 import Form from './backlog-form/Form';
 import GamePageInfoBlock from './GamePageInfoBlock';
 import YoutubeLink from './YoutubeLink';
+import ExternalLink from './ExternalLink';
 
 import { GAME_FETCH_REQUESTED } from '../store/gamePage';
 
@@ -83,7 +85,10 @@ export class GamePage extends Component {
                 <GamePageInfoBlock header="Publishers" text={formatObjects(game.publishers)} />
                 <GamePageInfoBlock header="Franchises" text={formatObjects(game.franchises)} />
               </div>
-              <div className="GamePage-info">
+              <div className="GamePage-info GamePage-links">
+                <ExternalLink label="IGDB" url={game.external_url}>
+                  <Info />
+                </ExternalLink>
                 {game.name && <YoutubeLink name={game.name} type="Walkthrough" />}
                 {game.name && <YoutubeLink name={game.name} type="Review" />}
               </div>
@@ -106,6 +111,7 @@ export class GamePage extends Component {
 GamePage.propTypes = {
   game: PropTypes.shape({
     name: PropTypes.string,
+    external_url: PropTypes.string,
     release_date: PropTypes.string,
     short_description: PropTypes.string,
     rating: PropTypes.number,
