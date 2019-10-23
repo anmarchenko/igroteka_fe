@@ -6,15 +6,13 @@ import { connect } from 'react-redux';
 import ReactPlaceholder from 'react-placeholder';
 import { TextBlock, TextRow, RectShape } from 'react-placeholder/lib/placeholders';
 import { Helmet } from 'react-helmet';
-import { Info } from 'react-feather';
 
 import { renderDate } from '../utils';
 import Poster from './Poster';
 
 import Form from './backlog-form/Form';
 import GamePageInfoBlock from './GamePageInfoBlock';
-import YoutubeLink from './YoutubeLink';
-import ExternalLink from './ExternalLink';
+import GamePageLinks from './GamePageLinks';
 
 import { GAME_FETCH_REQUESTED } from '../store/gamePage';
 
@@ -85,13 +83,7 @@ export class GamePage extends Component {
                 <GamePageInfoBlock header="Publishers" text={formatObjects(game.publishers)} />
                 <GamePageInfoBlock header="Franchises" text={formatObjects(game.franchises)} />
               </div>
-              <div className="GamePage-info GamePage-links">
-                <ExternalLink label="IGDB" url={game.external_url}>
-                  <Info />
-                </ExternalLink>
-                {game.name && <YoutubeLink name={game.name} type="Walkthrough" />}
-                {game.name && <YoutubeLink name={game.name} type="Review" />}
-              </div>
+              {game.name && <GamePageLinks game={game} />}
             </div>
             <div className="col-12 col-md-4">{currentUser && <Form game={game} />}</div>
           </div>

@@ -12,7 +12,7 @@ import GameSearchItem from './GameSearchItem';
 
 import './GlobalSearch.css';
 
-const renderItem = item => <GameSearchItem {...item} />;
+const renderItem = (item) => <GameSearchItem {...item} />;
 
 const onSelect = (item) => {
   history.push(`/games/${item.id}/show`);
@@ -51,13 +51,13 @@ GlobalSearch.propTypes = {
   loading: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   items: state.search.results,
   loading: state.search.loading,
 });
 
-const mapDispatchToProps = dispatch => ({
-  search: term => dispatch({ type: SEARCH_REQUESTED, term }),
+const mapDispatchToProps = (dispatch) => ({
+  search: (term) => dispatch({ type: SEARCH_REQUESTED, term }),
 });
 
 export default connect(

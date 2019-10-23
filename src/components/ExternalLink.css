@@ -2,6 +2,7 @@
   display: inline;
 
   margin-right: 2ch;
+  text-transform: capitalize;
 }
 
 .ExternalLink svg {
