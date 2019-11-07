@@ -47,8 +47,13 @@ const CriticsRating = ({ rating, ratings_count }) => (
 );
 
 CriticsRating.propTypes = {
-  rating: PropTypes.number.isRequired,
-  ratings_count: PropTypes.number.isRequired,
+  rating: PropTypes.number,
+  ratings_count: PropTypes.number,
+};
+
+CriticsRating.defaultProps = {
+  rating: null,
+  ratings_count: null,
 };
 
 export default CriticsRating;
