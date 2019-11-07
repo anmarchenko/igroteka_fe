@@ -116,7 +116,6 @@ export class Form extends Component {
                   value={backlogEntry.score}
                   color="yellow"
                   onChange={(rate) => updateBacklog({ score: rate })}
-                  max={10}
                 />
               </div>
             )}

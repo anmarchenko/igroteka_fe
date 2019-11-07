@@ -24,27 +24,31 @@ const expectationRatingStyle = {
   5: 'badge-danger',
 };
 
-const scoreColors = {
-  10: '#1B5E20',
-  9: '#388E3C',
-  8: '#4CAF50',
-  7: '#8BC34A',
-  6: '#FBC02D',
-  5: '#FFB300',
-  4: '#F57F17',
-  3: '#FF5722',
-  2: '#E64A19',
-  1: '#BF360C',
+const scoreText = {
+  1: 'Not recommended',
+  2: 'OK',
+  3: 'Good',
+  4: 'Excellent',
+  5: 'Masterpiece',
 };
 
-const backgroundStyleScore = (score) => {
-  if (!score) return null;
-  return { backgroundColor: scoreColors[score] };
+const scoreStyle = {
+  1: 'badge-light',
+  2: 'badge-primary',
+  3: 'badge-success',
+  4: 'badge-warning',
+  5: 'badge-danger',
 };
 
 const renderExpectationRating = (score) => (
   <span className={`badge badge-pill ${expectationRatingStyle[score]}`}>
     {expectationRatingText[score]}
+  </span>
+);
+
+const renderScore = (score) => (
+  <span className={`badge badge-pill ${scoreStyle[score]}`}>
+    {scoreText[score]}
   </span>
 );
 
@@ -73,9 +77,7 @@ export const BacklogItem = (props) => {
           <p>{entry.expectation_rating && renderExpectationRating(entry.expectation_rating)}</p>
         )}
         {entry.status === 'beaten' && (
-          <p className="BacklogItem-score" style={backgroundStyleScore(entry.score)}>
-            {entry.score}
-          </p>
+          <p>{entry.score && renderScore(entry.score)}</p>
         )}
         {entry.status === 'beaten' && <p>{entry.finished_at && renderDate(entry.finished_at)}</p>}
       </div>
