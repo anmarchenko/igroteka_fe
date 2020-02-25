@@ -22,16 +22,12 @@ const ALL_FILTERS = [
   'sort',
   'ownedPlatformId',
   'ownedPlatformName',
-  'availablePlatformId',
-  'availablePlatformName',
 ];
 
 const URL_FILTERS = [
   'page',
   'ownedPlatformId',
   'ownedPlatformName',
-  'availablePlatformId',
-  'availablePlatformName',
 ];
 
 const DEFAULTS = {
@@ -41,12 +37,9 @@ const DEFAULTS = {
 
   ownedPlatformId: null,
   ownedPlatformName: null,
-
-  availablePlatformId: null,
-  availablePlatformName: null,
 };
 
-const filtersChanged = (prev, next) => ALL_FILTERS.some(k => prev[k] !== next[k]);
+const filtersChanged = (prev, next) => ALL_FILTERS.some((k) => prev[k] !== next[k]);
 
 const queryStringToFilters = (queryString) => {
   const queryParams = new URLSearchParams(queryString);
@@ -77,7 +70,6 @@ export class Backlog extends Component {
 
     this.paginate = this.paginate.bind(this);
     this.load = this.load.bind(this);
-    this.filterAvailablePlatform = this.filterAvailablePlatform.bind(this);
     this.filterOwnedPlatform = this.filterOwnedPlatform.bind(this);
   }
 
@@ -111,14 +103,6 @@ export class Backlog extends Component {
     this.applyFilters({ page });
   }
 
-  filterAvailablePlatform({ id, name }) {
-    this.applyFilters({
-      availablePlatformId: id,
-      availablePlatformName: name,
-      page: 1,
-    });
-  }
-
   filterOwnedPlatform({ id, name }) {
     this.applyFilters({
       ownedPlatformId: id,
@@ -130,7 +114,6 @@ export class Backlog extends Component {
   render() {
     const {
       fetching,
-      availablePlatforms,
       ownedPlatforms,
       entries,
       totalPages,
@@ -165,9 +148,7 @@ export class Backlog extends Component {
           <BacklogFilters
             shownFilters={shownFilters}
             filters={filters}
-            availablePlatforms={availablePlatforms}
             ownedPlatforms={ownedPlatforms}
-            onAvailablePlatformChanged={this.filterAvailablePlatform}
             onOwnedPlatformChanged={this.filterOwnedPlatform}
           />
           <ReactPlaceholder showLoadingAnimation color="#ddd" ready={ready} type="text" rows={5}>
@@ -194,16 +175,8 @@ Backlog.propTypes = {
     status: PropTypes.string,
     ownedPlatformId: PropTypes.number,
     ownedPlatformName: PropTypes.string,
-    availablePlatformId: PropTypes.number,
-    availablePlatformName: PropTypes.string,
   }).isRequired,
 
-  availablePlatforms: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    }),
-  ),
   ownedPlatforms: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
@@ -219,7 +192,6 @@ Backlog.propTypes = {
 };
 
 Backlog.defaultProps = {
-  availablePlatforms: [],
   ownedPlatforms: [],
 };
 
@@ -235,12 +207,11 @@ const mapStateToProps = ({ myBacklog }, ownProps) => ({
     ...queryStringToFilters(ownProps.location.search),
     ...{ status: ownProps.match.params.status },
   },
-  availablePlatforms: myBacklog.availablePlatforms,
   ownedPlatforms: myBacklog.ownedPlatforms,
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchEntries: filters => dispatch({ type: BACKLOG_ENTRIES_FETCHING_REQUESTED, filters }),
+const mapDispatchToProps = (dispatch) => ({
+  fetchEntries: (filters) => dispatch({ type: BACKLOG_ENTRIES_FETCHING_REQUESTED, filters }),
 });
 
 export default connect(

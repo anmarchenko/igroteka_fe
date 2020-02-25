@@ -1,8 +1,8 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
 
-const SKARO_HOST = 'https://skaro.hmstr.rocks';
-// const SKARO_HOST = 'http://localhost:4000';
+// const SKARO_HOST = 'https://skaro.hmstr.rocks';
+const SKARO_HOST = 'http://localhost:4000';
 
 const Api = {
   currentUser() {
@@ -15,9 +15,6 @@ const Api = {
   fetchOwnedPlatforms(status) {
     return axios.get(`${SKARO_HOST}/api/available_platforms/owned?status=${status}`);
   },
-  fetchAvailablePlatforms(status) {
-    return axios.get(`${SKARO_HOST}/api/available_platforms?status=${status}`);
-  },
   fetchBacklogEntries(filters = {}) {
     // remove nulls and join query
     const queryString = [
@@ -26,9 +23,6 @@ const Api = {
       filters.status ? `filters[status]=${filters.status}` : null,
       filters.sort ? `filters[sort]=${filters.sort}` : null,
       filters.ownedPlatformId ? `filters[owned_platform_id]=${filters.ownedPlatformId}` : null,
-      filters.availablePlatformId
-        ? `filters[available_platform_id]=${filters.availablePlatformId}`
-        : null,
     ]
       .filter((q) => q)
       .join('&');

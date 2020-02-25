@@ -28,7 +28,7 @@ const BacklogList = ({
           />
         )}
         <ul className="BacklogList">
-          {entries.map(entry => (
+          {entries.map((entry) => (
             <BacklogItem key={entry.game_id} entry={entry} />
           ))}
         </ul>

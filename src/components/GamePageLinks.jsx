@@ -51,7 +51,7 @@ const renderCategoryIcon = (category) => {
 };
 
 const renderExternalLinks = (externalLinks) => externalLinks.map((link) => (
-  <ExternalLink label={link.category} url={link.url}>
+  <ExternalLink key={link.url} label={link.category} url={link.url}>
     {renderCategoryIcon(link.category)}
   </ExternalLink>
 ));

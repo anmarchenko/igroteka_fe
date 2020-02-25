@@ -18,7 +18,6 @@ const initialState = {
   totalPages: 1,
   totalCount: 0,
 
-  availablePlatforms: [],
   ownedPlatforms: [],
 };
 
@@ -27,29 +26,14 @@ export const BACKLOG_ENTRIES_FETCHING_REQUESTED = 'BACKLOG_ENTRIES_FETCHING_REQU
 export const BACKLOG_ENTRIES_FETCHING = 'BACKLOG_ENTRIES_FETCHING';
 export const BACKLOG_ENTRIES_RECEIVED = 'BACKLOG_ENTRIES_RECEIVED';
 
-export const AVAILABLE_PLATFORMS_REQUESTED = 'AVAILABLE_PLATFORMS_REQUESTED';
-export const AVAILABLE_PLATFORMS_RECEIVED = 'AVAILABLE_PLATFORMS_RECEIVED';
-
 export const OWNED_PLATFORMS_REQUESTED = 'OWNED_PLATFORMS_REQUESTED';
 export const OWNED_PLATFORMS_RECEIVED = 'OWNED_PLATFORMS_RECEIVED';
 
-const paginationAction = data => ({
+const paginationAction = (data) => ({
   page: data.meta.page,
   totalPages: data.meta.total_pages,
   totalCount: data.meta.total_count,
 });
-
-function* fetchAvailablePlatforms({ status }) {
-  try {
-    const response = yield call(Api.fetchAvailablePlatforms, status);
-    yield put({
-      type: AVAILABLE_PLATFORMS_RECEIVED,
-      availablePlatforms: response.data,
-    });
-  } catch (error) {
-    handle(error);
-  }
-}
 
 function* fetchOwnedPlatforms({ status }) {
   try {
@@ -65,10 +49,6 @@ function* fetchOwnedPlatforms({ status }) {
 
 function* fetchEntries({ filters }) {
   yield put({ type: BACKLOG_ENTRIES_FETCHING });
-  yield put({
-    type: AVAILABLE_PLATFORMS_REQUESTED,
-    status: filters.status,
-  });
   yield put({ type: OWNED_PLATFORMS_REQUESTED, status: filters.status });
 
   try {
@@ -87,12 +67,11 @@ function* fetchEntries({ filters }) {
 }
 
 export function* myBacklogWatch() {
-  yield takeLatest(AVAILABLE_PLATFORMS_REQUESTED, fetchAvailablePlatforms);
   yield takeLatest(OWNED_PLATFORMS_REQUESTED, fetchOwnedPlatforms);
   yield takeLatest(BACKLOG_ENTRIES_FETCHING_REQUESTED, fetchEntries);
 }
 
-const paginationReducer = action => ({
+const paginationReducer = (action) => ({
   page: action.page,
   totalPages: action.totalPages,
   totalCount: action.totalCount,
@@ -110,8 +89,6 @@ export const myBacklogReducer = (state = initialState, action = {}) => {
         entries: action.entries,
         fetching: false,
       };
-    case AVAILABLE_PLATFORMS_RECEIVED:
-      return { ...state, availablePlatforms: action.availablePlatforms };
     case OWNED_PLATFORMS_RECEIVED:
       return { ...state, ownedPlatforms: action.ownedPlatforms };
 
