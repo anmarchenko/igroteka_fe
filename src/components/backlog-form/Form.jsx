@@ -10,6 +10,7 @@ import Note from './Note';
 import Platform from './Platform';
 import BacklogRating from './BacklogRating';
 import BacklogStatus from './BacklogStatus';
+import BacklogScore from './BacklogScore';
 
 import {
   BACKLOG_ENTRY_FETCH_REQUESTED,
@@ -111,11 +112,9 @@ export class Form extends Component {
             )}
             {show.includes('score') && (
               <div className="col-12">
-                <BacklogRating
-                  label="Score"
-                  value={backlogEntry.score}
-                  color="yellow"
-                  onChange={(rate) => updateBacklog({ score: rate })}
+                <BacklogScore
+                  score={backlogEntry.score}
+                  setScore={(score) => updateBacklog({ score })}
                 />
               </div>
             )}

@@ -27,7 +27,7 @@ export const BacklogStatus = ({
         )}
         <DropdownMenu>
           <DropdownItem header>Mark as...</DropdownItem>
-          {BACKLOG_STATUSES.map(statusItem => (
+          {BACKLOG_STATUSES.map((statusItem) => (
             <DropdownItem key={statusItem.id} onClick={() => onStatusChange(statusItem.id)}>
               <BacklogStatusLabel status={statusItem} size={22} />
             </DropdownItem>

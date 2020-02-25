@@ -1,4 +1,6 @@
-import { Check, Star, Package } from 'react-feather';
+import {
+  Check, Star, Package, ThumbsDown, Meh, ThumbsUp, Smile, Heart,
+} from 'react-feather';
 import Gamepad from './icons/Gamepad';
 
 export const VALIDATION_ERRORS = {
@@ -49,5 +51,43 @@ export const BACKLOG_FIELDS = {
   playing: ['note', 'platform'],
   beaten: ['note', 'platform', 'score', 'finished'],
 };
+
+export const GAME_SCORES = [
+  {
+    label: 'Loved',
+    badgeStyle: 'badge-danger',
+    id: 5,
+    icon: Heart,
+    color: '#dc3545',
+  },
+  {
+    label: 'Liked',
+    badgeStyle: 'badge-warning',
+    id: 4,
+    icon: ThumbsUp,
+    color: '#ffc107',
+  },
+  {
+    label: 'Good',
+    badgeStyle: 'badge-success',
+    id: 3,
+    icon: Smile,
+    color: '#28a745',
+  },
+  {
+    label: 'OK',
+    badgeStyle: 'badge-primary',
+    id: 2,
+    icon: Meh,
+    color: '#007bff',
+  },
+  {
+    label: 'Bad',
+    badgeStyle: 'badge-light',
+    id: 1,
+    icon: ThumbsDown,
+    color: '#9E9E9E',
+  },
+];
 
 export default VALIDATION_ERRORS;

@@ -1,15 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './BacklogStatusLabel.css';
+import IconWithText from './IconWithText';
 
 export const BacklogStatusLabel = ({ status, size }) => (
-  <span className="BacklogStatusLabel">
-    {status.icon({ color: status.color, size })}
-    <span className="BacklogStatusLabel-text">
-      {status.label}
-    </span>
-  </span>
+  <IconWithText icon={status.icon} color={status.color} size={size} label={status.label} />
 );
 
 BacklogStatusLabel.propTypes = {

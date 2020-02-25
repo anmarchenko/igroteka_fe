@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import Poster from './Poster';
-import { yearFromDate, renderDate } from '../utils';
+import { yearFromDate, renderDate, gameScoreById } from '../utils';
 
 import './BacklogItem.css';
 
@@ -24,22 +24,6 @@ const expectationRatingStyle = {
   5: 'badge-danger',
 };
 
-const scoreText = {
-  1: 'Not recommended',
-  2: 'OK',
-  3: 'Good',
-  4: 'Excellent',
-  5: 'Masterpiece',
-};
-
-const scoreStyle = {
-  1: 'badge-light',
-  2: 'badge-primary',
-  3: 'badge-success',
-  4: 'badge-warning',
-  5: 'badge-danger',
-};
-
 const renderExpectationRating = (score) => (
   <span className={`badge badge-pill ${expectationRatingStyle[score]}`}>
     {expectationRatingText[score]}
@@ -47,13 +31,14 @@ const renderExpectationRating = (score) => (
 );
 
 const renderScore = (score) => (
-  <span className={`badge badge-pill ${scoreStyle[score]}`}>
-    {scoreText[score]}
+  <span className={`badge badge-pill ${score.badgeStyle}`}>
+    {score.label}
   </span>
 );
 
 export const BacklogItem = (props) => {
   const { entry } = props;
+  const scoreItem = gameScoreById(entry.score);
 
   return (
     <li className="BacklogItem">
@@ -77,7 +62,7 @@ export const BacklogItem = (props) => {
           <p>{entry.expectation_rating && renderExpectationRating(entry.expectation_rating)}</p>
         )}
         {entry.status === 'beaten' && (
-          <p>{entry.score && renderScore(entry.score)}</p>
+          <p>{entry.score && renderScore(scoreItem)}</p>
         )}
         {entry.status === 'beaten' && <p>{entry.finished_at && renderDate(entry.finished_at)}</p>}
       </div>
