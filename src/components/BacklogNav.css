@@ -11,7 +11,7 @@
     width: 25%;
     text-align: center;
   }
-  .BacklogNav .BacklogStatusLabel-text {
+  .BacklogNav .IconWithText-text {
     display: none;
   }
 }
