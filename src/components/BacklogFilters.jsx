@@ -12,10 +12,10 @@ const BacklogFilters = ({
 }) => (
   <div className="row">
     <div className="col-12 BacklogFilters">
-      {shownFilters.includes('played') && ownedPlatforms && ownedPlatforms.length > 0 && (
+      {shownFilters.includes('platform') && ownedPlatforms && ownedPlatforms.length > 0 && (
         <div className="BacklogFilter">
           <div className="form-group">
-            <label htmlFor="backlog_owned_platform_filter">My platform</label>
+            <label htmlFor="backlog_owned_platform_filter">Platform</label>
             <br />
             <FilterPlatform
               onChange={onOwnedPlatformChanged}

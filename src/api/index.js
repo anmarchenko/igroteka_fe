@@ -15,6 +15,9 @@ const Api = {
   fetchOwnedPlatforms(status) {
     return axios.get(`${SKARO_HOST}/api/available_platforms/owned?status=${status}`);
   },
+  fetchFilters(status) {
+    return axios.get(`${SKARO_HOST}/api/backlog_filters?status=${status}`);
+  },
   fetchBacklogEntries(filters = {}) {
     // remove nulls and join query
     const queryString = [

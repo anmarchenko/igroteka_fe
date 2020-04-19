@@ -39,10 +39,10 @@ export const BACKLOG_STATUSES = [
 ];
 
 export const BACKLOG_FILTERS = {
-  wishlist: ['played'],
-  backlog: ['played'],
+  wishlist: ['platform'],
+  backlog: ['platform'],
   playing: [],
-  beaten: ['played'],
+  beaten: ['platform'],
 };
 
 export const BACKLOG_FIELDS = {
@@ -54,35 +54,35 @@ export const BACKLOG_FIELDS = {
 
 export const GAME_SCORES = [
   {
-    label: 'Loved',
+    label: 'Fantastic',
     badgeStyle: 'badge-danger',
     id: 5,
     icon: Heart,
     color: '#dc3545',
   },
   {
-    label: 'Liked',
+    label: 'Excellent',
     badgeStyle: 'badge-warning',
     id: 4,
     icon: ThumbsUp,
     color: '#ffc107',
   },
   {
-    label: 'Good',
+    label: 'Enjoyable',
     badgeStyle: 'badge-success',
     id: 3,
     icon: Smile,
     color: '#28a745',
   },
   {
-    label: 'OK',
+    label: 'Mediocre',
     badgeStyle: 'badge-primary',
     id: 2,
     icon: Meh,
     color: '#007bff',
   },
   {
-    label: 'Bad',
+    label: 'Unsatisfying',
     badgeStyle: 'badge-light',
     id: 1,
     icon: ThumbsDown,
