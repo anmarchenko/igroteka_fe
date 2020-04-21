@@ -147,7 +147,7 @@ export class Backlog extends Component {
               )}
               {shownFilters.includes('releaseYear') && years && years.length > 0 && (
                 <SelectFilter
-                  label="Release year"
+                  label="Release&nbsp;year"
                   clearFilterLabel="All years"
                   options={years.map((year) => ({
                     value: year,
