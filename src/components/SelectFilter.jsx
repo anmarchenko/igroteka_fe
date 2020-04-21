@@ -11,7 +11,7 @@ const renderItems = (options) => {
   }
   return options.map((option) => (
     <option key={option.value} value={option.value}>
-      {option.label.substring(0, 25)}
+      {option.label.toString().substring(0, 25)}
     </option>
   ));
 };
