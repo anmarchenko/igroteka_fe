@@ -57,7 +57,7 @@ function* fetchEntries({ filters }) {
   try {
     const response = yield call(Api.fetchBacklogEntries, {
       ...filters,
-      sort: DEFAULT_SORT[filters.status],
+      sort: filters.sort || DEFAULT_SORT[filters.status],
     });
     yield put({
       type: BACKLOG_ENTRIES_RECEIVED,

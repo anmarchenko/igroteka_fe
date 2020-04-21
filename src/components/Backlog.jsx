@@ -9,7 +9,7 @@ import BacklogNav from './BacklogNav';
 import BacklogList from './BacklogList';
 import SelectFilter from './SelectFilter';
 
-import { BACKLOG_FILTERS, IMPORTANT_PLATFORMS } from '../constants';
+import { BACKLOG_FILTERS, IMPORTANT_PLATFORMS, SORT_OPTIONS } from '../constants';
 import { backlogStatusById } from '../utils';
 import history from '../store/history';
 
@@ -106,6 +106,7 @@ export class Backlog extends Component {
     const selectedStatus = backlogStatusById(status) || {};
 
     const { platforms, years } = filterOptions;
+    const sorts = SORT_OPTIONS[status];
 
     return (
       <div className="container">
@@ -150,14 +151,27 @@ export class Backlog extends Component {
                   label="Release&nbsp;year"
                   clearFilterLabel="All years"
                   options={years.map((year) => ({
-                    value: year,
-                    label: year,
+                    value: year.toString(),
+                    label: year.toString(),
                   }))}
                   selectedValue={filters.releaseYear}
                   onChange={(value) => {
                     this.applyFilters({
                       releaseYear: value,
                       page: 1,
+                    });
+                  }}
+                />
+              )}
+              {shownFilters.includes('sort') && sorts && sorts.length > 0 && (
+                <SelectFilter
+                  label="Sort"
+                  showClearFilter={false}
+                  options={sorts}
+                  selectedValue={filters.sort}
+                  onChange={(value) => {
+                    this.applyFilters({
+                      sort: value,
                     });
                   }}
                 />
@@ -188,6 +202,7 @@ Backlog.propTypes = {
     status: PropTypes.string,
     ownedPlatformId: PropTypes.string,
     releaseYear: PropTypes.string,
+    sort: PropTypes.string,
   }).isRequired,
 
   filterOptions: PropTypes.shape({

@@ -47,7 +47,19 @@ export const BACKLOG_FILTERS = {
   wishlist: ['platform', 'releaseYear'],
   backlog: ['platform', 'releaseYear'],
   playing: [],
-  beaten: ['platform', 'releaseYear'],
+  beaten: ['platform', 'releaseYear', 'sort'],
+};
+
+export const SORT_OPTIONS = {
+  wishlist: [],
+  backlog: [],
+  playing: [],
+  beaten: [
+    { value: 'desc:finished_at', label: 'Finished' },
+    { value: 'desc:score', label: 'My score' },
+    { value: 'desc:game_release_date', label: 'Release date' },
+    { value: 'asc:game_name', label: 'Name' },
+  ],
 };
 
 export const BACKLOG_FIELDS = {

@@ -23,6 +23,7 @@ export const SelectFilter = ({
   label,
   clearFilterLabel,
   importantOptions,
+  showClearFilter,
 }) => {
   if (!options || options.length === 0) {
     return <span />;
@@ -40,7 +41,7 @@ export const SelectFilter = ({
           value={selectedValue || ''}
           onChange={(e) => onChange(e.target.value)}
         >
-          <option value="">{clearFilterLabel}</option>
+          {showClearFilter && <option value="">{clearFilterLabel}</option>}
           {renderItems(important)}
           {renderItems(rest)}
         </select>
@@ -51,13 +52,15 @@ export const SelectFilter = ({
 
 SelectFilter.propTypes = {
   label: PropTypes.string.isRequired,
-  clearFilterLabel: PropTypes.string.isRequired,
+
+  showClearFilter: PropTypes.bool,
+  clearFilterLabel: PropTypes.string,
 
   selectedValue: PropTypes.string,
   importantOptions: PropTypes.arrayOf(PropTypes.string),
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      value: PropTypes.number.isRequired,
+      value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     }),
   ),
@@ -69,6 +72,8 @@ SelectFilter.defaultProps = {
   options: [],
   importantOptions: [],
   selectedValue: undefined,
+  showClearFilter: true,
+  clearFilterLabel: 'All',
 };
 
 export default SelectFilter;
