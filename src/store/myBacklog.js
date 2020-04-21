@@ -3,7 +3,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import handle from '../api/errors';
 import Api from '../api';
 
-const sorting = {
+const DEFAULT_SORT = {
   wishlist: 'desc:expectation_rating',
   backlog: 'desc:expectation_rating',
   playing: 'desc:game_release_date',
@@ -18,7 +18,10 @@ const initialState = {
   totalPages: 1,
   totalCount: 0,
 
-  ownedPlatforms: [],
+  filterOptions: {
+    platforms: [],
+    years: [],
+  },
 };
 
 export const BACKLOG_ENTRIES_FETCHING_REQUESTED = 'BACKLOG_ENTRIES_FETCHING_REQUESTED';
@@ -26,8 +29,8 @@ export const BACKLOG_ENTRIES_FETCHING_REQUESTED = 'BACKLOG_ENTRIES_FETCHING_REQU
 export const BACKLOG_ENTRIES_FETCHING = 'BACKLOG_ENTRIES_FETCHING';
 export const BACKLOG_ENTRIES_RECEIVED = 'BACKLOG_ENTRIES_RECEIVED';
 
-export const OWNED_PLATFORMS_REQUESTED = 'OWNED_PLATFORMS_REQUESTED';
-export const OWNED_PLATFORMS_RECEIVED = 'OWNED_PLATFORMS_RECEIVED';
+export const FILTERS_REQUESTED = 'FILTERS_REQUESTED';
+export const FILTERS_RECEIVED = 'FILTERS_RECEIVED';
 
 const paginationAction = (data) => ({
   page: data.meta.page,
@@ -35,12 +38,12 @@ const paginationAction = (data) => ({
   totalCount: data.meta.total_count,
 });
 
-function* fetchOwnedPlatforms({ status }) {
+function* fetchFilters({ status }) {
   try {
-    const response = yield call(Api.fetchOwnedPlatforms, status);
+    const response = yield call(Api.fetchFilters, status);
     yield put({
-      type: OWNED_PLATFORMS_RECEIVED,
-      ownedPlatforms: response.data,
+      type: FILTERS_RECEIVED,
+      filterOptions: response.data,
     });
   } catch (error) {
     handle(error);
@@ -49,12 +52,12 @@ function* fetchOwnedPlatforms({ status }) {
 
 function* fetchEntries({ filters }) {
   yield put({ type: BACKLOG_ENTRIES_FETCHING });
-  yield put({ type: OWNED_PLATFORMS_REQUESTED, status: filters.status });
+  yield put({ type: FILTERS_REQUESTED, status: filters.status });
 
   try {
     const response = yield call(Api.fetchBacklogEntries, {
       ...filters,
-      sort: sorting[filters.status],
+      sort: DEFAULT_SORT[filters.status],
     });
     yield put({
       type: BACKLOG_ENTRIES_RECEIVED,
@@ -67,7 +70,7 @@ function* fetchEntries({ filters }) {
 }
 
 export function* myBacklogWatch() {
-  yield takeLatest(OWNED_PLATFORMS_REQUESTED, fetchOwnedPlatforms);
+  yield takeLatest(FILTERS_REQUESTED, fetchFilters);
   yield takeLatest(BACKLOG_ENTRIES_FETCHING_REQUESTED, fetchEntries);
 }
 
@@ -89,8 +92,8 @@ export const myBacklogReducer = (state = initialState, action = {}) => {
         entries: action.entries,
         fetching: false,
       };
-    case OWNED_PLATFORMS_RECEIVED:
-      return { ...state, ownedPlatforms: action.ownedPlatforms };
+    case FILTERS_RECEIVED:
+      return { ...state, filterOptions: action.filterOptions };
 
     default:
       return state;

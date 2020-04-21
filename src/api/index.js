@@ -12,9 +12,6 @@ const Api = {
     const data = { session: { email, password } };
     return axios.post(`${SKARO_HOST}/api/sessions`, data);
   },
-  fetchOwnedPlatforms(status) {
-    return axios.get(`${SKARO_HOST}/api/available_platforms/owned?status=${status}`);
-  },
   fetchFilters(status) {
     return axios.get(`${SKARO_HOST}/api/backlog_filters?status=${status}`);
   },
@@ -26,6 +23,7 @@ const Api = {
       filters.status ? `filters[status]=${filters.status}` : null,
       filters.sort ? `filters[sort]=${filters.sort}` : null,
       filters.ownedPlatformId ? `filters[owned_platform_id]=${filters.ownedPlatformId}` : null,
+      filters.releaseYear ? `filters[release_year]=${filters.releaseYear}` : null,
     ]
       .filter((q) => q)
       .join('&');

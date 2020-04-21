@@ -6,29 +6,20 @@ import ReactPlaceholder from 'react-placeholder';
 import { Helmet } from 'react-helmet';
 
 import BacklogNav from './BacklogNav';
-import BacklogFilters from './BacklogFilters';
 import BacklogList from './BacklogList';
+import SelectFilter from './SelectFilter';
 
-import { BACKLOG_FILTERS } from '../constants';
+import { BACKLOG_FILTERS, IMPORTANT_PLATFORMS } from '../constants';
 import { backlogStatusById } from '../utils';
 import history from '../store/history';
 
 import { BACKLOG_ENTRIES_FETCHING_REQUESTED } from '../store/myBacklog';
 
-const ALL_FILTERS = [
-  'status',
-  'page',
-  'pageSize',
-  'sort',
-  'ownedPlatformId',
-  'ownedPlatformName',
-];
+import './Backlog.css';
 
-const URL_FILTERS = [
-  'page',
-  'ownedPlatformId',
-  'ownedPlatformName',
-];
+const ALL_FILTERS = ['status', 'page', 'pageSize', 'sort', 'ownedPlatformId', 'releaseYear'];
+
+const URL_FILTERS = ['page', 'sort', 'ownedPlatformId', 'releaseYear'];
 
 const DEFAULTS = {
   page: 1,
@@ -36,7 +27,8 @@ const DEFAULTS = {
   sort: 'asc:inserted_at',
 
   ownedPlatformId: null,
-  ownedPlatformName: null,
+
+  releaseYear: null,
 };
 
 const filtersChanged = (prev, next) => ALL_FILTERS.some((k) => prev[k] !== next[k]);
@@ -70,7 +62,6 @@ export class Backlog extends Component {
 
     this.paginate = this.paginate.bind(this);
     this.load = this.load.bind(this);
-    this.filterOwnedPlatform = this.filterOwnedPlatform.bind(this);
   }
 
   componentDidMount() {
@@ -103,22 +94,9 @@ export class Backlog extends Component {
     this.applyFilters({ page });
   }
 
-  filterOwnedPlatform({ id, name }) {
-    this.applyFilters({
-      ownedPlatformId: id,
-      ownedPlatformName: name,
-      page: 1,
-    });
-  }
-
   render() {
     const {
-      fetching,
-      ownedPlatforms,
-      entries,
-      totalPages,
-      totalCount,
-      filters,
+      fetching, filterOptions, entries, totalPages, totalCount, filters,
     } = this.props;
 
     const { status, page } = filters;
@@ -126,6 +104,8 @@ export class Backlog extends Component {
     const ready = !fetching;
     const shownFilters = BACKLOG_FILTERS[status] || [];
     const selectedStatus = backlogStatusById(status) || {};
+
+    const { platforms, years } = filterOptions;
 
     return (
       <div className="container">
@@ -136,7 +116,7 @@ export class Backlog extends Component {
           <BacklogNav />
           <div className="row">
             <div className="col-12">
-              {totalCount != null && totalCount !== 0 && (
+              {totalCount != null && (
                 <p className="text-secondary">
                   Showing&nbsp;
                   {totalCount}
@@ -145,12 +125,45 @@ export class Backlog extends Component {
               )}
             </div>
           </div>
-          <BacklogFilters
-            shownFilters={shownFilters}
-            filters={filters}
-            ownedPlatforms={ownedPlatforms}
-            onOwnedPlatformChanged={this.filterOwnedPlatform}
-          />
+          <div className="row">
+            <div className="col-12 Backlog-filters">
+              {shownFilters.includes('platform') && platforms && platforms.length > 0 && (
+                <SelectFilter
+                  label="Platform"
+                  clearFilterLabel="All platforms"
+                  options={platforms.map((platform) => ({
+                    value: platform.id,
+                    label: platform.name,
+                  }))}
+                  importantOptions={IMPORTANT_PLATFORMS}
+                  selectedValue={filters.ownedPlatformId}
+                  onChange={(value) => {
+                    this.applyFilters({
+                      ownedPlatformId: value,
+                      page: 1,
+                    });
+                  }}
+                />
+              )}
+              {shownFilters.includes('releaseYear') && years && years.length > 0 && (
+                <SelectFilter
+                  label="Release year"
+                  clearFilterLabel="All years"
+                  options={years.map((year) => ({
+                    value: year,
+                    label: year,
+                  }))}
+                  selectedValue={filters.releaseYear}
+                  onChange={(value) => {
+                    this.applyFilters({
+                      releaseYear: value,
+                      page: 1,
+                    });
+                  }}
+                />
+              )}
+            </div>
+          </div>
           <ReactPlaceholder showLoadingAnimation color="#ddd" ready={ready} type="text" rows={5}>
             <BacklogList
               entries={entries}
@@ -173,16 +186,19 @@ Backlog.propTypes = {
   filters: PropTypes.shape({
     page: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     status: PropTypes.string,
-    ownedPlatformId: PropTypes.number,
-    ownedPlatformName: PropTypes.string,
+    ownedPlatformId: PropTypes.string,
+    releaseYear: PropTypes.string,
   }).isRequired,
 
-  ownedPlatforms: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    }),
-  ),
+  filterOptions: PropTypes.shape({
+    platforms: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+      }),
+    ),
+    years: PropTypes.arrayOf(PropTypes.number),
+  }),
 
   fetching: PropTypes.bool.isRequired,
   totalPages: PropTypes.number.isRequired,
@@ -192,7 +208,10 @@ Backlog.propTypes = {
 };
 
 Backlog.defaultProps = {
-  ownedPlatforms: [],
+  filterOptions: {
+    platforms: [],
+    years: [],
+  },
 };
 
 const mapStateToProps = ({ myBacklog }, ownProps) => ({
@@ -207,14 +226,11 @@ const mapStateToProps = ({ myBacklog }, ownProps) => ({
     ...queryStringToFilters(ownProps.location.search),
     ...{ status: ownProps.match.params.status },
   },
-  ownedPlatforms: myBacklog.ownedPlatforms,
+  filterOptions: myBacklog.filterOptions,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchEntries: (filters) => dispatch({ type: BACKLOG_ENTRIES_FETCHING_REQUESTED, filters }),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Backlog);
+export default connect(mapStateToProps, mapDispatchToProps)(Backlog);

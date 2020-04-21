@@ -9,7 +9,12 @@ export const VALIDATION_ERRORS = {
   passwordLength: 'password should have at least 5 characters',
 };
 
-export const IMPORTANT_PLATFORMS = ['PC', 'Mac', 'PlayStation 4', 'Xbox One', 'Nintendo Switch'];
+export const IMPORTANT_PLATFORMS = [
+  'PC (Microsoft Windows)',
+  'PlayStation 4',
+  'Xbox One',
+  'Nintendo Switch',
+];
 
 export const BACKLOG_STATUSES = [
   {
@@ -39,10 +44,10 @@ export const BACKLOG_STATUSES = [
 ];
 
 export const BACKLOG_FILTERS = {
-  wishlist: ['platform'],
-  backlog: ['platform'],
+  wishlist: ['platform', 'releaseYear'],
+  backlog: ['platform', 'releaseYear'],
   playing: [],
-  beaten: ['platform'],
+  beaten: ['platform', 'releaseYear'],
 };
 
 export const BACKLOG_FIELDS = {

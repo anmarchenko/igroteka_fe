@@ -12,7 +12,7 @@ const BacklogList = ({
   if (!entries || entries.length === 0) {
     return (
       <div className="row BacklogList-empty">
-        <div className="col-12">Collection is empty</div>
+        <div className="col-12">No results</div>
       </div>
     );
   }

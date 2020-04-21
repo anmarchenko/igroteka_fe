@@ -1,0 +1,8 @@
+.Backlog-filters {
+  display: flex;
+  flex-direction: row;
+}
+
+.filter-item {
+  margin-right: 2ch;
+}

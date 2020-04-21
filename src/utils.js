@@ -1,12 +1,6 @@
 import dayjs from 'dayjs';
 
-import { IMPORTANT_PLATFORMS, BACKLOG_STATUSES, GAME_SCORES } from './constants';
-
-const sortByName = (platforms) => platforms.sort((left, right) => (left.name < right.name ? -1 : 1));
-
-export const selectImportantPlatforms = (platforms) => sortByName(platforms.filter((pl) => IMPORTANT_PLATFORMS.includes(pl.name)));
-
-export const selectRestPlatforms = (platforms) => sortByName(platforms.filter((pl) => !IMPORTANT_PLATFORMS.includes(pl.name)));
+import { BACKLOG_STATUSES, GAME_SCORES } from './constants';
 
 export const backlogStatusById = (id) => BACKLOG_STATUSES.find((status) => status.id === id);
 
@@ -40,4 +34,4 @@ export const yupToFormErrors = (yupException) => {
   return errors;
 };
 
-export default selectImportantPlatforms;
+export default backlogStatusById;

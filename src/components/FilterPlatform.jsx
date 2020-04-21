@@ -10,14 +10,13 @@ const renderPlatforms = (platforms, onChange) => {
   if (!platforms || platforms.length === 0) {
     return null;
   }
-  return platforms.map(platform => (
+  return platforms.map((platform) => (
     <DropdownItem
       key={platform.id}
       onClick={() => onChange({
         id: platform.id,
         name: platform.name,
-      })
-      }
+      })}
     >
       {platform.name}
     </DropdownItem>
