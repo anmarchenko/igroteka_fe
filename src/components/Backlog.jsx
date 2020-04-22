@@ -24,11 +24,6 @@ const URL_FILTERS = ['page', 'sort', 'ownedPlatformId', 'releaseYear'];
 const DEFAULTS = {
   page: 1,
   pageSize: 50,
-  sort: 'asc:inserted_at',
-
-  ownedPlatformId: null,
-
-  releaseYear: null,
 };
 
 const filtersChanged = (prev, next) => ALL_FILTERS.some((k) => prev[k] !== next[k]);
