@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './SelectFilter.css';
+
 const selectImportantOptions = (options, important) => options.filter((o) => important.includes(o.label));
 
 const selectRestOptions = (options, important) => options.filter((o) => !important.includes(o.label));
@@ -11,7 +13,7 @@ const renderItems = (options) => {
   }
   return options.map((option) => (
     <option key={option.value} value={option.value}>
-      {option.label.toString().substring(0, 25)}
+      {option.label}
     </option>
   ));
 };
@@ -32,7 +34,7 @@ export const SelectFilter = ({
   const rest = selectRestOptions(options, importantOptions);
 
   return (
-    <div className="filter-item">
+    <div className="SelectFilter">
       <div className="form-group">
         <label htmlFor="backlog_owned_platform_filter">{label}</label>
         <br />

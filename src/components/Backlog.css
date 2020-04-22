@@ -1,9 +1,5 @@
 .Backlog-filters {
   display: flex;
   flex-direction: row;
-}
-
-.filter-item {
-  margin-right: 2ch;
-  min-width: 150px;
+  flex-wrap: wrap;
 }
