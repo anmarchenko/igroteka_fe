@@ -1,68 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,
-} from 'reactstrap';
-
 import { GAME_SCORES } from '../../constants';
-import { gameScoreById } from '../../utils';
-import IconWithText from '../IconWithText';
+import FancySelect from '../forms/FancySelect';
 
-export const BacklogStatus = ({
-  setScore, score,
-}) => {
-  const currentScoreItem = gameScoreById(score);
-  return (
-    <div className="form-group BacklogScore">
-      <label>Rating</label>
-      <br />
-      <UncontrolledButtonDropdown>
-        {!score && (
-          <DropdownToggle caret outline>
-            Rate this game
-          </DropdownToggle>
-        )}
-        {score && (
-          <DropdownToggle outline caret>
-            <IconWithText
-              icon={currentScoreItem.icon}
-              color={currentScoreItem.color}
-              label={currentScoreItem.label}
-              size={20}
-            />
-          </DropdownToggle>
-        )}
-        <DropdownMenu>
-          {GAME_SCORES.map((scoreItem) => (
-            <DropdownItem key={scoreItem.id} onClick={() => setScore(scoreItem.id)}>
-              <IconWithText
-                icon={scoreItem.icon}
-                color={scoreItem.color}
-                label={scoreItem.label}
-                size={22}
-              />
-            </DropdownItem>
-          ))}
-          {score && <DropdownItem divider />}
-          {score && (
-            <DropdownItem className="danger" onClick={() => setScore(null)}>
-              Remove score
-            </DropdownItem>
-          )}
-        </DropdownMenu>
-      </UncontrolledButtonDropdown>
-    </div>
-  );
-};
+export const BacklogScore = ({ setScore, score }) => (
+  <FancySelect
+    value={score}
+    options={GAME_SCORES}
+    onChange={setScore}
+    onDelete={() => setScore(null)}
+    label="Rating"
+    emptyLabel="Rate this game"
+    deleteLabel="Remove score"
+  />
+);
 
-BacklogStatus.propTypes = {
+BacklogScore.propTypes = {
   score: PropTypes.number,
   setScore: PropTypes.func.isRequired,
 };
 
-BacklogStatus.defaultProps = {
+BacklogScore.defaultProps = {
   score: null,
 };
 
-export default BacklogStatus;
+export default BacklogScore;

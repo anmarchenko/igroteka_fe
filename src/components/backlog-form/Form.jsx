@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 import DateField from './DateField';
 import Note from './Note';
 import Platform from './Platform';
-import BacklogRating from './BacklogRating';
+import BacklogExpectation from './BacklogExpectation';
 import BacklogStatus from './BacklogStatus';
 import BacklogScore from './BacklogScore';
 
@@ -88,11 +88,9 @@ export class Form extends Component {
           <div className="row BacklogForm-note">
             {show.includes('expectationRating') && (
               <div className="col-12">
-                <BacklogRating
-                  label="Expectation score"
+                <BacklogExpectation
                   value={backlogEntry.expectation_rating}
-                  color="blue"
-                  onChange={(rate) => updateBacklog({ expectation_rating: rate })}
+                  setExpectation={(rate) => updateBacklog({ expectation_rating: rate })}
                 />
               </div>
             )}
@@ -204,7 +202,4 @@ const mapDispatchToProps = (dispatch) => ({
   removeFromBacklog: (gameId) => dispatch({ type: BACKLOG_ENTRY_DELETE, gameId }),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Form);
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

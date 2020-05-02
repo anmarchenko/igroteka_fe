@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet';
 
 import BacklogNav from './BacklogNav';
 import BacklogList from './BacklogList';
-import SelectFilter from './SelectFilter';
+import FilterSelect from './forms/FilterSelect';
 
 import { BACKLOG_FILTERS, IMPORTANT_PLATFORMS, SORT_OPTIONS } from '../constants';
 import { backlogStatusById } from '../utils';
@@ -124,7 +124,7 @@ export class Backlog extends Component {
           <div className="row">
             <div className="col-12 Backlog-filters">
               {shownFilters.includes('platform') && platforms && platforms.length > 0 && (
-                <SelectFilter
+                <FilterSelect
                   label="Platform"
                   clearFilterLabel="All platforms"
                   options={platforms.map((platform) => ({
@@ -142,7 +142,7 @@ export class Backlog extends Component {
                 />
               )}
               {shownFilters.includes('releaseYear') && years && years.length > 0 && (
-                <SelectFilter
+                <FilterSelect
                   label="Release&nbsp;year"
                   clearFilterLabel="All years"
                   options={years.map((year) => ({
@@ -159,7 +159,7 @@ export class Backlog extends Component {
                 />
               )}
               {shownFilters.includes('sort') && sorts && sorts.length > 0 && (
-                <SelectFilter
+                <FilterSelect
                   label="Sort"
                   showClearFilter={false}
                   options={sorts}

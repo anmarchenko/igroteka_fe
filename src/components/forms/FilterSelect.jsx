@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './SelectFilter.css';
+import './FilterSelect.css';
 
 const selectImportantOptions = (options, important) => options.filter((o) => important.includes(o.label));
 
@@ -18,7 +18,7 @@ const renderItems = (options) => {
   ));
 };
 
-export const SelectFilter = ({
+export const FilterSelect = ({
   options,
   selectedValue,
   onChange,
@@ -34,7 +34,7 @@ export const SelectFilter = ({
   const rest = selectRestOptions(options, importantOptions);
 
   return (
-    <div className="SelectFilter">
+    <div className="FilterSelect">
       <div className="form-group">
         <label htmlFor="backlog_owned_platform_filter">{label}</label>
         <br />
@@ -52,7 +52,7 @@ export const SelectFilter = ({
   );
 };
 
-SelectFilter.propTypes = {
+FilterSelect.propTypes = {
   label: PropTypes.string.isRequired,
 
   showClearFilter: PropTypes.bool,
@@ -70,7 +70,7 @@ SelectFilter.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-SelectFilter.defaultProps = {
+FilterSelect.defaultProps = {
   options: [],
   importantOptions: [],
   selectedValue: undefined,
@@ -78,4 +78,4 @@ SelectFilter.defaultProps = {
   clearFilterLabel: 'All',
 };
 
-export default SelectFilter;
+export default FilterSelect;

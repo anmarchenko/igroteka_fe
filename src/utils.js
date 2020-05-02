@@ -1,10 +1,12 @@
 import dayjs from 'dayjs';
 
-import { BACKLOG_STATUSES, GAME_SCORES } from './constants';
+import { BACKLOG_STATUSES, GAME_SCORES, EXPECTATIONS } from './constants';
 
 export const backlogStatusById = (id) => BACKLOG_STATUSES.find((status) => status.id === id);
 
 export const gameScoreById = (id) => GAME_SCORES.find((score) => score.id === id);
+
+export const expectationById = (id) => EXPECTATIONS.find((ex) => ex.id === id);
 
 export const yearFromDate = (date) => {
   if (!date || date === '') {

@@ -1,5 +1,14 @@
 import {
-  Check, Star, Package, ThumbsDown, Meh, ThumbsUp, Smile, Heart,
+  Archive,
+  Bookmark,
+  Check,
+  Star,
+  Package,
+  ThumbsDown,
+  Meh,
+  ThumbsUp,
+  Smile,
+  Heart,
 } from 'react-feather';
 import Gamepad from './icons/Gamepad';
 
@@ -104,6 +113,30 @@ export const GAME_SCORES = [
     id: 1,
     icon: ThumbsDown,
     color: '#9E9E9E',
+  },
+];
+
+export const EXPECTATIONS = [
+  {
+    label: 'Must play',
+    badgeStyle: 'badge-danger',
+    id: 3,
+    icon: Heart,
+    color: '#dc3545',
+  },
+  {
+    label: 'Wanted',
+    badgeStyle: 'badge-warning',
+    id: 2,
+    icon: Bookmark,
+    color: '#ffc107',
+  },
+  {
+    label: 'Interesting',
+    badgeStyle: 'badge-secondary',
+    id: 1,
+    icon: Archive,
+    color: '#28a745',
   },
 ];
 
