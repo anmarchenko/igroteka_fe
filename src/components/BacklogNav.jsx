@@ -10,7 +10,7 @@ const BacklogNav = () => (
   <div className="row BacklogNav">
     <div className="col-12">
       <ul className="nav nav-tabs">
-        {BACKLOG_STATUSES.map(status => (
+        {BACKLOG_STATUSES.map((status) => (
           <li key={status.id} className="nav-item">
             <NavLink className="nav-link" to={`/collections/${status.id}`} activeClassName="active">
               <BacklogStatusLabel status={status} size={24} />

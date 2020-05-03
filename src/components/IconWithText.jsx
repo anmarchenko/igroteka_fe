@@ -4,18 +4,16 @@ import PropTypes from 'prop-types';
 import './IconWithText.css';
 
 export const IconWithText = ({
-  icon, color, size, label,
+  Icon, color, size, label,
 }) => (
   <span className="IconWithText">
-    {icon({ color, size })}
-    <span className="IconWithText-text">
-      {label}
-    </span>
+    <Icon color={color} size={size} />
+    <span className="IconWithText-text">{label}</span>
   </span>
 );
 
 IconWithText.propTypes = {
-  icon: PropTypes.func.isRequired,
+  Icon: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.func]).isRequired,
   color: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,

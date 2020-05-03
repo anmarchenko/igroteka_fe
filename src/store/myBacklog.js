@@ -54,8 +54,6 @@ function* fetchEntries({ filters }) {
   yield put({ type: BACKLOG_ENTRIES_FETCHING });
   yield put({ type: FILTERS_REQUESTED, status: filters.status });
 
-  console.log(filters.sort);
-
   try {
     const response = yield call(Api.fetchBacklogEntries, {
       ...filters,

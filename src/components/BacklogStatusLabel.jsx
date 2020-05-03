@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import IconWithText from './IconWithText';
 
 export const BacklogStatusLabel = ({ status, size }) => (
-  <IconWithText icon={status.icon} color={status.color} size={size} label={status.label} />
+  <IconWithText Icon={status.icon} color={status.color} size={size} label={status.label} />
 );
 
 BacklogStatusLabel.propTypes = {
   status: PropTypes.shape({
-    icon: PropTypes.func,
+    icon: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.func]),
     color: PropTypes.string,
     label: PropTypes.string,
   }).isRequired,

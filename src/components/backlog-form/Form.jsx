@@ -85,7 +85,7 @@ export class Form extends Component {
             </div>
           </div>
 
-          <div className="row BacklogForm-note">
+          <div className="row">
             {show.includes('expectationRating') && (
               <div className="col-12">
                 <BacklogExpectation
@@ -157,16 +157,16 @@ Form.propTypes = {
   }).isRequired,
 
   game: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
+    id: PropTypes.number,
+    name: PropTypes.string,
     release_date: PropTypes.string,
     poster: PropTypes.shape({
       thumb_url: PropTypes.string,
     }),
     platforms: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
+        id: PropTypes.number,
+        name: PropTypes.string,
       }),
     ),
   }).isRequired,

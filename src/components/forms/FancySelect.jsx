@@ -36,7 +36,7 @@ export const FancySelect = ({
         {value && (
           <DropdownToggle outline caret>
             <IconWithText
-              icon={currentItem.icon}
+              Icon={currentItem.icon}
               color={currentItem.color}
               label={currentItem.label}
               size={20}
@@ -46,7 +46,7 @@ export const FancySelect = ({
         <DropdownMenu>
           {options.map((item) => (
             <DropdownItem key={item.id} onClick={() => onChange(item.id)}>
-              <IconWithText icon={item.icon} color={item.color} label={item.label} size={22} />
+              <IconWithText Icon={item.icon} color={item.color} label={item.label} size={22} />
             </DropdownItem>
           ))}
           {value && <DropdownItem divider />}
@@ -62,17 +62,18 @@ export const FancySelect = ({
 };
 
 FancySelect.propTypes = {
-  value: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   options: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   onChange: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   emptyLabel: PropTypes.string.isRequired,
   deleteLabel: PropTypes.string.isRequired,
 };
 
 FancySelect.defaultProps = {
   value: null,
+  label: null,
 };
 
 export default FancySelect;
