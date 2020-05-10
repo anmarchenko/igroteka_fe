@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import Poster from './Poster';
+import Flag from './Flag';
+
 import {
   yearFromDate, renderDate, gameScoreById, expectationById,
 } from '../utils';
@@ -35,6 +37,9 @@ export const BacklogItem = (props) => {
         <p className="BacklogItem-name">
           <Link to={`/games/${entry.game_id}/show`}>{entry.game_name}</Link>
           <small>{yearFromDate(entry.game_release_date)}</small>
+          {entry.countries.map((country) => (
+            <Flag country={country} />
+          ))}
         </p>
         {!!entry.owned_platform_name && (
           <p className="BacklogItem-platform text-important">{entry.owned_platform_name}</p>
@@ -68,6 +73,7 @@ BacklogItem.propTypes = {
     expectation_rating: PropTypes.number,
     owned_platform_name: PropTypes.string,
     finished_at: PropTypes.string,
+    countries: PropTypes.arrayOf(PropTypes.string),
 
     available_platforms: PropTypes.arrayOf(
       PropTypes.shape({
