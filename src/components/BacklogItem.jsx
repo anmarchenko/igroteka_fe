@@ -7,7 +7,7 @@ import Poster from './Poster';
 import Flag from './Flag';
 
 import {
-  yearFromDate, renderDate, gameScoreById, expectationById,
+  yearFromDate, renderDate, gameScoreById, expectationById, cleanCountries,
 } from '../utils';
 
 import './BacklogItem.css';
@@ -37,7 +37,7 @@ export const BacklogItem = (props) => {
         <p className="BacklogItem-name">
           <Link to={`/games/${entry.game_id}/show`}>{entry.game_name}</Link>
           <small>{yearFromDate(entry.game_release_date)}</small>
-          {entry.countries.map((country) => (
+          {cleanCountries(entry.countries).map((country) => (
             <Flag country={country} />
           ))}
         </p>

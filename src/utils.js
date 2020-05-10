@@ -36,4 +36,9 @@ export const yupToFormErrors = (yupException) => {
   return errors;
 };
 
+export const cleanCountries = (countries) => {
+  const res = (countries || []).filter((country) => !!country);
+  return [...new Set(res)];
+};
+
 export default backlogStatusById;
