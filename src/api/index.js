@@ -1,6 +1,8 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
 
+import { countriesForGame } from '../utils';
+
 const SKARO_HOST = 'https://skaro.hmstr.rocks';
 // const SKARO_HOST = 'http://localhost:4000';
 
@@ -47,6 +49,7 @@ const Api = {
       game_name: game.name,
       game_release_date: releaseDate,
       poster_thumb_url: (game.poster || {}).thumb_url,
+      countries: countriesForGame(game),
     };
 
     const platforms = game.platforms.map((platform) => ({

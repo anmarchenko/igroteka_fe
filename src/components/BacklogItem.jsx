@@ -38,7 +38,7 @@ export const BacklogItem = (props) => {
           <Link to={`/games/${entry.game_id}/show`}>{entry.game_name}</Link>
           <small>{yearFromDate(entry.game_release_date)}</small>
           {cleanCountries(entry.countries).map((country) => (
-            <Flag country={country} />
+            <Flag key={country} country={country} />
           ))}
         </p>
         {!!entry.owned_platform_name && (

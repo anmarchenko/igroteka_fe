@@ -41,4 +41,6 @@ export const cleanCountries = (countries) => {
   return [...new Set(res)];
 };
 
+export const countriesForGame = (game) => cleanCountries(game.developers.map((dev) => dev.country));
+
 export default backlogStatusById;

@@ -7,17 +7,18 @@ import ReactPlaceholder from 'react-placeholder';
 import { TextBlock, TextRow, RectShape } from 'react-placeholder/lib/placeholders';
 import { Helmet } from 'react-helmet';
 
-import { renderDate } from '../utils';
+import { renderDate, countriesForGame } from '../utils';
 import Poster from './Poster';
+import Flag from './Flag';
 
 import Form from './backlog-form/Form';
 import GamePageInfoBlock from './GamePageInfoBlock';
 import GamePageLinks from './GamePageLinks';
+import CriticsRating from './CriticsRating';
 
 import { GAME_FETCH_REQUESTED } from '../store/gamePage';
 
 import './GamePage.css';
-import CriticsRating from './CriticsRating';
 
 const formatObjects = (objects) => {
   if (!objects) return null;
@@ -60,6 +61,7 @@ export class GamePage extends Component {
   render() {
     const { game, gameFetching, currentUser } = this.props;
     const ready = !gameFetching && !!game.name;
+
     return (
       <ReactPlaceholder showLoadingAnimation ready={ready} customPlaceholder={placeholder}>
         <div className="container GamePage">
@@ -73,10 +75,18 @@ export class GamePage extends Component {
             <div className="col-12 col-md-6">
               <div className="GamePage-header-top">
                 <div className="GamePage-game-name">{game.name}</div>
-                {game.rating
-                  && <CriticsRating rating={game.rating} ratings_count={game.ratings_count} />}
+                {game.rating && (
+                  <CriticsRating rating={game.rating} ratings_count={game.ratings_count} />
+                )}
               </div>
-              <div className="GamePage-release-date">{renderDate(game.release_date)}</div>
+              <div className="GamePage-release-date">
+                {renderDate(game.release_date)}
+                {' '}
+                {game.developers
+                  && countriesForGame(game).map((country) => (
+                    <Flag key={country} country={country} size={24} />
+                  ))}
+              </div>
               <div className="GamePage-platforms">{formatObjects(game.platforms)}</div>
               <div className="GamePage-info">
                 <GamePageInfoBlock header="Developers" text={formatObjects(game.developers)} />
@@ -181,7 +191,4 @@ const mapDispatchToProps = (dispatch) => ({
   fetchGame: (gameId) => dispatch({ type: GAME_FETCH_REQUESTED, gameId }),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(GamePage);
+export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
