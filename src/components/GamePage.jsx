@@ -15,6 +15,7 @@ import Form from './backlog-form/Form';
 import GamePageInfoBlock from './GamePageInfoBlock';
 import GamePageLinks from './GamePageLinks';
 import CriticsRating from './CriticsRating';
+import Screenshots from './Screenshots';
 
 import { GAME_FETCH_REQUESTED } from '../store/gamePage';
 
@@ -59,7 +60,9 @@ export class GamePage extends Component {
   }
 
   render() {
-    const { game, gameFetching, currentUser } = this.props;
+    const {
+      gameId, game, gameFetching, currentUser,
+    } = this.props;
     const ready = !gameFetching && !!game.name;
 
     return (
@@ -101,7 +104,10 @@ export class GamePage extends Component {
             <div className="col-12">
               <h3 className="GamePage-extended-header">Extended info</h3>
               <h4 className="GamePage-short-description-header">Description</h4>
-              <div className="GamePage-short-description">{game.short_description}</div>
+              <div className="GamePage-short-description">
+                {game.short_description || 'No description yet'}
+              </div>
+              <Screenshots gameId={gameId} />
             </div>
           </div>
         </div>

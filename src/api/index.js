@@ -75,6 +75,9 @@ const Api = {
       user: params,
     });
   },
+  fetchScreenshots(gameId) {
+    return axios.get(`${SKARO_HOST}/api/screenshots?game_id=${gameId}`);
+  },
 };
 
 export default Api;

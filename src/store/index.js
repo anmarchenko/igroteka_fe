@@ -8,6 +8,7 @@ import { searchReducer, searchWatch } from './search';
 import { gamePageReducer, gamePageWatch } from './gamePage';
 import { backlogFormReducer, backlogFormWatch } from './backlogForm';
 import { profileReducer, profileWatch } from './profile';
+import { screenshotsReducer, screenshotsWatch } from './screenshots';
 
 const reducers = combineReducers({
   notifications: notificationsReducer,
@@ -17,6 +18,7 @@ const reducers = combineReducers({
   gamePage: gamePageReducer,
   backlogForm: backlogFormReducer,
   profile: profileReducer,
+  screenshots: screenshotsReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -29,5 +31,6 @@ sagaMiddleware.run(searchWatch);
 sagaMiddleware.run(gamePageWatch);
 sagaMiddleware.run(backlogFormWatch);
 sagaMiddleware.run(profileWatch);
+sagaMiddleware.run(screenshotsWatch);
 
 export default store;

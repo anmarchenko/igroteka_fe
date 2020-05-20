@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import 'react-image-gallery/styles/css/image-gallery.css';
 
 import './index.css';
 import App from './components/App';
