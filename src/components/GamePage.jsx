@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import ReactPlaceholder from 'react-placeholder';
 import { TextBlock, TextRow, RectShape } from 'react-placeholder/lib/placeholders';
 import { Helmet } from 'react-helmet';
+import YouTube from 'react-youtube';
 
 import { renderDate, countriesForGame } from '../utils';
 import Poster from './Poster';
@@ -108,6 +109,16 @@ export class GamePage extends Component {
                 {game.short_description || 'No description yet'}
               </div>
               <Screenshots gameId={gameId} />
+              {game.videos && (
+                <>
+                  <h4 className="GamePage-videos-header">Videos</h4>
+                  {game.videos.map((video) => (
+                    <div key={video.video_id} className="GamePage-video">
+                      <YouTube videoId={video.video_id} containerClassName="GamePage-video-container" />
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -160,10 +171,10 @@ GamePage.propTypes = {
         id: PropTypes.number,
       }),
     ),
-    images: PropTypes.arrayOf(
+    videos: PropTypes.arrayOf(
       PropTypes.shape({
-        super_url: PropTypes.string,
-        thumb_url: PropTypes.string,
+        name: PropTypes.string,
+        video_id: PropTypes.string,
       }),
     ),
     poster: PropTypes.shape({
