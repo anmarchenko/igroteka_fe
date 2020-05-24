@@ -78,6 +78,9 @@ const Api = {
   fetchScreenshots(gameId) {
     return axios.get(`${SKARO_HOST}/api/screenshots?game_id=${gameId}`);
   },
+  fetchTopGames() {
+    return axios.get(`${SKARO_HOST}/api/games`);
+  },
 };
 
 export default Api;

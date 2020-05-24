@@ -35,39 +35,30 @@ export class TopNav extends Component {
     return null;
   }
 
-  collection() {
-    const { currentUser } = this.props;
-    if (currentUser) {
-      return (
-        <NavItem>
-          <Link to="/collections/wishlist" className="nav-link">
-            My collection
-          </Link>
-        </NavItem>
-      );
-    }
-    return null;
-  }
-
   render() {
     return (
       <div className="container">
         <Navbar light className="TopNav my-2" expand="xs">
-          <NavbarBrand href="/">
-Igroteka
-          </NavbarBrand>
+          <NavbarBrand href="/">Igroteka</NavbarBrand>
           <Nav navbar className="mr-auto">
             <NavItem>
               <Link to="/search" className="search-opener nav-link">
                 <Search />
-                <span className="d-none d-xs-none d-sm-none d-md-inline">
-Search
-                </span>
+                <span className="d-none d-xs-none d-sm-none d-md-inline">Search</span>
               </Link>
             </NavItem>
           </Nav>
           <Nav navbar className="ml-auto">
-            {this.collection()}
+            <NavItem className="d-none d-xs-none d-sm-none d-md-inline">
+              <Link to="/collections/wishlist" className="nav-link">
+                My collection
+              </Link>
+            </NavItem>
+            <NavItem className="d-none d-xs-none d-sm-none d-md-inline">
+              <Link to="/top" className="nav-link">
+                Top games
+              </Link>
+            </NavItem>
             {this.login()}
             {this.userMenu()}
           </Nav>
@@ -88,17 +79,14 @@ TopNav.defaultProps = {
   currentUser: undefined,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   currentUser: state.session.currentUser,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   signOut() {
     dispatch({ type: SIGN_OUT_REQUESTED });
   },
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(TopNav);
+export default connect(mapStateToProps, mapDispatchToProps)(TopNav);

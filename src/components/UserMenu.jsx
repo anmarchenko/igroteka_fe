@@ -19,6 +19,18 @@ export const UserMenu = ({ user, signOut }) => (
       <DropdownItem className="user-link" tag={Link} to="/profile">
         My profile
       </DropdownItem>
+      <DropdownItem divider className="d-xs-inline d-sm-none" />
+      <DropdownItem
+        className="user-link d-xs-inline d-sm-none"
+        tag={Link}
+        to="/collections/wishlist"
+      >
+        My collection
+      </DropdownItem>
+      <DropdownItem className="user-link d-xs-inline d-sm-none" tag={Link} to="/top">
+        Top games
+      </DropdownItem>
+      <DropdownItem divider className="d-xs-inline d-sm-none" />
       <DropdownItem className="user-link" tag={Link} to="/change_password">
         Change password
       </DropdownItem>

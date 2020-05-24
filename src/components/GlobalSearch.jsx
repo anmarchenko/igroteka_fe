@@ -8,11 +8,11 @@ import history from '../store/history';
 import { SEARCH_REQUESTED } from '../store/search';
 
 import Typeahead from './Typeahead';
-import GameSearchItem from './GameSearchItem';
+import GameListItem from './GameListItem';
 
 import './GlobalSearch.css';
 
-const renderItem = (item) => <GameSearchItem {...item} />;
+const renderItem = (item) => <GameListItem game={item} />;
 
 const onSelect = (item) => {
   history.push(`/games/${item.id}/show`);
@@ -60,7 +60,4 @@ const mapDispatchToProps = (dispatch) => ({
   search: (term) => dispatch({ type: SEARCH_REQUESTED, term }),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(GlobalSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(GlobalSearch);

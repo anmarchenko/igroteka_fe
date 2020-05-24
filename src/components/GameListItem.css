@@ -1,4 +1,4 @@
-.GameSearchItem {
+.GameListItem {
   display: flex;
   flex-flow: row;
   align-items: flex-start;
@@ -9,22 +9,22 @@
   min-height: 150px;
 }
 
-.GameSearchItem .game-info {
+.GameListItem .game-info {
   vertical-align: top;
 }
 
-.GameSearchItem .game-description {
+.GameListItem .game-description {
   font-size: 1.2em;
   color: rgba(0, 0, 0, 0.44);
   margin-bottom: 0.5em;
   white-space: normal;
 }
 
-.GameSearchItem .game-platforms {
+.GameListItem .game-platforms {
   white-space: normal;
 }
 
-.GameSearchItem .game-name {
+.GameListItem .game-name {
   font-size: 1.5rem;
   line-height: 1.2;
   font-weight: 500;
@@ -32,32 +32,32 @@
   margin-right: 1rem;
 }
 
-.GameSearchItem .game-name small {
+.GameListItem .game-name small {
   color: rgba(0, 0, 0, 0.44);
   margin-left: 1ch;
 }
 
-.GameSearchItem .GamePoster {
+.GameListItem .GamePoster {
   margin-right: 3ch;
 }
 
 @media (max-width: 573px) {
-  .GameSearchItem {
+  .GameListItem {
     min-height: 75px;
   }
 
-  .GameSearchItem .GamePoster {
+  .GameListItem .GamePoster {
     width: 50px;
     margin-right: 2ch;
   }
 
-  .GameSearchItem .game-description {
+  .GameListItem .game-description {
     display: none;
   }
-  .GameSearchItem .game-platforms {
+  .GameListItem .game-platforms {
     color: rgba(0, 0, 0, 0.44);
   }
-  .GameSearchItem .game-name {
+  .GameListItem .game-name {
     font-size: 1em;
     white-space: normal;
   }

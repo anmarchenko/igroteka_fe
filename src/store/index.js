@@ -9,6 +9,7 @@ import { gamePageReducer, gamePageWatch } from './gamePage';
 import { backlogFormReducer, backlogFormWatch } from './backlogForm';
 import { profileReducer, profileWatch } from './profile';
 import { screenshotsReducer, screenshotsWatch } from './screenshots';
+import { topGamesReducer, topGamesWatch } from './topGames';
 
 const reducers = combineReducers({
   notifications: notificationsReducer,
@@ -19,6 +20,7 @@ const reducers = combineReducers({
   backlogForm: backlogFormReducer,
   profile: profileReducer,
   screenshots: screenshotsReducer,
+  topGames: topGamesReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -32,5 +34,6 @@ sagaMiddleware.run(gamePageWatch);
 sagaMiddleware.run(backlogFormWatch);
 sagaMiddleware.run(profileWatch);
 sagaMiddleware.run(screenshotsWatch);
+sagaMiddleware.run(topGamesWatch);
 
 export default store;
