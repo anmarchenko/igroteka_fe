@@ -78,8 +78,14 @@ const Api = {
   fetchScreenshots(gameId) {
     return axios.get(`${SKARO_HOST}/api/screenshots?game_id=${gameId}`);
   },
-  fetchTopGames() {
-    return axios.get(`${SKARO_HOST}/api/games`);
+  fetchTopGames(filters = {}) {
+    const queryString = [
+      filters.year ? `year=${filters.year}` : null,
+      filters.platform ? `platform=${filters.platform}` : null,
+    ]
+      .filter((q) => q)
+      .join('&');
+    return axios.get(`${SKARO_HOST}/api/games?${queryString}`);
   },
 };
 

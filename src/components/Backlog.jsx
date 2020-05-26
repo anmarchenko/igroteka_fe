@@ -10,7 +10,7 @@ import BacklogList from './BacklogList';
 import FilterSelect from './forms/FilterSelect';
 
 import { BACKLOG_FILTERS, IMPORTANT_PLATFORMS, SORT_OPTIONS } from '../constants';
-import { backlogStatusById } from '../utils';
+import { backlogStatusById, queryStringToFilters, filtersToQueryString } from '../utils';
 import history from '../store/history';
 
 import { BACKLOG_ENTRIES_FETCHING_REQUESTED } from '../store/myBacklog';
@@ -27,29 +27,6 @@ const DEFAULTS = {
 };
 
 const filtersChanged = (prev, next) => ALL_FILTERS.some((k) => prev[k] !== next[k]);
-
-const queryStringToFilters = (queryString) => {
-  const queryParams = new URLSearchParams(queryString);
-
-  return [...queryParams.keys()].reduce((acc, key) => {
-    if (URL_FILTERS.includes(key)) {
-      return Object.assign(acc, { [key]: queryParams.get(key) });
-    }
-    return acc;
-  }, {});
-};
-
-const filtersToQueryString = (filters) => {
-  const urlFilters = URL_FILTERS.reduce((acc, key) => {
-    const value = filters[key];
-    if (value !== null && value !== undefined) {
-      return Object.assign(acc, { [key]: value });
-    }
-    return acc;
-  }, {});
-
-  return new URLSearchParams(urlFilters).toString();
-};
 
 export class Backlog extends Component {
   constructor(props) {
@@ -73,10 +50,13 @@ export class Backlog extends Component {
   applyFilters(newFilters) {
     const { filters } = this.props;
     history.push(
-      `/collections/${filters.status}?${filtersToQueryString({
-        ...filters,
-        ...newFilters,
-      })}`,
+      `/collections/${filters.status}?${filtersToQueryString(
+        {
+          ...filters,
+          ...newFilters,
+        },
+        URL_FILTERS,
+      )}`,
     );
   }
 
@@ -233,7 +213,7 @@ const mapStateToProps = ({ myBacklog }, ownProps) => ({
 
   filters: {
     ...DEFAULTS,
-    ...queryStringToFilters(ownProps.location.search),
+    ...queryStringToFilters(ownProps.location.search, URL_FILTERS),
     ...{ status: ownProps.match.params.status },
   },
   filterOptions: myBacklog.filterOptions,

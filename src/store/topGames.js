@@ -12,10 +12,10 @@ export const FETCH_TOP_GAMES_STARTED = 'FETCH_TOP_GAMES_STARTED';
 export const FETCH_TOP_GAMES_FINISHED = 'FETCH_TOP_GAMES_FINISHED';
 export const FETCH_TOP_GAMES_ERRORED = 'FETCH_TOP_GAMES_ERRORED';
 
-function* fetchTopGames() {
+function* fetchTopGames({ filters }) {
   yield put({ type: FETCH_TOP_GAMES_STARTED });
   try {
-    const response = yield call(Api.fetchTopGames);
+    const response = yield call(Api.fetchTopGames, filters);
     yield put({
       type: FETCH_TOP_GAMES_FINISHED,
       data: response.data,

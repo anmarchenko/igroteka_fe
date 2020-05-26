@@ -43,4 +43,27 @@ export const cleanCountries = (countries) => {
 
 export const countriesForGame = (game) => cleanCountries(game.developers.map((dev) => dev.country));
 
+export const queryStringToFilters = (queryString, whitelist) => {
+  const queryParams = new URLSearchParams(queryString);
+
+  return [...queryParams.keys()].reduce((acc, key) => {
+    if (whitelist.includes(key)) {
+      return Object.assign(acc, { [key]: queryParams.get(key) });
+    }
+    return acc;
+  }, {});
+};
+
+export const filtersToQueryString = (filters, whitelist) => {
+  const urlFilters = whitelist.reduce((acc, key) => {
+    const value = filters[key];
+    if (value !== null && value !== undefined) {
+      return Object.assign(acc, { [key]: value });
+    }
+    return acc;
+  }, {});
+
+  return new URLSearchParams(urlFilters).toString();
+};
+
 export default backlogStatusById;
