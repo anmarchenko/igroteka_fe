@@ -27,6 +27,9 @@ export const UserMenu = ({ user, signOut }) => (
       >
         My collection
       </DropdownItem>
+      <DropdownItem className="user-link d-xs-inline d-sm-none" tag={Link} to="/new">
+        New games
+      </DropdownItem>
       <DropdownItem className="user-link d-xs-inline d-sm-none" tag={Link} to="/top">
         Top games
       </DropdownItem>

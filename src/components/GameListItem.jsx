@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Poster from './Poster';
 import CriticsRating from './CriticsRating';
 
-import { yearFromDate } from '../utils';
+import { yearFromDate, renderDate } from '../utils';
 
 import './GameListItem.css';
 
@@ -25,6 +25,7 @@ export const GameListItem = ({
   linked,
   numbered,
   index,
+  longDate,
 }) => (
   <div className="GameListItem">
     <div className="game-image">
@@ -35,7 +36,7 @@ export const GameListItem = ({
         <div className="game-name">
           {linked && <a href={`/games/${id}/show`}>{renderName(name, numbered, index)}</a>}
           {!linked && name}
-          <small>{yearFromDate(release_date)}</small>
+          <small>{longDate ? renderDate(release_date) : yearFromDate(release_date)}</small>
         </div>
         <CriticsRating rating={rating} ratings_count={ratings_count} />
       </div>
@@ -64,6 +65,7 @@ GameListItem.propTypes = {
   }),
   linked: PropTypes.bool,
   numbered: PropTypes.bool,
+  longDate: PropTypes.bool,
   index: PropTypes.number,
 };
 
@@ -78,6 +80,7 @@ GameListItem.defaultProps = {
   },
   linked: false,
   numbered: false,
+  longDate: false,
   index: null,
 };
 

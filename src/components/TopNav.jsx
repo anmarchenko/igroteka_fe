@@ -55,6 +55,11 @@ export class TopNav extends Component {
               </Link>
             </NavItem>
             <NavItem className="d-none d-xs-none d-sm-none d-md-inline">
+              <Link to="/new" className="nav-link">
+                New games
+              </Link>
+            </NavItem>
+            <NavItem className="d-none d-xs-none d-sm-none d-md-inline">
               <Link to="/top" className="nav-link">
                 Top games
               </Link>

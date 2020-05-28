@@ -87,6 +87,9 @@ const Api = {
       .join('&');
     return axios.get(`${SKARO_HOST}/api/games?${queryString}`);
   },
+  fetchNewGames() {
+    return axios.get(`${SKARO_HOST}/api/games?new=1`);
+  },
 };
 
 export default Api;

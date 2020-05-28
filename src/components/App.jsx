@@ -18,6 +18,7 @@ import GamePage from './GamePage';
 import MyProfile from './MyProfile';
 import ChangePassword from './ChangePassword';
 import TopGames from './TopGames';
+import NewGames from './NewGames';
 
 import store from '../store';
 import history from '../store/history';
@@ -40,6 +41,7 @@ export const App = () => (
             <PrivateRoute path="/profile" component={MyProfile} />
             <PrivateRoute path="/change_password" component={ChangePassword} />
             <PrivateRoute path="/top" component={TopGames} />
+            <PrivateRoute path="/new" component={NewGames} />
 
             <Route component={NotFound} />
           </Switch>
