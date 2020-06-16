@@ -2,9 +2,11 @@ import dayjs from 'dayjs';
 
 import { BACKLOG_STATUSES, GAME_SCORES, EXPECTATIONS } from './constants';
 
-export const backlogStatusById = (id) => BACKLOG_STATUSES.find((status) => status.id === id);
+export const backlogStatusById = (id) =>
+  BACKLOG_STATUSES.find((status) => status.id === id);
 
-export const gameScoreById = (id) => GAME_SCORES.find((score) => score.id === id);
+export const gameScoreById = (id) =>
+  GAME_SCORES.find((score) => score.id === id);
 
 export const expectationById = (id) => EXPECTATIONS.find((ex) => ex.id === id);
 
@@ -41,7 +43,8 @@ export const cleanCountries = (countries) => {
   return [...new Set(res)];
 };
 
-export const countriesForGame = (game) => cleanCountries(game.developers.map((dev) => dev.country));
+export const countriesForGame = (game) =>
+  cleanCountries(game.developers.map((dev) => dev.country));
 
 export const queryStringToFilters = (queryString, whitelist) => {
   const queryParams = new URLSearchParams(queryString);
@@ -65,5 +68,7 @@ export const filtersToQueryString = (filters, whitelist) => {
 
   return new URLSearchParams(urlFilters).toString();
 };
+
+export const formatMinutes = (minutes) => `${minutes / 60}h`;
 
 export default backlogStatusById;

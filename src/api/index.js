@@ -24,15 +24,21 @@ const Api = {
       filters.pageSize ? `filters[page_size]=${filters.pageSize}` : null,
       filters.status ? `filters[status]=${filters.status}` : null,
       filters.sort ? `filters[sort]=${filters.sort}` : null,
-      filters.ownedPlatformId ? `filters[owned_platform_id]=${filters.ownedPlatformId}` : null,
-      filters.releaseYear ? `filters[release_year]=${filters.releaseYear}` : null,
+      filters.ownedPlatformId
+        ? `filters[owned_platform_id]=${filters.ownedPlatformId}`
+        : null,
+      filters.releaseYear
+        ? `filters[release_year]=${filters.releaseYear}`
+        : null,
     ]
       .filter((q) => q)
       .join('&');
     return axios.get(`${SKARO_HOST}/api/backlog_entries?${queryString}`);
   },
   search(term) {
-    return axios.get(`${SKARO_HOST}/api/games?term=${encodeURIComponent(term)}`);
+    return axios.get(
+      `${SKARO_HOST}/api/games?term=${encodeURIComponent(term)}`,
+    );
   },
   fetchGame(gameId) {
     return axios.get(`${SKARO_HOST}/api/games/${gameId}`);
@@ -41,7 +47,9 @@ const Api = {
     return axios.get(`${SKARO_HOST}/api/backlog_entries/${gameId}`);
   },
   addGameToBacklog(status, game) {
-    const releaseDate = game.release_date ? dayjs(game.release_date).format('YYYY-MM-DD') : null;
+    const releaseDate = game.release_date
+      ? dayjs(game.release_date).format('YYYY-MM-DD')
+      : null;
     const entryData = {
       status,
 
@@ -57,10 +65,15 @@ const Api = {
       platform_name: platform.name,
     }));
 
-    return axios.post(`${SKARO_HOST}/api/backlog_entries`, { backlog_entry: entryData, platforms });
+    return axios.post(`${SKARO_HOST}/api/backlog_entries`, {
+      backlog_entry: entryData,
+      platforms,
+    });
   },
   updateBacklogEntry(gameId, entryParams) {
-    return axios.put(`${SKARO_HOST}/api/backlog_entries/${gameId}`, { backlog_entry: entryParams });
+    return axios.put(`${SKARO_HOST}/api/backlog_entries/${gameId}`, {
+      backlog_entry: entryParams,
+    });
   },
   deleteBacklogEntry(gameId) {
     return axios.delete(`${SKARO_HOST}/api/backlog_entries/${gameId}`);

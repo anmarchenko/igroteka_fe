@@ -140,4 +140,13 @@ export const EXPECTATIONS = [
   },
 ];
 
+export const PLAYTHROUGH_BADGES = {
+  'very-short': 'badge-secondary',
+  short: 'badge-success',
+  fair: 'badge-info',
+  average: 'badge-primary',
+  long: 'badge-warning',
+  'very-long': 'badge-danger',
+};
+
 export default VALIDATION_ERRORS;

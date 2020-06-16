@@ -5,15 +5,22 @@ import { Link } from 'react-router-dom';
 
 import Poster from './Poster';
 import Flag from './Flag';
+import PlaythroughTimeBadge from './PlaythroughTimeBadge';
 
 import {
-  yearFromDate, renderDate, gameScoreById, expectationById, cleanCountries,
+  yearFromDate,
+  renderDate,
+  gameScoreById,
+  expectationById,
+  cleanCountries,
 } from '../utils';
 
 import './BacklogItem.css';
 
 const renderExpectationRating = (expectationItem) => (
-  <span className={`badge badge-pill ${expectationItem.badgeStyle}`}>{expectationItem.label}</span>
+  <span className={`badge badge-pill ${expectationItem.badgeStyle}`}>
+    {expectationItem.label}
+  </span>
 );
 
 const renderScore = (score) => (
@@ -42,16 +49,30 @@ export const BacklogItem = (props) => {
           ))}
         </p>
         {!!entry.owned_platform_name && (
-          <p className="BacklogItem-platform text-important">{entry.owned_platform_name}</p>
+          <p className="BacklogItem-platform text-important">
+            {entry.owned_platform_name}
+          </p>
+        )}
+        {!!entry.playthrough_time && entry.playthrough_time.main && (
+          <p>
+            <PlaythroughTimeBadge playthroughTime={entry.playthrough_time} />
+          </p>
         )}
         {!!entry.note && <p className="font-italic">{entry.note}</p>}
       </div>
       <div className="BacklogItem-important">
         {['wishlist', 'backlog'].includes(entry.status) && (
-          <p>{entry.expectation_rating && renderExpectationRating(expectationItem)}</p>
+          <p>
+            {entry.expectation_rating &&
+              renderExpectationRating(expectationItem)}
+          </p>
         )}
-        {entry.status === 'beaten' && <p>{entry.score && renderScore(scoreItem)}</p>}
-        {entry.status === 'beaten' && <p>{entry.finished_at && renderDate(entry.finished_at)}</p>}
+        {entry.status === 'beaten' && (
+          <p>{entry.score && renderScore(scoreItem)}</p>
+        )}
+        {entry.status === 'beaten' && (
+          <p>{entry.finished_at && renderDate(entry.finished_at)}</p>
+        )}
       </div>
     </li>
   );
@@ -81,6 +102,7 @@ BacklogItem.propTypes = {
         name: PropTypes.string,
       }),
     ),
+    playthrough_time: PropTypes.shape(),
   }).isRequired,
 };
 
