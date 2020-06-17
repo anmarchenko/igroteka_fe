@@ -30,6 +30,21 @@
     "jsx-a11y/label-has-for": 0,
     "jsx-a11y/label-has-associated-control": 0
   },
-  "extends": ["airbnb"],
-  "plugins": ["react"]
+  "extends": [
+    "prettier",
+    "plugin:react/recommended",
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/react",
+    "plugin:import/recommended"
+  ],
+  "plugins": ["react", "import"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx"]
+      }
+    }
+  }
 }

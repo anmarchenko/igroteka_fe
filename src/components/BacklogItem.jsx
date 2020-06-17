@@ -100,7 +100,7 @@ BacklogItem.propTypes = {
       PropTypes.shape({
         id: PropTypes.number,
         name: PropTypes.string,
-      }),
+      })
     ),
     playthrough_time: PropTypes.shape(),
   }).isRequired,

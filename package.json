@@ -37,11 +37,9 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "eslint-config-airbnb": "^18.0.0",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.10.0",
-    "prettier-eslint": "^11.0.0"
+    "eslint-plugin-react": "^7.10.0"
   },
   "browserslist": [
     ">0.2%",

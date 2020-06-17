@@ -9,8 +9,12 @@ const isAuthenticated = () => !!localStorage.getItem('phoenixAuthToken');
 const GuestRoute = ({ component, ...rest }) => (
   <Route
     {...rest}
-    render={
-      (props) => (isAuthenticated() ? <Redirect to="/" push /> : React.createElement(component, props))
+    render={(props) =>
+      isAuthenticated() ? (
+        <Redirect to="/" push />
+      ) : (
+        React.createElement(component, props)
+      )
     }
   />
 );

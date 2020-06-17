@@ -7,7 +7,12 @@ import BacklogItem from './BacklogItem';
 import './BacklogList.css';
 
 const BacklogList = ({
-  entries, fetching, totalPages, totalCount, page, onPaginate,
+  entries,
+  fetching,
+  totalPages,
+  totalCount,
+  page,
+  onPaginate,
 }) => {
   if (!entries || entries.length === 0) {
     return (
@@ -32,7 +37,13 @@ const BacklogList = ({
             <BacklogItem key={entry.game_id} entry={entry} />
           ))}
         </ul>
-        {!fetching && <Pagination page={page} totalPages={totalPages} onPaginate={onPaginate} />}
+        {!fetching && (
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            onPaginate={onPaginate}
+          />
+        )}
       </div>
     </div>
   );
@@ -52,9 +63,9 @@ BacklogList.propTypes = {
         PropTypes.shape({
           id: PropTypes.number,
           name: PropTypes.string,
-        }),
+        })
       ),
-    }),
+    })
   ).isRequired,
   fetching: PropTypes.bool.isRequired,
   page: PropTypes.number.isRequired,
