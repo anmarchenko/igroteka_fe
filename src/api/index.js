@@ -37,7 +37,7 @@ const Api = {
   },
   search(term) {
     return axios.get(
-      `${SKARO_HOST}/api/games?term=${encodeURIComponent(term)}`,
+      `${SKARO_HOST}/api/games?term=${encodeURIComponent(term)}`
     );
   },
   fetchGame(gameId) {
@@ -90,6 +90,16 @@ const Api = {
   },
   fetchScreenshots(gameId) {
     return axios.get(`${SKARO_HOST}/api/screenshots?game_id=${gameId}`);
+  },
+  fetchPlaythroughTime(gameId, gameName, gameReleaseDate) {
+    const releaseDate = gameReleaseDate
+      ? dayjs(gameReleaseDate).format('YYYY-MM-DD')
+      : null;
+    return axios.get(
+      `${SKARO_HOST}/api/playthrough_times/${gameId}?name=${encodeURIComponent(
+        gameName
+      )}&release_date=${encodeURIComponent(releaseDate)}`
+    );
   },
   fetchTopGames(filters = {}) {
     const queryString = [

@@ -30,6 +30,10 @@
   margin-bottom: 0.2em;
 }
 
+.GamePage-release-date .badge {
+  margin-left: 1ch;
+}
+
 .GamePage-platforms {
   font-size: 1em;
   line-height: 1.5em;

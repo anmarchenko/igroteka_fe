@@ -69,6 +69,12 @@ export const filtersToQueryString = (filters, whitelist) => {
   return new URLSearchParams(urlFilters).toString();
 };
 
-export const formatMinutes = (minutes) => `${minutes / 60}h`;
+export const formatMinutes = (minutes) => {
+  if (minutes) {
+    return `${minutes / 60}h`;
+  } else {
+    return 'N/A';
+  }
+};
 
 export default backlogStatusById;
