@@ -101,7 +101,7 @@ export const GAME_SCORES = [
     color: '#28a745',
   },
   {
-    label: 'Mediocre',
+    label: 'OK',
     badgeStyle: 'badge-primary',
     id: 2,
     icon: Meh,
@@ -118,21 +118,21 @@ export const GAME_SCORES = [
 
 export const EXPECTATIONS = [
   {
-    label: 'Must play',
+    label: 'Essential',
     badgeStyle: 'badge-danger',
     id: 3,
     icon: Heart,
     color: '#dc3545',
   },
   {
-    label: 'Wanted',
+    label: 'Priority',
     badgeStyle: 'badge-warning',
     id: 2,
     icon: Bookmark,
     color: '#ffc107',
   },
   {
-    label: 'Interesting',
+    label: 'Eventually',
     badgeStyle: 'badge-secondary',
     id: 1,
     icon: Archive,
