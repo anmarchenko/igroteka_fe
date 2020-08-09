@@ -7,7 +7,6 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 
 import './index.css';
 import App from './components/App';
-import registerServiceWorker from './registerServiceWorker';
 
 axios.interceptors.request.use((config) => {
   const token = localStorage.getItem('phoenixAuthToken');
@@ -18,5 +17,3 @@ axios.interceptors.request.use((config) => {
 });
 
 ReactDOM.render(<App />, document.getElementById('root')); // eslint-disable-line react/jsx-filename-extension
-
-registerServiceWorker();
