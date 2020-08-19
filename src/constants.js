@@ -53,20 +53,30 @@ export const BACKLOG_STATUSES = [
 ];
 
 export const BACKLOG_FILTERS = {
-  wishlist: ['platform', 'releaseYear'],
-  backlog: ['platform', 'releaseYear'],
+  wishlist: ['platform', 'releaseYear', 'sort'],
+  backlog: ['platform', 'releaseYear', 'sort'],
   playing: [],
   beaten: ['platform', 'releaseYear', 'sort'],
 };
 
 export const SORT_OPTIONS = {
-  wishlist: [],
-  backlog: [],
+  wishlist: [
+    { value: 'desc:expectation_rating', label: 'Expectation' },
+    { value: 'asc:playthrough', label: 'Shortest first' },
+    { value: 'desc:playthrough', label: 'Longest first' },
+  ],
+  backlog: [
+    { value: 'desc:expectation_rating', label: 'Expectation' },
+    { value: 'asc:playthrough', label: 'Shortest first' },
+    { value: 'desc:playthrough', label: 'Longest first' },
+  ],
   playing: [],
   beaten: [
     { value: 'desc:finished_at', label: 'Finished' },
     { value: 'desc:score', label: 'My score' },
     { value: 'desc:game_release_date', label: 'Release date' },
+    { value: 'asc:playthrough', label: 'Shortest first' },
+    { value: 'desc:playthrough', label: 'Longest first' },
     { value: 'asc:game_name', label: 'Name' },
   ],
 };
