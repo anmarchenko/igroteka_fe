@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { PlusCircle, MinusCircle } from 'react-feather';
+
 import OpencriticTier from './OpencriticTier';
 import CircularProgress from './CircularProgress';
 
 import './Reviews.css';
-
-// const renderPoints = (points) => (
-//   points.map((p) => )
-// )
 
 const Reviews = ({ rating }) => (
   <>
@@ -41,7 +39,13 @@ const Reviews = ({ rating }) => (
     </div>
     {rating.summary && (
       <>
-        <p>{rating.summary}</p>
+        <p className="text-description">{rating.summary}</p>
+        {rating.points.map((p) => (
+          <p className="Reviews-point text-description" key={p.title}>
+            {p.state == 'pro' ? <PlusCircle color="green" /> : <MinusCircle />}
+            <b>{p.title}</b>: {p.description}
+          </p>
+        ))}
       </>
     )}
   </>
@@ -53,6 +57,7 @@ Reviews.propTypes = {
     percent_recommended: PropTypes.number,
     tier: PropTypes.string,
     summary: PropTypes.string,
+    points: PropTypes.arrayOf(PropTypes.shape({})),
   }).isRequired,
 };
 

@@ -18,3 +18,8 @@
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
+
+.Reviews-point svg {
+  margin-right: 1ch;
+  vertical-align: bottom;
+}

@@ -56,3 +56,7 @@ footer {
 h4 {
   margin-top: 1em;
 }
+
+.text-description {
+  max-width: 80ch;
+}

@@ -175,7 +175,7 @@ export const GamePage = (props) => {
           <div className="col-12">
             <h3 className="GamePage-extended-header">Extended info</h3>
             <h4 className="GamePage-short-description-header">Description</h4>
-            <div className="GamePage-short-description">
+            <div className="GamePage-short-description text-description">
               {game.short_description || 'No description yet'}
             </div>
             {rating.score && <Reviews rating={rating} />}
