@@ -7,7 +7,9 @@ const ReviewCard = ({ review }) => (
   <div className="ReviewCard card">
     <div className="card-body">
       <h5 className="card-title">{review.name}</h5>
-      <h6 className="card-subtitle mb-2 text-muted">{review.score} / 100</h6>
+      <h6 className="card-subtitle mb-2 text-muted">
+        {review.score ? `${review.score} / 100` : 'Unscored'}
+      </h6>
       <p className="card-text">{review.snippet}</p>
       <a href={review.external_url} className="card-link">
         Read full review
