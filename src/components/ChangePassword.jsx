@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -43,10 +41,7 @@ export class ChangePassword extends React.Component {
         .default('')
         .required(required)
         .min(5, passwordLength),
-      passwordConfirmation: yup
-        .string()
-        .default('')
-        .required(required),
+      passwordConfirmation: yup.string().default('').required(required),
     });
   }
 
@@ -70,7 +65,10 @@ export class ChangePassword extends React.Component {
     const component = this;
 
     this.schema
-      .validate({ oldPassword, password, passwordConfirmation }, { abortEarly: false })
+      .validate(
+        { oldPassword, password, passwordConfirmation },
+        { abortEarly: false }
+      )
       .then(
         (formValue) => {
           updatePassword(currentUser.id, {
@@ -84,14 +82,12 @@ export class ChangePassword extends React.Component {
           component.setState({
             errors: yupToFormErrors(exception),
           });
-        },
+        }
       );
   }
 
   render() {
-    const {
-      oldPassword, password, passwordConfirmation, errors,
-    } = this.state;
+    const { oldPassword, password, passwordConfirmation, errors } = this.state;
     const { backendErrors, currentUser } = this.props;
 
     if (!currentUser) {
@@ -130,7 +126,9 @@ export class ChangePassword extends React.Component {
                   onChange={this.handleChange}
                 />
                 <span className="error-message">{errors.password}</span>
-                <span className="error-message">{(backendErrors.password || []).join(',')}</span>
+                <span className="error-message">
+                  {(backendErrors.password || []).join(',')}
+                </span>
               </div>
               <div className="form-group">
                 <label htmlFor="passwordConfirmation">Confirm password</label>
@@ -141,14 +139,19 @@ export class ChangePassword extends React.Component {
                   value={passwordConfirmation}
                   onChange={this.handleChange}
                 />
-                <span className="error-message">{errors.passwordConfirmation}</span>
+                <span className="error-message">
+                  {errors.passwordConfirmation}
+                </span>
                 <span className="error-message">
                   {(backendErrors.password_confirmation || []).join(',')}
                 </span>
               </div>
               <div className="row">
                 <div className="col-md-12">
-                  <button type="submit" className="btn btn-outline-success btn-lg">
+                  <button
+                    type="submit"
+                    className="btn btn-outline-success btn-lg"
+                  >
                     Save
                   </button>
                 </div>
@@ -178,12 +181,12 @@ ChangePassword.defaultProps = {
   currentUser: undefined,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   backendErrors: state.profile.formPasswordErrors,
   currentUser: state.session.currentUser,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   updatePassword(userId, data) {
     dispatch({ type: USER_CHANGE_PASSWORD_REQUESTED, params: data, userId });
   },
@@ -192,7 +195,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ChangePassword);
+export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword);

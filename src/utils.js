@@ -77,4 +77,23 @@ export const formatMinutes = (minutes) => {
   }
 };
 
+export const scoreColor = (rating) => {
+  if (rating > 89) {
+    return '#1B5E20';
+  }
+  if (rating > 79) {
+    return '#4CAF50';
+  }
+  if (rating > 69) {
+    return '#FBC02D';
+  }
+  if (rating > 59) {
+    return '#F57F17';
+  }
+  if (rating > 49) {
+    return '#E64A19';
+  }
+  return '#BF360C';
+};
+
 export default backlogStatusById;

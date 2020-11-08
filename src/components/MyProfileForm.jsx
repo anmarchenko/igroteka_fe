@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -24,10 +22,7 @@ export class MyProfileForm extends Component {
     };
 
     this.userSchema = yup.object().shape({
-      name: yup
-        .string()
-        .default('')
-        .required(required),
+      name: yup.string().default('').required(required),
     });
   }
 
@@ -54,7 +49,7 @@ export class MyProfileForm extends Component {
         component.setState({
           errors: yupToFormErrors(exception),
         });
-      },
+      }
     );
   }
 
@@ -74,13 +69,19 @@ export class MyProfileForm extends Component {
             onChange={this.handleChange}
           />
           <span className="error-message">{errors.name}</span>
-          <span className="error-message">{(backendErrors.name || []).join(',')}</span>
+          <span className="error-message">
+            {(backendErrors.name || []).join(',')}
+          </span>
         </div>
         <div className="form-group MyProfile-edit-controls">
           <button type="submit" className="btn btn-outline-success">
             Save
           </button>
-          <button type="button" className="btn btn-secondary" onClick={onCancel}>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={onCancel}
+          >
             Cancel
           </button>
         </div>

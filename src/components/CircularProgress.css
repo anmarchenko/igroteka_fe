@@ -1,0 +1,26 @@
+.CircularProgress {
+  height: 75px;
+  position: relative;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.CircularProgress-svg {
+  display: block;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.CircularProgress-label {
+  text-align: center;
+  font-size: 1rem;
+  line-height: normal;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

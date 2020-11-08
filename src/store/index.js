@@ -15,6 +15,7 @@ import {
   playthroughTimeReducer,
   playthroughTimeWatch,
 } from './playthroughTime';
+import { ratingReducer, ratingWatch } from './rating';
 
 const reducers = combineReducers({
   notifications: notificationsReducer,
@@ -28,6 +29,7 @@ const reducers = combineReducers({
   topGames: topGamesReducer,
   newGames: newGamesReducer,
   playthroughTime: playthroughTimeReducer,
+  rating: ratingReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -44,5 +46,6 @@ sagaMiddleware.run(screenshotsWatch);
 sagaMiddleware.run(topGamesWatch);
 sagaMiddleware.run(newGamesWatch);
 sagaMiddleware.run(playthroughTimeWatch);
+sagaMiddleware.run(ratingWatch);
 
 export default store;

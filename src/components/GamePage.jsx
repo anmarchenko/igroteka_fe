@@ -12,7 +12,7 @@ import {
 import { Helmet } from 'react-helmet';
 import YouTube from 'react-youtube';
 
-import { renderDate, countriesForGame } from '../utils';
+import { renderDate, countriesForGame, formatMinutes } from '../utils';
 import Poster from './Poster';
 import Flag from './Flag';
 
@@ -22,10 +22,11 @@ import GamePageLinks from './GamePageLinks';
 import CriticsRating from './CriticsRating';
 import Screenshots from './Screenshots';
 import PlaythroughTimeBadge from './PlaythroughTimeBadge';
+import Reviews from './Reviews';
 
 import { GAME_FETCH_REQUESTED } from '../store/gamePage';
 import { FETCH_PLAYTROUGH_TIME_REQUESTED } from '../store/playthroughTime';
-import { formatMinutes } from '../utils';
+import { FETCH_RATING_REQUESTED } from '../store/rating';
 
 import './GamePage.css';
 
@@ -72,6 +73,7 @@ export const GamePage = (props) => {
   const currentUser = useSelector((state) => state.session.currentUser);
   const { gameFetching, game } = useSelector((state) => state.gamePage);
   const playthroughTime = useSelector((state) => state.playthroughTime.data);
+  const rating = useSelector((state) => state.rating.data);
 
   const dispatch = useDispatch();
 
@@ -83,6 +85,17 @@ export const GamePage = (props) => {
     if (game.id) {
       dispatch({
         type: FETCH_PLAYTROUGH_TIME_REQUESTED,
+        gameId: game.id,
+        gameName: game.name,
+        gameReleaseDate: game.release_date,
+      });
+    }
+  }, [dispatch, game.name, game.id, game.release_date]);
+
+  useEffect(() => {
+    if (game.id) {
+      dispatch({
+        type: FETCH_RATING_REQUESTED,
         gameId: game.id,
         gameName: game.name,
         gameReleaseDate: game.release_date,
@@ -109,12 +122,6 @@ export const GamePage = (props) => {
           <div className="col-12 col-md-6">
             <div className="GamePage-header-top">
               <div className="GamePage-game-name">{game.name}</div>
-              {game.rating && (
-                <CriticsRating
-                  rating={game.rating}
-                  ratings_count={game.ratings_count}
-                />
-              )}
             </div>
             <div className="GamePage-release-date">
               {renderDate(game.release_date)}{' '}
@@ -126,6 +133,12 @@ export const GamePage = (props) => {
                 <PlaythroughTimeBadge
                   playthroughTime={playthroughTime}
                   useLabel={true}
+                />
+              )}
+              {rating.score && (
+                <CriticsRating
+                  rating={rating.score}
+                  ratings_count={rating.num_reviews}
                 />
               )}
             </div>
@@ -165,6 +178,7 @@ export const GamePage = (props) => {
             <div className="GamePage-short-description">
               {game.short_description || 'No description yet'}
             </div>
+            {rating.score && <Reviews rating={rating} />}
             <Screenshots gameId={gameId} />
             {game.videos && (
               <>

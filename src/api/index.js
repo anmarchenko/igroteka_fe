@@ -113,6 +113,16 @@ const Api = {
   fetchNewGames() {
     return axios.get(`${SKARO_HOST}/api/games?new=1`);
   },
+  fetchRating(gameId, gameName, gameReleaseDate) {
+    const releaseDate = gameReleaseDate
+      ? dayjs(gameReleaseDate).format('YYYY-MM-DD')
+      : null;
+    return axios.get(
+      `${SKARO_HOST}/api/reviews/${gameId}?name=${encodeURIComponent(
+        gameName
+      )}&release_date=${encodeURIComponent(releaseDate)}`
+    );
+  },
 };
 
 export default Api;

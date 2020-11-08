@@ -9,8 +9,6 @@ import { SIGN_IN_REQUESTED } from '../store/login';
 import { VALIDATION_ERRORS } from '../constants';
 import { yupToFormErrors } from '../utils';
 
-/* eslint-disable jsx-a11y/label-has-associated-control */
-
 export class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -26,14 +24,8 @@ export class Login extends React.Component {
     };
 
     this.loginSchema = yup.object().shape({
-      email: yup
-        .string()
-        .default('')
-        .required(required),
-      password: yup
-        .string()
-        .default('')
-        .required(required),
+      email: yup.string().default('').required(required),
+      password: yup.string().default('').required(required),
     });
   }
 
@@ -60,7 +52,7 @@ export class Login extends React.Component {
         component.setState({
           errors: yupToFormErrors(exception),
         });
-      },
+      }
     );
   }
 
@@ -101,7 +93,10 @@ export class Login extends React.Component {
                 <span className="error-message">{errors.password}</span>
               </div>
               <div className="form-group">
-                <button type="submit" className="btn btn-outline-success btn-lg btn-block">
+                <button
+                  type="submit"
+                  className="btn btn-outline-success btn-lg btn-block"
+                >
                   Sign in
                 </button>
               </div>
@@ -113,8 +108,6 @@ export class Login extends React.Component {
   }
 }
 
-/* eslint-enable jsx-a11y/label-has-associated-control */
-
 Login.propTypes = {
   // TODO: refactor this
   backendErrors: PropTypes.shape({
@@ -123,15 +116,12 @@ Login.propTypes = {
   signIn: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({ backendErrors: state.session.errors });
+const mapStateToProps = (state) => ({ backendErrors: state.session.errors });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   signIn(email, password) {
     dispatch({ type: SIGN_IN_REQUESTED, email, password });
   },
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
