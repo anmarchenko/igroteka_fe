@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ExternalLink as FeatherExternalLink } from 'react-feather';
+
+import ExternalLink from './ExternalLink';
 
 import './ReviewCard.css';
 
@@ -11,9 +14,13 @@ const ReviewCard = ({ review }) => (
         {review.score ? `${review.score} / 100` : 'Unscored'}
       </h6>
       <p className="card-text">{review.snippet}</p>
-      <a href={review.external_url} className="card-link">
-        Read full review
-      </a>
+      <ExternalLink
+        className="card-link"
+        label="Full review"
+        url={review.external_url}
+      >
+        <FeatherExternalLink />
+      </ExternalLink>
     </div>
   </div>
 );

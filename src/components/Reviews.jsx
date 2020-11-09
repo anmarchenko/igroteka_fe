@@ -45,7 +45,7 @@ const Reviews = ({ rating }) => (
     </div>
     <p>
       <ExternalLink
-        label="Read all reviews"
+        label="All reviews"
         url={`https://opencritic.com/game/${rating.external_id}/a`}
       >
         <FeatherExternalLink />
