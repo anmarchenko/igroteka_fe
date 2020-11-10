@@ -53,6 +53,11 @@
   margin-left: 1ch;
 }
 
+.BacklogItem-badges .OpencriticTier {
+  height: 18px;
+  margin-left: 1ch;
+}
+
 @media (max-width: 573px) {
   .BacklogItem-name {
     font-size: 1em;

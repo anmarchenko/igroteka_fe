@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Poster from './Poster';
 import Flag from './Flag';
 import PlaythroughTimeBadge from './PlaythroughTimeBadge';
+import OpencriticTier from './OpencriticTier';
 
 import {
   yearFromDate,
@@ -53,9 +54,15 @@ export const BacklogItem = (props) => {
             {entry.owned_platform_name}
           </p>
         )}
-        {!!entry.playthrough_time && entry.playthrough_time.main && (
-          <p>
-            <PlaythroughTimeBadge playthroughTime={entry.playthrough_time} />
+        {((!!entry.playthrough_time && entry.playthrough_time.main) ||
+          (!!entry.rating && entry.rating.tier)) && (
+          <p className="BacklogItem-badges">
+            {!!entry.playthrough_time && entry.playthrough_time.main && (
+              <PlaythroughTimeBadge playthroughTime={entry.playthrough_time} />
+            )}
+            {!!entry.rating && entry.rating.tier && (
+              <OpencriticTier tier={entry.rating.tier} />
+            )}
           </p>
         )}
         {!!entry.note && <p className="font-italic">{entry.note}</p>}
@@ -103,6 +110,7 @@ BacklogItem.propTypes = {
       })
     ),
     playthrough_time: PropTypes.shape(),
+    rating: PropTypes.shape(),
   }).isRequired,
 };
 
