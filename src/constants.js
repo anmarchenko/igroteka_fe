@@ -62,11 +62,13 @@ export const BACKLOG_FILTERS = {
 export const SORT_OPTIONS = {
   wishlist: [
     { value: 'desc:expectation_rating', label: 'Expectation' },
+    { value: 'desc:rating', label: 'OpenCritic rating' },
     { value: 'asc:playthrough', label: 'Shortest first' },
     { value: 'desc:playthrough', label: 'Longest first' },
   ],
   backlog: [
     { value: 'desc:expectation_rating', label: 'Expectation' },
+    { value: 'desc:rating', label: 'OpenCritic rating' },
     { value: 'asc:playthrough', label: 'Shortest first' },
     { value: 'desc:playthrough', label: 'Longest first' },
   ],
@@ -74,6 +76,7 @@ export const SORT_OPTIONS = {
   beaten: [
     { value: 'desc:finished_at', label: 'Finished' },
     { value: 'desc:score', label: 'My score' },
+    { value: 'desc:rating', label: 'OpenCritic rating' },
     { value: 'desc:game_release_date', label: 'Release date' },
     { value: 'asc:playthrough', label: 'Shortest first' },
     { value: 'desc:playthrough', label: 'Longest first' },
