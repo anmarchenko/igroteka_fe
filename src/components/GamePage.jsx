@@ -135,7 +135,7 @@ export const GamePage = (props) => {
                   useLabel={true}
                 />
               )}
-              {rating.score && (
+              {rating.score && rating.score > 0 && (
                 <CriticsRating
                   rating={rating.score}
                   ratings_count={rating.num_reviews}
@@ -178,7 +178,7 @@ export const GamePage = (props) => {
             <div className="GamePage-short-description text-description">
               {game.short_description || 'No description yet'}
             </div>
-            {rating.score && <Reviews rating={rating} />}
+            {rating.score && rating.score > 0 && <Reviews rating={rating} />}
             <Screenshots gameId={gameId} />
             {game.videos && (
               <>
