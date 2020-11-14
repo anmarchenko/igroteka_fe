@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 
 import './FilterSelect.css';
 
-const selectImportantOptions = (options, important) => options.filter((o) => important.includes(o.label));
+const selectImportantOptions = (options, important) =>
+  options.filter((o) => important.includes(o.value));
 
-const selectRestOptions = (options, important) => options.filter((o) => !important.includes(o.label));
+const selectRestOptions = (options, important) =>
+  options.filter((o) => !important.includes(o.value));
 
 const renderItems = (options) => {
   if (!options || options.length === 0) {
@@ -62,9 +64,10 @@ FilterSelect.propTypes = {
   importantOptions: PropTypes.arrayOf(PropTypes.string),
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        .isRequired,
       label: PropTypes.string.isRequired,
-    }),
+    })
   ),
 
   onChange: PropTypes.func.isRequired,

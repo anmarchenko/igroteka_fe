@@ -9,15 +9,32 @@ import BacklogNav from './BacklogNav';
 import BacklogList from './BacklogList';
 import FilterSelect from './forms/FilterSelect';
 
-import { BACKLOG_FILTERS, IMPORTANT_PLATFORMS, SORT_OPTIONS } from '../constants';
-import { backlogStatusById, queryStringToFilters, filtersToQueryString } from '../utils';
+import {
+  BACKLOG_FILTERS,
+  IMPORTANT_PLATFORMS,
+  SORT_OPTIONS,
+} from '../constants';
+
+import {
+  backlogStatusById,
+  queryStringToFilters,
+  filtersToQueryString,
+} from '../utils';
+
 import history from '../store/history';
 
 import { BACKLOG_ENTRIES_FETCHING_REQUESTED } from '../store/myBacklog';
 
 import './Backlog.css';
 
-const ALL_FILTERS = ['status', 'page', 'pageSize', 'sort', 'ownedPlatformId', 'releaseYear'];
+const ALL_FILTERS = [
+  'status',
+  'page',
+  'pageSize',
+  'sort',
+  'ownedPlatformId',
+  'releaseYear',
+];
 
 const URL_FILTERS = ['page', 'sort', 'ownedPlatformId', 'releaseYear'];
 
@@ -26,7 +43,8 @@ const DEFAULTS = {
   pageSize: 50,
 };
 
-const filtersChanged = (prev, next) => ALL_FILTERS.some((k) => prev[k] !== next[k]);
+const filtersChanged = (prev, next) =>
+  ALL_FILTERS.some((k) => prev[k] !== next[k]);
 
 export class Backlog extends Component {
   constructor(props) {
@@ -55,8 +73,8 @@ export class Backlog extends Component {
           ...filters,
           ...newFilters,
         },
-        URL_FILTERS,
-      )}`,
+        URL_FILTERS
+      )}`
     );
   }
 
@@ -71,7 +89,12 @@ export class Backlog extends Component {
 
   render() {
     const {
-      fetching, filterOptions, entries, totalPages, totalCount, filters,
+      fetching,
+      filterOptions,
+      entries,
+      totalPages,
+      totalCount,
+      filters,
     } = this.props;
 
     const { status, page } = filters;
@@ -103,41 +126,45 @@ export class Backlog extends Component {
           </div>
           <div className="row">
             <div className="col-12 Backlog-filters">
-              {shownFilters.includes('platform') && platforms && platforms.length > 0 && (
-                <FilterSelect
-                  label="Platform"
-                  clearFilterLabel="All platforms"
-                  options={platforms.map((platform) => ({
-                    value: platform.id,
-                    label: platform.name,
-                  }))}
-                  importantOptions={IMPORTANT_PLATFORMS}
-                  selectedValue={filters.ownedPlatformId}
-                  onChange={(value) => {
-                    this.applyFilters({
-                      ownedPlatformId: value,
-                      page: 1,
-                    });
-                  }}
-                />
-              )}
-              {shownFilters.includes('releaseYear') && years && years.length > 0 && (
-                <FilterSelect
-                  label="Release&nbsp;year"
-                  clearFilterLabel="All years"
-                  options={years.map((year) => ({
-                    value: year.toString(),
-                    label: year.toString(),
-                  }))}
-                  selectedValue={filters.releaseYear}
-                  onChange={(value) => {
-                    this.applyFilters({
-                      releaseYear: value,
-                      page: 1,
-                    });
-                  }}
-                />
-              )}
+              {shownFilters.includes('platform') &&
+                platforms &&
+                platforms.length > 0 && (
+                  <FilterSelect
+                    label="Platform"
+                    clearFilterLabel="All platforms"
+                    options={platforms.map((platform) => ({
+                      value: platform.id,
+                      label: platform.name,
+                    }))}
+                    importantOptions={IMPORTANT_PLATFORMS.map((pl) => pl.id)}
+                    selectedValue={filters.ownedPlatformId}
+                    onChange={(value) => {
+                      this.applyFilters({
+                        ownedPlatformId: value,
+                        page: 1,
+                      });
+                    }}
+                  />
+                )}
+              {shownFilters.includes('releaseYear') &&
+                years &&
+                years.length > 0 && (
+                  <FilterSelect
+                    label="Release&nbsp;year"
+                    clearFilterLabel="All years"
+                    options={years.map((year) => ({
+                      value: year.toString(),
+                      label: year.toString(),
+                    }))}
+                    selectedValue={filters.releaseYear}
+                    onChange={(value) => {
+                      this.applyFilters({
+                        releaseYear: value,
+                        page: 1,
+                      });
+                    }}
+                  />
+                )}
               {shownFilters.includes('sort') && sorts && sorts.length > 0 && (
                 <FilterSelect
                   label="Sort"
@@ -153,7 +180,13 @@ export class Backlog extends Component {
               )}
             </div>
           </div>
-          <ReactPlaceholder showLoadingAnimation color="#ddd" ready={ready} type="text" rows={5}>
+          <ReactPlaceholder
+            showLoadingAnimation
+            color="#ddd"
+            ready={ready}
+            type="text"
+            rows={5}
+          >
             <BacklogList
               entries={entries}
               page={parseInt(page, 10)}
@@ -185,7 +218,7 @@ Backlog.propTypes = {
       PropTypes.shape({
         id: PropTypes.number,
         name: PropTypes.string,
-      }),
+      })
     ),
     years: PropTypes.arrayOf(PropTypes.number),
   }),
@@ -220,7 +253,8 @@ const mapStateToProps = ({ myBacklog }, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchEntries: (filters) => dispatch({ type: BACKLOG_ENTRIES_FETCHING_REQUESTED, filters }),
+  fetchEntries: (filters) =>
+    dispatch({ type: BACKLOG_ENTRIES_FETCHING_REQUESTED, filters }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Backlog);

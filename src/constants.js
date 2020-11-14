@@ -19,10 +19,10 @@ export const VALIDATION_ERRORS = {
 };
 
 export const IMPORTANT_PLATFORMS = [
-  'PC (Microsoft Windows)',
-  'PlayStation 4',
-  'Xbox One',
-  'Nintendo Switch',
+  { id: 167, name: 'PlayStation 5' },
+  { id: 169, name: 'Xbox Series' },
+  { id: 130, name: 'Nintendo Switch' },
+  { id: 39, name: 'iOS' },
 ];
 
 export const BACKLOG_STATUSES = [

@@ -71,7 +71,13 @@ export class Form extends Component {
     const ready = !backlogFetching;
     const show = BACKLOG_FIELDS[backlogEntry.status] || [];
     return (
-      <ReactPlaceholder showLoadingAnimation color="#ddd" ready={ready} type="text" rows={5}>
+      <ReactPlaceholder
+        showLoadingAnimation
+        color="#ddd"
+        ready={ready}
+        type="text"
+        rows={5}
+      >
         <div className="BacklogForm">
           <h5>My collection</h5>
           <div className="row">
@@ -90,20 +96,23 @@ export class Form extends Component {
               <div className="col-12">
                 <BacklogExpectation
                   value={backlogEntry.expectation_rating}
-                  setExpectation={(rate) => updateBacklog({ expectation_rating: rate })}
+                  setExpectation={(rate) =>
+                    updateBacklog({ expectation_rating: rate })
+                  }
                 />
               </div>
             )}
             {show.includes('platform') && (
               <div className="col-12">
                 <Platform
-                  label="My platform"
                   platformId={backlogEntry.owned_platform_id}
                   platformName={backlogEntry.owned_platform_name}
-                  onChange={(platformId, platformName) => updateBacklog({
-                    owned_platform_id: platformId,
-                    owned_platform_name: platformName,
-                  })}
+                  onChange={(platformId, platformName) =>
+                    updateBacklog({
+                      owned_platform_id: platformId,
+                      owned_platform_name: platformName,
+                    })
+                  }
                   platforms={game.platforms}
                 />
               </div>
@@ -167,7 +176,7 @@ Form.propTypes = {
       PropTypes.shape({
         id: PropTypes.number,
         name: PropTypes.string,
-      }),
+      })
     ),
   }).isRequired,
 
@@ -196,10 +205,14 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchBacklog: (gameId) => dispatch({ type: BACKLOG_ENTRY_FETCH_REQUESTED, gameId }),
-  addToBacklog: (status, game) => dispatch({ type: BACKLOG_ENTRY_ADD, status, game }),
-  updateBacklog: (gameId, p) => dispatch({ type: BACKLOG_ENTRY_UPDATE, gameId, entryParams: p }),
-  removeFromBacklog: (gameId) => dispatch({ type: BACKLOG_ENTRY_DELETE, gameId }),
+  fetchBacklog: (gameId) =>
+    dispatch({ type: BACKLOG_ENTRY_FETCH_REQUESTED, gameId }),
+  addToBacklog: (status, game) =>
+    dispatch({ type: BACKLOG_ENTRY_ADD, status, game }),
+  updateBacklog: (gameId, p) =>
+    dispatch({ type: BACKLOG_ENTRY_UPDATE, gameId, entryParams: p }),
+  removeFromBacklog: (gameId) =>
+    dispatch({ type: BACKLOG_ENTRY_DELETE, gameId }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
