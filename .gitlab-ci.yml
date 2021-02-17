@@ -1,4 +1,4 @@
-image: docker:latest
+image: node:15.8.0-alpine3.13
 
 services:
   - docker:dind
@@ -13,6 +13,8 @@ variables:
 build:
   stage: build
   script:
+    - yarn install
+    - yarn build
     - docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
     - docker pull $CI_REGISTRY_IMAGE:latest || true
     - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE:latest .
