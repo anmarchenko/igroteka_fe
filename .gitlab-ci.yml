@@ -4,6 +4,7 @@ services:
   - docker:dind
 
 stages:
+  - pre_build
   - build
 
 variables:
@@ -12,7 +13,7 @@ variables:
 
 build_assets:
   image: node:15.8.0-alpine3.13
-  stage: build
+  stage: pre_build
   script:
     - yarn install
     - yarn build
