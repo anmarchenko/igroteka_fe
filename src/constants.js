@@ -93,35 +93,35 @@ export const BACKLOG_FIELDS = {
 
 export const GAME_SCORES = [
   {
-    label: 'Fantastic',
+    label: 'Excellent',
     badgeStyle: 'badge-danger',
     id: 5,
     icon: Heart,
     color: '#dc3545',
   },
   {
-    label: 'Excellent',
+    label: 'Good',
     badgeStyle: 'badge-warning',
     id: 4,
     icon: ThumbsUp,
     color: '#ffc107',
   },
   {
-    label: 'Enjoyable',
+    label: 'Fine',
     badgeStyle: 'badge-success',
     id: 3,
     icon: Smile,
     color: '#28a745',
   },
   {
-    label: 'OK',
+    label: 'Tedious',
     badgeStyle: 'badge-primary',
     id: 2,
     icon: Meh,
     color: '#007bff',
   },
   {
-    label: 'Unsatisfying',
+    label: 'Terrible',
     badgeStyle: 'badge-light',
     id: 1,
     icon: ThumbsDown,

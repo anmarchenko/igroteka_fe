@@ -23,12 +23,12 @@
     "react-redux": "^7.0.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "4.0.0",
+    "react-scripts": "4.0.2",
     "react-youtube": "^7.11",
     "reactstrap": "^8.5",
     "redux": "^4.0.0",
     "redux-saga": "^1.0.0",
-    "yup": "^0.29"
+    "yup": "^0.32"
   },
   "scripts": {
     "start": "react-scripts start",
