@@ -6,7 +6,6 @@ import ReactPlaceholder from 'react-placeholder';
 import dayjs from 'dayjs';
 
 import DateField from './DateField';
-import Note from './Note';
 import Platform from './Platform';
 import BacklogExpectation from './BacklogExpectation';
 import BacklogStatus from './BacklogStatus';
@@ -144,15 +143,6 @@ export class Form extends Component {
                 />
               </div>
             )}
-            {show.includes('note') && (
-              <div className="col-12">
-                <Note
-                  label="Note"
-                  note={backlogEntry.note}
-                  onChange={(note) => updateBacklog({ note })}
-                />
-              </div>
-            )}
           </div>
         </div>
       </ReactPlaceholder>
@@ -185,7 +175,6 @@ Form.propTypes = {
     expectation_rating: PropTypes.number,
     score: PropTypes.number,
     status: PropTypes.string,
-    note: PropTypes.string,
     owned_platform_id: PropTypes.number,
     owned_platform_name: PropTypes.string,
     finished_at: PropTypes.string,

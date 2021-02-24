@@ -65,7 +65,6 @@ export const BacklogItem = (props) => {
             )}
           </p>
         )}
-        {!!entry.note && <p className="font-italic">{entry.note}</p>}
       </div>
       <div className="BacklogItem-important">
         {['wishlist', 'backlog'].includes(entry.status) && (
@@ -96,7 +95,6 @@ BacklogItem.propTypes = {
 
     status: PropTypes.string,
 
-    note: PropTypes.string,
     score: PropTypes.number,
     expectation_rating: PropTypes.number,
     owned_platform_name: PropTypes.string,

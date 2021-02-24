@@ -85,10 +85,10 @@ export const SORT_OPTIONS = {
 };
 
 export const BACKLOG_FIELDS = {
-  wishlist: ['note', 'platform', 'expectationRating'],
-  backlog: ['note', 'platform', 'expectationRating'],
-  playing: ['note', 'platform'],
-  beaten: ['note', 'platform', 'score', 'finished'],
+  wishlist: ['platform', 'expectationRating'],
+  backlog: ['platform', 'expectationRating'],
+  playing: ['platform'],
+  beaten: ['platform', 'score', 'finished'],
 };
 
 export const GAME_SCORES = [

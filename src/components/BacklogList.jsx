@@ -57,8 +57,6 @@ BacklogList.propTypes = {
       game_release_date: PropTypes.string,
       poster_thumb_url: PropTypes.string,
 
-      note: PropTypes.string,
-
       available_platforms: PropTypes.arrayOf(
         PropTypes.shape({
           id: PropTypes.number,
