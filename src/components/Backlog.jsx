@@ -7,13 +7,7 @@ import { Helmet } from 'react-helmet';
 
 import BacklogNav from './BacklogNav';
 import BacklogList from './BacklogList';
-import FilterSelect from './forms/FilterSelect';
-
-import {
-  BACKLOG_FILTERS,
-  IMPORTANT_PLATFORMS,
-  SORT_OPTIONS,
-} from '../constants';
+import BacklogFilters from './backlog/BacklogFilters';
 
 import {
   backlogStatusById,
@@ -52,6 +46,10 @@ export class Backlog extends Component {
 
     this.paginate = this.paginate.bind(this);
     this.load = this.load.bind(this);
+
+    this.state = {
+      shownFilters: false,
+    };
   }
 
   componentDidMount() {
@@ -98,13 +96,10 @@ export class Backlog extends Component {
     } = this.props;
 
     const { status, page } = filters;
+    const { shownFilters } = this.state;
 
     const ready = !fetching;
-    const shownFilters = BACKLOG_FILTERS[status] || [];
     const selectedStatus = backlogStatusById(status) || {};
-
-    const { platforms, years } = filterOptions;
-    const sorts = SORT_OPTIONS[status];
 
     return (
       <div className="container">
@@ -115,71 +110,32 @@ export class Backlog extends Component {
           <BacklogNav />
           <div className="row">
             <div className="col-12">
-              {totalCount != null && (
-                <p className="text-secondary">
-                  Showing&nbsp;
-                  {totalCount}
-                  &nbsp;results
-                </p>
-              )}
+              <p className="text-secondary">
+                <span className="d-xs-block d-sm-none">
+                  {selectedStatus.label}&nbsp;·&nbsp;
+                </span>
+                {totalCount != null && <>{totalCount}&nbsp;games</>}
+                &nbsp;·&nbsp;
+                <a
+                  href="#"
+                  onClick={() => this.setState({ shownFilters: !shownFilters })}
+                  className="Backlog-filters-switch"
+                >
+                  {shownFilters ? 'Hide' : 'Show'} filters
+                </a>
+              </p>
             </div>
           </div>
-          <div className="row">
-            <div className="col-12 Backlog-filters">
-              {shownFilters.includes('platform') &&
-                platforms &&
-                platforms.length > 0 && (
-                  <FilterSelect
-                    label="Platform"
-                    clearFilterLabel="All platforms"
-                    options={platforms.map((platform) => ({
-                      value: platform.id,
-                      label: platform.name,
-                    }))}
-                    importantOptions={IMPORTANT_PLATFORMS.map((pl) => pl.id)}
-                    selectedValue={filters.ownedPlatformId}
-                    onChange={(value) => {
-                      this.applyFilters({
-                        ownedPlatformId: value,
-                        page: 1,
-                      });
-                    }}
-                  />
-                )}
-              {shownFilters.includes('releaseYear') &&
-                years &&
-                years.length > 0 && (
-                  <FilterSelect
-                    label="Release&nbsp;year"
-                    clearFilterLabel="All years"
-                    options={years.map((year) => ({
-                      value: year.toString(),
-                      label: year.toString(),
-                    }))}
-                    selectedValue={filters.releaseYear}
-                    onChange={(value) => {
-                      this.applyFilters({
-                        releaseYear: value,
-                        page: 1,
-                      });
-                    }}
-                  />
-                )}
-              {shownFilters.includes('sort') && sorts && sorts.length > 0 && (
-                <FilterSelect
-                  label="Sort"
-                  showClearFilter={false}
-                  options={sorts}
-                  selectedValue={filters.sort}
-                  onChange={(value) => {
-                    this.applyFilters({
-                      sort: value,
-                    });
-                  }}
-                />
-              )}
+          {this.state.shownFilters && (
+            <div className="row">
+              <BacklogFilters
+                filters={filters}
+                filterOptions={filterOptions}
+                applyFilters={this.applyFilters.bind(this)}
+              />
             </div>
-          </div>
+          )}
+
           <ReactPlaceholder
             showLoadingAnimation
             color="#ddd"

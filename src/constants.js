@@ -51,14 +51,6 @@ export const BACKLOG_STATUSES = [
     color: '#4CAF50',
   },
 ];
-
-export const BACKLOG_FILTERS = {
-  wishlist: ['platform', 'releaseYear', 'sort'],
-  backlog: ['platform', 'releaseYear', 'sort'],
-  playing: [],
-  beaten: ['platform', 'releaseYear', 'sort'],
-};
-
 export const SORT_OPTIONS = {
   wishlist: [
     { value: 'desc:expectation_rating', label: 'Expectation' },
