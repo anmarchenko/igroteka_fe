@@ -131,21 +131,21 @@ export const GAME_SCORES = [
 
 export const EXPECTATIONS = [
   {
-    label: 'Essential',
+    label: 'High',
     badgeStyle: 'badge-danger',
     id: 3,
     icon: Heart,
     color: '#dc3545',
   },
   {
-    label: 'Priority',
+    label: 'Medium',
     badgeStyle: 'badge-warning',
     id: 2,
     icon: Bookmark,
     color: '#ffc107',
   },
   {
-    label: 'Eventually',
+    label: 'Low',
     badgeStyle: 'badge-secondary',
     id: 1,
     icon: Archive,
