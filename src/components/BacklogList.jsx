@@ -10,7 +10,6 @@ const BacklogList = ({
   entries,
   fetching,
   totalPages,
-  totalCount,
   page,
   onPaginate,
 }) => {
@@ -24,14 +23,6 @@ const BacklogList = ({
   return (
     <div className="row">
       <div className="col-12">
-        {!fetching && (
-          <Pagination
-            page={page}
-            totalPages={totalPages}
-            totalCount={totalCount}
-            onPaginate={onPaginate}
-          />
-        )}
         <ul className="BacklogList">
           {entries.map((entry) => (
             <BacklogItem key={entry.game_id} entry={entry} />
@@ -68,7 +59,6 @@ BacklogList.propTypes = {
   fetching: PropTypes.bool.isRequired,
   page: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
-  totalCount: PropTypes.number.isRequired,
   onPaginate: PropTypes.func.isRequired,
 };
 

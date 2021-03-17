@@ -147,7 +147,6 @@ export class Backlog extends Component {
               entries={entries}
               page={parseInt(page, 10)}
               totalPages={totalPages}
-              totalCount={totalCount}
               fetching={fetching}
               onPaginate={this.paginate}
             />

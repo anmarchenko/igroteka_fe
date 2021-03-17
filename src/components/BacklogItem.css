@@ -67,3 +67,9 @@
   height: 18px;
   margin-left: 1ch;
 }
+
+@media (min-width: 1100px) {
+  .BacklogItem {
+    margin-right: 2ch;
+  }
+}
