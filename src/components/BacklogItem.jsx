@@ -36,7 +36,7 @@ export const BacklogItem = (props) => {
 
   return (
     <li className="BacklogItem">
-      <div className="BacklogItem-poster d-none d-sm-block">
+      <div className="BacklogItem-poster">
         <Link to={`/games/${entry.game_id}/show`}>
           <Poster url={entry.poster_thumb_url} />
         </Link>
@@ -45,40 +45,30 @@ export const BacklogItem = (props) => {
         <p className="BacklogItem-name">
           <Link to={`/games/${entry.game_id}/show`}>{entry.game_name}</Link>
           <small>{yearFromDate(entry.game_release_date)}</small>
-          {cleanCountries(entry.countries).map((country) => (
-            <Flag key={country} country={country} />
-          ))}
         </p>
-        {!!entry.owned_platform_name && (
-          <p className="BacklogItem-platform text-important">
-            {entry.owned_platform_name}
-          </p>
-        )}
-        {((!!entry.playthrough_time && entry.playthrough_time.main) ||
-          (!!entry.rating && entry.rating.tier)) && (
-          <p className="BacklogItem-badges">
-            {!!entry.playthrough_time && entry.playthrough_time.main && (
-              <PlaythroughTimeBadge playthroughTime={entry.playthrough_time} />
-            )}
-            {!!entry.rating && entry.rating.tier && (
-              <OpencriticTier tier={entry.rating.tier} />
-            )}
-          </p>
-        )}
-      </div>
-      <div className="BacklogItem-important">
-        {['wishlist', 'backlog'].includes(entry.status) && (
-          <p>
-            {entry.expectation_rating &&
-              renderExpectationRating(expectationItem)}
-          </p>
-        )}
-        {entry.status === 'beaten' && (
-          <p>{entry.score && renderScore(scoreItem)}</p>
-        )}
-        {entry.status === 'beaten' && (
-          <p>{entry.finished_at && renderDate(entry.finished_at)}</p>
-        )}
+        <p className="BacklogItem-important text-secondary">
+          {['wishlist', 'backlog'].includes(entry.status) && (
+            <p>
+              {entry.owned_platform_name}
+              {entry.expectation_rating &&
+                (<>&nbsp;·&nbsp; {renderExpectationRating(expectationItem)}</>)}
+            </p>
+          )}
+          {entry.status === 'beaten' && (
+            <p>{entry.score && renderScore(scoreItem)} &nbsp;·&nbsp; {entry.finished_at && (<span>finished on {renderDate(entry.finished_at)}</span>)}</p>
+          )}
+        </p>
+        {/* <p className="BacklogItem-platform BacklogItem-badges">
+          {!!entry.playthrough_time && entry.playthrough_time.main && (
+            <PlaythroughTimeBadge playthroughTime={entry.playthrough_time} />
+          )}
+          {!!entry.rating && entry.rating.tier && (
+            <OpencriticTier tier={entry.rating.tier} />
+          )}
+        {cleanCountries(entry.countries).map((country) => (
+          <Flag key={country} country={country} />
+        ))}
+        </p> */}
       </div>
     </li>
   );

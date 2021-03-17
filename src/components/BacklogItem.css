@@ -1,14 +1,17 @@
 .BacklogItem {
   display: flex;
   flex-flow: row;
-  align-items: flex-start;
+  align-items: center;
   align-content: flex-start;
   justify-content: space-between;
 
-  padding-bottom: 10px;
-  padding-top: 10px;
-  border-bottom: 1px #eceeef solid;
-  max-width: 800px;
+  max-width: 528px;
+  width: min(100%, 528px);
+  border: 1px solid;
+  border-radius: 12px;
+  border-color: lightgray;
+
+  margin-bottom: 20px;
 }
 
 .BacklogItem .BacklogItem-score {
@@ -24,28 +27,35 @@
 }
 
 .BacklogItem-poster {
-  margin-right: 3ch;
+  padding: 14px;
+  background-color: #f3f4f4;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.BacklogItem-poster .GamePoster {
+  width: 78px;
+  border-radius: 3px;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px inset;
 }
 
 .BacklogItem-main {
+  padding-left: 2ch;
   flex: 1;
-}
-
-.BacklogItem-important {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-content: flex-end;
-  margin-left: 3ch;
-  align-items: flex-end;
+  max-width: calc(100% - 106px);
 }
 
 .BacklogItem-main p {
   margin-bottom: 0.5rem;
 }
-
 .BacklogItem-name {
-  font-size: 1.2em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.BacklogItem-name a {
+  color: #131314;
 }
 
 .BacklogItem-name small {
@@ -56,11 +66,4 @@
 .BacklogItem-badges .OpencriticTier {
   height: 18px;
   margin-left: 1ch;
-}
-
-@media (max-width: 573px) {
-  .BacklogItem-name {
-    font-size: 1em;
-    white-space: normal;
-  }
 }
