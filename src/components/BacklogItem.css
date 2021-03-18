@@ -84,6 +84,10 @@
   vertical-align: middle;
 }
 
+.BacklogItem-game-info .Flag {
+  margin-left: 0;
+}
+
 @media (min-width: 1100px) {
   .BacklogItem {
     margin-right: 2ch;

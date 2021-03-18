@@ -34,6 +34,11 @@ export const BacklogItem = (props) => {
   const scoreItem = gameScoreById(entry.score);
   const expectationItem = expectationById(entry.expectation_rating);
 
+  const countries = cleanCountries(entry.countries);
+  const timePresent = !!entry.playthrough_time && entry.playthrough_time.main;
+  const ratingPresent =
+    !!entry.rating && entry.rating.score && entry.rating.score != -1;
+
   return (
     <li className="BacklogItem">
       <div className="BacklogItem-poster">
@@ -67,17 +72,13 @@ export const BacklogItem = (props) => {
           )}
         </p>
         <p className="BacklogItem-game-info">
-          {!!entry.playthrough_time && entry.playthrough_time.main && (
+          {timePresent && (
             <PlaythroughTimeInfo playthroughTime={entry.playthrough_time} />
           )}
-          {!!entry.playthrough_time &&
-            entry.playthrough_time.main &&
-            ((!!entry.rating && entry.rating.score) ||
-              cleanCountries(entry.countries)) && <>&nbsp;·&nbsp;</>}
-          {!!entry.rating && entry.rating.score && (
-            <OpencriticScore score={entry.rating.score} />
-          )}
-          {cleanCountries(entry.countries).map((country) => (
+          {timePresent && ratingPresent && <>&nbsp;·&nbsp;</>}
+          {ratingPresent && <OpencriticScore score={entry.rating.score} />}
+          {(timePresent || ratingPresent) && countries && <>&nbsp;·&nbsp;</>}
+          {countries.map((country) => (
             <Flag key={country} country={country} />
           ))}
         </p>
