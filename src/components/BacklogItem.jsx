@@ -35,6 +35,7 @@ export const BacklogItem = (props) => {
   const expectationItem = expectationById(entry.expectation_rating);
 
   const countries = cleanCountries(entry.countries);
+  const countriesPresent = countries && countries.length > 0;
   const timePresent = !!entry.playthrough_time && entry.playthrough_time.main;
   const ratingPresent =
     !!entry.rating && entry.rating.score && entry.rating.score != -1;
@@ -77,7 +78,9 @@ export const BacklogItem = (props) => {
           )}
           {timePresent && ratingPresent && <>&nbsp;·&nbsp;</>}
           {ratingPresent && <OpencriticScore score={entry.rating.score} />}
-          {(timePresent || ratingPresent) && countries && <>&nbsp;·&nbsp;</>}
+          {(timePresent || ratingPresent) && countriesPresent && (
+            <>&nbsp;·&nbsp;</>
+          )}
           {countries.map((country) => (
             <Flag key={country} country={country} />
           ))}
