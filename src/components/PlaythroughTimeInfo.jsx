@@ -5,8 +5,6 @@ import { Clock } from 'react-feather';
 import IconWithText from './IconWithText';
 import { formatMinutes } from '../utils';
 
-import './PlaythroughTimeInfo.css';
-
 const PlaythroughTimeInfo = ({ playthroughTime }) => (
   <span className="PlaythroughTimeInfo">
     <IconWithText

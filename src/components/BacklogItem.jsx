@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Poster from './Poster';
 import Flag from './Flag';
 import PlaythroughTimeInfo from './PlaythroughTimeInfo';
-import OpencriticTier from './OpencriticTier';
+import OpencriticScore from './OpencriticScore';
 
 import {
   yearFromDate,
@@ -70,12 +70,16 @@ export const BacklogItem = (props) => {
           {!!entry.playthrough_time && entry.playthrough_time.main && (
             <PlaythroughTimeInfo playthroughTime={entry.playthrough_time} />
           )}
-          {/* {!!entry.rating && entry.rating.tier && (
-            <OpencriticTier tier={entry.rating.tier} />
+          {!!entry.playthrough_time &&
+            entry.playthrough_time.main &&
+            ((!!entry.rating && entry.rating.score) ||
+              cleanCountries(entry.countries)) && <>&nbsp;·&nbsp;</>}
+          {!!entry.rating && entry.rating.score && (
+            <OpencriticScore score={entry.rating.score} />
           )}
-        {cleanCountries(entry.countries).map((country) => (
-          <Flag key={country} country={country} />
-        ))} */}
+          {cleanCountries(entry.countries).map((country) => (
+            <Flag key={country} country={country} />
+          ))}
         </p>
       </div>
     </li>
