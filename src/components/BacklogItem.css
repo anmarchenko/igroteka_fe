@@ -14,6 +14,16 @@
   margin-bottom: 20px;
 }
 
+.BacklogItem:hover {
+  background-color: #fafafb;
+  transform: translate3d(0px, -1px, 0px) perspective(1px);
+  border-color: gray;
+}
+
+.BacklogItem:hover .BacklogItem-name a {
+  text-decoration: underline;
+}
+
 .BacklogItem .BacklogItem-score {
   display: inline-block;
   width: 2em;
@@ -35,6 +45,7 @@
 
 .BacklogItem-poster .GamePoster {
   width: 78px;
+  height: 104px;
   border-radius: 3px;
   box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px inset;
 }
@@ -48,6 +59,7 @@
 .BacklogItem-main p {
   margin-bottom: 0.5rem;
 }
+
 .BacklogItem-name {
   text-overflow: ellipsis;
   overflow: hidden;
@@ -60,11 +72,6 @@
 
 .BacklogItem-name small {
   color: rgba(0, 0, 0, 0.44);
-  margin-left: 1ch;
-}
-
-.BacklogItem-badges .OpencriticTier {
-  height: 18px;
   margin-left: 1ch;
 }
 

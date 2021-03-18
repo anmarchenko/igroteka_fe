@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import Poster from './Poster';
 import Flag from './Flag';
-import PlaythroughTimeBadge from './PlaythroughTimeBadge';
+import PlaythroughTimeInfo from './PlaythroughTimeInfo';
 import OpencriticTier from './OpencriticTier';
 
 import {
@@ -46,29 +46,37 @@ export const BacklogItem = (props) => {
           <Link to={`/games/${entry.game_id}/show`}>{entry.game_name}</Link>
           <small>{yearFromDate(entry.game_release_date)}</small>
         </p>
-        <p className="BacklogItem-important text-secondary">
+        <p className="BacklogItem-user-info text-secondary">
           {['wishlist', 'backlog'].includes(entry.status) && (
-            <p>
+            <>
               {entry.owned_platform_name}
-              {entry.expectation_rating &&
-                (<>&nbsp;·&nbsp; {renderExpectationRating(expectationItem)}</>)}
-            </p>
+              {entry.expectation_rating && (
+                <>&nbsp;·&nbsp; {renderExpectationRating(expectationItem)}</>
+              )}
+            </>
           )}
           {entry.status === 'beaten' && (
-            <p>{entry.score && renderScore(scoreItem)} &nbsp;·&nbsp; {entry.finished_at && (<span>finished on {renderDate(entry.finished_at)}</span>)}</p>
+            <>
+              {entry.score && renderScore(scoreItem)} &nbsp;·&nbsp;{' '}
+              {entry.finished_at && (
+                <span className="BacklogItem-finished-at">
+                  {renderDate(entry.finished_at)}
+                </span>
+              )}
+            </>
           )}
         </p>
-        {/* <p className="BacklogItem-platform BacklogItem-badges">
+        <p className="BacklogItem-game-info">
           {!!entry.playthrough_time && entry.playthrough_time.main && (
-            <PlaythroughTimeBadge playthroughTime={entry.playthrough_time} />
+            <PlaythroughTimeInfo playthroughTime={entry.playthrough_time} />
           )}
-          {!!entry.rating && entry.rating.tier && (
+          {/* {!!entry.rating && entry.rating.tier && (
             <OpencriticTier tier={entry.rating.tier} />
           )}
         {cleanCountries(entry.countries).map((country) => (
           <Flag key={country} country={country} />
-        ))}
-        </p> */}
+        ))} */}
+        </p>
       </div>
     </li>
   );
