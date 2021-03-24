@@ -53,7 +53,7 @@ export const TopGames = ({ location: { search } }) => {
       dispatch({ type: FETCH_TOP_GAMES_REQUESTED, filters });
     },
     // eslint-disable-next-line
-    FILTERS.map((filter) => filters[filter]),
+    FILTERS.map((filter) => filters[filter])
   );
 
   const currentYear = new Date().getFullYear();
@@ -62,7 +62,7 @@ export const TopGames = ({ location: { search } }) => {
       <Helmet>
         <title>Top games | Igroteka</title>
       </Helmet>
-      <h2>Top games from IGDB</h2>
+      <h4>Top games from IGDB</h4>
       <div className="row">
         <div className="col-12 TopGames-filters">
           <FilterSelect
@@ -100,11 +100,23 @@ export const TopGames = ({ location: { search } }) => {
           />
         </div>
       </div>
-      <ReactPlaceholder showLoadingAnimation color="#ddd" ready={!fetching} type="text" rows={20}>
+      <ReactPlaceholder
+        showLoadingAnimation
+        color="#ddd"
+        ready={!fetching}
+        type="text"
+        rows={20}
+      >
         <div className="row">
-          <div className="col-12">
+          <div className="col-12 GameList">
             {games.map((game, index) => (
-              <GameListItem key={game.id} game={game} linked numbered index={index + 1} />
+              <GameListItem
+                key={game.id}
+                game={game}
+                linked
+                numbered
+                index={index + 1}
+              />
             ))}
           </div>
         </div>

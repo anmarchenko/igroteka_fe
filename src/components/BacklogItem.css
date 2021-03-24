@@ -24,18 +24,6 @@
   text-decoration: underline;
 }
 
-.BacklogItem .BacklogItem-score {
-  display: inline-block;
-  width: 2em;
-  height: 2em;
-  line-height: 2em;
-  margin-left: auto;
-  color: white;
-  vertical-align: middle;
-  text-align: center;
-  border-radius: 50%;
-}
-
 .BacklogItem-poster {
   padding: 14px;
   background-color: #f3f4f4;

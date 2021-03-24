@@ -21,7 +21,7 @@ export const NewGames = () => {
       dispatch({ type: FETCH_NEW_GAMES_REQUESTED });
     },
     // eslint-disable-next-line
-    [],
+    []
   );
 
   return (
@@ -29,12 +29,18 @@ export const NewGames = () => {
       <Helmet>
         <title>New games | Igroteka</title>
       </Helmet>
-      <h2>New and noteworthy games</h2>
-      <ReactPlaceholder showLoadingAnimation color="#ddd" ready={!fetching} type="text" rows={20}>
+      <h4>New and noteworthy games</h4>
+      <ReactPlaceholder
+        showLoadingAnimation
+        color="#ddd"
+        ready={!fetching}
+        type="text"
+        rows={20}
+      >
         <div className="row">
-          <div className="col-12">
+          <div className="col-12 GameList">
             {games.map((game) => (
-              <GameListItem key={game.id} game={game} linked longDate />
+              <GameListItem key={game.id} game={game} />
             ))}
           </div>
         </div>

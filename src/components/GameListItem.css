@@ -1,35 +1,50 @@
+.GameList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .GameListItem {
   display: flex;
   flex-flow: row;
-  align-items: flex-start;
+  align-items: center;
   align-content: flex-start;
 
-  padding-bottom: 10px;
-  padding-top: 10px;
-  min-height: 150px;
+  max-width: 528px;
+  width: min(100%, 528px);
+  border: 1px solid;
+  border-radius: 12px;
+  border-color: lightgray;
+
+  margin-bottom: 20px;
+}
+
+.GameListItem:hover {
+  background-color: #fafafb;
+  transform: translate3d(0px, -1px, 0px) perspective(1px);
+  border-color: gray;
+}
+
+.GameListItem:hover .game-name a {
+  text-decoration: underline;
 }
 
 .GameListItem .game-info {
-  vertical-align: top;
+  padding-left: 2ch;
+  flex: 1;
+  max-width: calc(100% - 106px);
 }
-
-.GameListItem .game-description {
-  font-size: 1.2em;
-  color: rgba(0, 0, 0, 0.44);
-  margin-bottom: 0.5em;
-  white-space: normal;
-}
-
-.GameListItem .game-platforms {
-  white-space: normal;
+.GameListItem .game-info p {
+  margin-bottom: 0.5rem;
 }
 
 .GameListItem .game-name {
-  font-size: 1.5rem;
-  line-height: 1.2;
-  font-weight: 500;
-  display: inline;
-  margin-right: 1rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.GameListItem .game-name a {
+  color: #131314;
 }
 
 .GameListItem .game-name small {
@@ -37,28 +52,27 @@
   margin-left: 1ch;
 }
 
-.GameListItem .GamePoster {
-  margin-right: 3ch;
+.GameListItem .game-name small {
+  color: rgba(0, 0, 0, 0.44);
+  margin-left: 1ch;
 }
 
-@media (max-width: 573px) {
+.GameListItem .game-image {
+  padding: 14px;
+  background-color: #f3f4f4;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.GameListItem .GamePoster {
+  width: 78px;
+  height: 104px;
+  border-radius: 3px;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px inset;
+}
+
+@media (min-width: 1100px) {
   .GameListItem {
-    min-height: 75px;
-  }
-
-  .GameListItem .GamePoster {
-    width: 50px;
     margin-right: 2ch;
-  }
-
-  .GameListItem .game-description {
-    display: none;
-  }
-  .GameListItem .game-platforms {
-    color: rgba(0, 0, 0, 0.44);
-  }
-  .GameListItem .game-name {
-    font-size: 1em;
-    white-space: normal;
   }
 }

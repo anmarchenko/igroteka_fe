@@ -14,10 +14,6 @@ import './GlobalSearch.css';
 
 const renderItem = (item) => <GameListItem game={item} />;
 
-const onSelect = (item) => {
-  history.push(`/games/${item.id}/show`);
-};
-
 const onClose = () => {
   history.goBack();
 };
@@ -26,7 +22,12 @@ export const GlobalSearch = ({ items, search, loading }) => (
   <div className="GlobalSearch">
     <div className="container">
       <div className="text-right">
-        <button type="button" className="SearchClose" tabIndex="0" onClick={onClose}>
+        <button
+          type="button"
+          className="SearchClose"
+          tabIndex="0"
+          onClick={onClose}
+        >
           <X width="48" height="48" />
         </button>
       </div>
@@ -37,7 +38,6 @@ export const GlobalSearch = ({ items, search, loading }) => (
         placeholder="Search..."
         renderItem={renderItem}
         onChange={search}
-        onSelect={onSelect}
         loading={loading}
       />
       {loading && <div className="GlobalSearchLoading">Searching...</div>}

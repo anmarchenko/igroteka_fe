@@ -16,43 +16,18 @@ export class Typeahead extends Component {
   constructor() {
     super();
 
-    this.selectItem = this.selectItem.bind(this);
-    this.getSelectedItem = this.getSelectedItem.bind(this);
-
     this.hideItems = this.hideItems.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleKeyUp = this.handleKeyUp.bind(this);
 
     this.state = {
       showItems: false,
-      selectedIndex: 0,
       term: '',
     };
-  }
-
-  getSelectedItem() {
-    const { selectedIndex } = this.state;
-    const { items } = this.props;
-    if (selectedIndex < items.length) {
-      return items[selectedIndex];
-    }
-    return null;
-  }
-
-  selectItem(item) {
-    const { onSelect } = this.props;
-    if (!item) {
-      return;
-    }
-    this.setState({ term: '' });
-    onSelect(item);
-    this.hideItems();
   }
 
   hideItems() {
     this.setState({
       showItems: false,
-      selectedIndex: 0,
     });
   }
 
@@ -74,50 +49,21 @@ export class Typeahead extends Component {
     });
   }
 
-  handleKeyUp(e) {
-    const { selectedIndex } = this.state;
-    const { items } = this.props;
-    switch (e.key) {
-      case 'Enter':
-        this.selectItem(this.getSelectedItem());
-        break;
-      case 'ArrowDown':
-        if (selectedIndex < items.length - 1) {
-          this.setState(state => ({ selectedIndex: state.selectedIndex + 1 }));
-        }
-        break;
-      case 'ArrowUp':
-        if (selectedIndex > 0) {
-          this.setState(state => ({ selectedIndex: state.selectedIndex - 1 }));
-        }
-        break;
-      case 'Escape':
-        this.hideItems();
-        break;
-      default:
-        break;
-    }
-  }
-
   renderItems() {
-    const { selectedIndex } = this.state;
     const { items, renderItem } = this.props;
-    return items.map((item, index) => {
-      let classname = '';
-      if (index === selectedIndex) {
-        classname = 'selected';
-      }
-      return (
-        <li key={item.id} onClick={() => this.selectItem(item)} className={classname}>
-          {renderItem(item)}
-        </li>
-      );
+    return items.map((item) => {
+      return renderItem(item);
     });
   }
 
   render() {
     const {
-      autoFocus, delay, className, placeholder, items, loading,
+      autoFocus,
+      delay,
+      className,
+      placeholder,
+      items,
+      loading,
     } = this.props;
 
     const { term, showItems } = this.state;
@@ -135,10 +81,16 @@ export class Typeahead extends Component {
           onKeyDown={blockUnwantedButtons}
           onKeyPress={blockUnwantedButtons}
         />
-        {showItems && items.length > 0 && <ul className="Typeahead-items">{this.renderItems()}</ul>}
-        {showItems
-          && !loading
-          && items.length === 0 && <div className="Typeahead-empty">No results</div>}
+        {showItems && items.length > 0 && (
+          <div className="row">
+            <div className="Typeahead-items col-12 GameList">
+              {this.renderItems()}
+            </div>
+          </div>
+        )}
+        {showItems && !loading && items.length === 0 && (
+          <div className="Typeahead-empty">No results</div>
+        )}
       </span>
     );
   }
@@ -154,7 +106,6 @@ Typeahead.propTypes = {
 
   items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 
-  onSelect: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   renderItem: PropTypes.func.isRequired,
 };
