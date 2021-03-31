@@ -25,7 +25,7 @@ export const GameListItem = ({
     </div>
     <div className="game-info">
       <p className="game-name">
-        <a href={`/games/${id}/show`}>{renderName(name, numbered, index)}</a>
+        <a href={`/games/${id}/info`}>{renderName(name, numbered, index)}</a>
         <small>{yearFromDate(release_date)}</small>
       </p>
       {developers && developers.length > 0 && (

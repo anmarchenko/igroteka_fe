@@ -16,14 +16,6 @@
   margin-right: 1rem;
 }
 
-.GamePage-short-description-header {
-  margin-top: 1em;
-}
-
-.GamePage-short-description {
-  margin-top: 1em;
-}
-
 .GamePage-release-date {
   font-size: 1.2em;
   line-height: 1.5em;
@@ -43,16 +35,6 @@
 
 .GamePage-info div {
   margin-bottom: 0.5em;
-}
-
-.GamePage-extended {
-  margin-top: 1em;
-}
-
-.GamePage-extended-header {
-  margin-bottom: 20px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
 }
 
 .GamePage-video-container iframe {

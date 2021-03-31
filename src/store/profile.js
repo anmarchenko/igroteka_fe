@@ -21,7 +21,8 @@ export const USER_SAVE_ERRORED = 'USER_SAVE_ERRORED';
 
 export const USER_CHANGE_PASSWORD_REQUESTED = 'USER_CHANGE_PASSWORD_REQUESTED';
 export const USER_CHANGE_PASSWORD_FAILED = 'USER_CHANGE_PASSWORD_FAILED';
-export const USER_CHANGE_PASSWORD_CLEAR_ERRORS = 'USER_CHANGE_PASSWORD_CLEAR_ERRORS';
+export const USER_CHANGE_PASSWORD_CLEAR_ERRORS =
+  'USER_CHANGE_PASSWORD_CLEAR_ERRORS';
 
 function* saveUser({ userId, params }) {
   try {
@@ -41,7 +42,7 @@ function* saveUser({ userId, params }) {
 function* updatePassword({ userId, params }) {
   try {
     yield call(Api.updatePassword, userId, params);
-    history.push(`/users/${userId}/show`);
+    history.push(`/users/${userId}`);
     yield put({
       type: ADD_NOTIFICATION,
       message: 'Password changed',

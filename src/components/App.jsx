@@ -1,9 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import {
-  Redirect, Switch, Route, Router,
-} from 'react-router-dom';
+import { Redirect, Switch, Route, Router } from 'react-router-dom';
 
 import Login from './Login';
 import Backlog from './Backlog';
@@ -37,7 +35,7 @@ export const App = () => (
 
             <PrivateRoute path="/search" component={GlobalSearch} />
             <PrivateRoute path="/collections/:status" component={Backlog} />
-            <PrivateRoute path="/games/:gameId/show" component={GamePage} />
+            <PrivateRoute path="/games/:gameId" component={GamePage} />
             <PrivateRoute path="/profile" component={MyProfile} />
             <PrivateRoute path="/change_password" component={ChangePassword} />
             <PrivateRoute path="/top" component={TopGames} />
@@ -52,16 +50,22 @@ export const App = () => (
       <footer className="text-muted">
         <div className="container">
           <p>
-            Designed and built by
-            {' '}
-            <a href="https://github.com/altmer" target="_blank" rel="noopener noreferrer">
+            Designed and built by{' '}
+            <a
+              href="https://github.com/altmer"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               @altmer
             </a>
           </p>
           <p>
-            Powered by
-            {' '}
-            <a href="https://igdb.com" target="_blank" rel="noopener noreferrer">
+            Powered by{' '}
+            <a
+              href="https://igdb.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               IGDB
             </a>
           </p>

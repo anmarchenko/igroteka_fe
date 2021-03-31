@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 
 import ReactPlaceholder from 'react-placeholder';
 import {
@@ -10,7 +11,6 @@ import {
   RectShape,
 } from 'react-placeholder/lib/placeholders';
 import { Helmet } from 'react-helmet';
-import YouTube from 'react-youtube';
 
 import { renderDate, countriesForGame, formatMinutes } from '../utils';
 import Poster from './Poster';
@@ -18,11 +18,12 @@ import Flag from './Flag';
 
 import Form from './backlog-form/Form';
 import GamePageInfoBlock from './GamePageInfoBlock';
-import GamePageLinks from './GamePageLinks';
 import CriticsRating from './CriticsRating';
-import Screenshots from './Screenshots';
 import PlaythroughTimeBadge from './PlaythroughTimeBadge';
-import Reviews from './Reviews';
+import GameTabs from './GameTabs';
+import GameTabInfo from './GameTabInfo';
+import GameTabMedia from './GameTabMedia';
+import GameTabReviews from './GameTabReviews';
 
 import { GAME_FETCH_REQUESTED } from '../store/gamePage';
 import { FETCH_PLAYTROUGH_TIME_REQUESTED } from '../store/playthroughTime';
@@ -104,6 +105,7 @@ export const GamePage = (props) => {
   }, [dispatch, game.name, game.id, game.release_date]);
 
   const ready = !gameFetching && !!game.name;
+  const ratingPresent = rating && rating.score > 0;
 
   return (
     <ReactPlaceholder
@@ -135,7 +137,7 @@ export const GamePage = (props) => {
                   useLabel={true}
                 />
               )}
-              {rating.score && rating.score > 0 && (
+              {ratingPresent && (
                 <CriticsRating
                   rating={rating.score}
                   ratings_count={rating.num_reviews}
@@ -165,36 +167,26 @@ export const GamePage = (props) => {
                 text={formatObjects(game.franchises)}
               />
             </div>
-            {game.name && <GamePageLinks game={game} />}
           </div>
           <div className="col-12 col-md-4">
             {currentUser && <Form game={game} />}
           </div>
         </div>
-        <div className="row GamePage-extended">
-          <div className="col-12">
-            <h3 className="GamePage-extended-header">Extended info</h3>
-            <h4 className="GamePage-short-description-header">Description</h4>
-            <div className="GamePage-short-description text-description">
-              {game.short_description || 'No description yet'}
-            </div>
-            {rating.score && rating.score > 0 && <Reviews rating={rating} />}
-            <Screenshots gameId={gameId} />
-            {game.videos && (
-              <>
-                <h4 className="GamePage-videos-header">Videos</h4>
-                {game.videos.map((video) => (
-                  <div key={video.video_id} className="GamePage-video">
-                    <YouTube
-                      videoId={video.video_id}
-                      containerClassName="GamePage-video-container"
-                    />
-                  </div>
-                ))}
-              </>
-            )}
-          </div>
-        </div>
+        <GameTabs gameId={gameId} showReviews={ratingPresent} />
+        <Switch>
+          <Route
+            path={`/games/${gameId}/info`}
+            render={(props) => <GameTabInfo {...props} game={game} />}
+          />
+          <Route
+            path={`/games/${gameId}/media`}
+            render={(props) => <GameTabMedia {...props} game={game} />}
+          />
+          <Route
+            path={`/games/${gameId}/reviews`}
+            render={(props) => <GameTabReviews {...props} rating={rating} />}
+          />
+        </Switch>
       </div>
     </ReactPlaceholder>
   );

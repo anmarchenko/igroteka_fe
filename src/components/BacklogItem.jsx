@@ -43,13 +43,13 @@ export const BacklogItem = (props) => {
   return (
     <li className="BacklogItem">
       <div className="BacklogItem-poster">
-        <Link to={`/games/${entry.game_id}/show`}>
+        <Link to={`/games/${entry.game_id}/info`}>
           <Poster url={entry.poster_thumb_url} />
         </Link>
       </div>
       <div className="BacklogItem-main">
         <p className="BacklogItem-name">
-          <Link to={`/games/${entry.game_id}/show`}>{entry.game_name}</Link>
+          <Link to={`/games/${entry.game_id}/info`}>{entry.game_name}</Link>
           <small>{yearFromDate(entry.game_release_date)}</small>
         </p>
         <p className="BacklogItem-user-info text-secondary">
