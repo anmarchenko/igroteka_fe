@@ -12,7 +12,7 @@ const GameTabReviews = ({ rating }) => (
 );
 GameTabReviews.propTypes = {
   rating: PropTypes.shape({
-    score: PropTypes.number.isRequired,
+    score: PropTypes.number,
   }),
 };
 

@@ -43,25 +43,37 @@ const renderCategoryIcon = (category) => {
     return <Youtube />;
   }
 
-  if (['steam', 'iphone', 'ipad', 'android', 'google_plus'].includes(category)) {
+  if (
+    ['steam', 'iphone', 'ipad', 'android', 'google_plus'].includes(category)
+  ) {
     return <ShoppingBag />;
   }
 
   return <FeatherExternalLink />;
 };
 
-const renderExternalLinks = (externalLinks) => externalLinks.map((link) => (
-  <ExternalLink key={link.url} label={link.category} url={link.url}>
-    {renderCategoryIcon(link.category)}
-  </ExternalLink>
-));
+const renderSeparator = () => (
+  <span className="GamePageLinks-separator">·</span>
+);
+
+const renderExternalLinks = (externalLinks) =>
+  externalLinks.map((link) => (
+    <span key={link.url}>
+      {renderSeparator()}
+      <ExternalLink label={link.category} url={link.url}>
+        {renderCategoryIcon(link.category)}
+      </ExternalLink>
+    </span>
+  ));
 
 const GamePageLinks = ({ game }) => (
   <div className="GamePage-info GamePageLinks">
     <ExternalLink label="IGDB" url={game.external_url}>
       <Info />
     </ExternalLink>
+    {renderSeparator()}
     <YoutubeLink name={game.name} type="Walkthrough" />
+    {renderSeparator()}
     <YoutubeLink name={game.name} type="Review" />
     {renderExternalLinks(game.external_links)}
   </div>
@@ -75,7 +87,7 @@ GamePageLinks.propTypes = {
       PropTypes.shape({
         category: PropTypes.string,
         url: PropTypes.string,
-      }),
+      })
     ),
   }).isRequired,
 };

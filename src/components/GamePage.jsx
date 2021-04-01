@@ -12,12 +12,11 @@ import {
 } from 'react-placeholder/lib/placeholders';
 import { Helmet } from 'react-helmet';
 
-import { renderDate, countriesForGame, formatMinutes } from '../utils';
+import { renderDate, countriesForGame } from '../utils';
 import Poster from './Poster';
 import Flag from './Flag';
 
 import Form from './backlog-form/Form';
-import GamePageInfoBlock from './GamePageInfoBlock';
 import CriticsRating from './CriticsRating';
 import PlaythroughTimeBadge from './PlaythroughTimeBadge';
 import GameTabs from './GameTabs';
@@ -30,22 +29,6 @@ import { FETCH_PLAYTROUGH_TIME_REQUESTED } from '../store/playthroughTime';
 import { FETCH_RATING_REQUESTED } from '../store/rating';
 
 import './GamePage.css';
-
-const formatObjects = (objects) => {
-  if (!objects) return null;
-  return objects.map((obj) => obj.name).join(', ');
-};
-
-const formatPlaythroughTime = (playthroughTime) => {
-  if (!playthroughTime.main) return null;
-  return (
-    <a href={playthroughTime.external_url} target="_blank" rel="noreferrer">
-      {formatMinutes(playthroughTime.main)} /{' '}
-      {formatMinutes(playthroughTime.main_extra)} /{' '}
-      {formatMinutes(playthroughTime.completionist)}
-    </a>
-  );
-};
 
 const placeholder = (
   <div className="container GamePage">
@@ -121,7 +104,7 @@ export const GamePage = (props) => {
           <div className="col-12 col-md-2 d-none d-sm-block">
             {game.poster && <Poster url={game.poster.medium_url} />}
           </div>
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-10">
             <div className="GamePage-header-top">
               <div className="GamePage-game-name">{game.name}</div>
             </div>
@@ -144,31 +127,6 @@ export const GamePage = (props) => {
                 />
               )}
             </div>
-            <div className="GamePage-platforms">
-              {formatObjects(game.platforms)}
-            </div>
-            <div className="GamePage-info">
-              {playthroughTime.main && (
-                <GamePageInfoBlock
-                  header="Time to beat"
-                  text={formatPlaythroughTime(playthroughTime)}
-                />
-              )}
-              <GamePageInfoBlock
-                header="Developers"
-                text={formatObjects(game.developers)}
-              />
-              <GamePageInfoBlock
-                header="Publishers"
-                text={formatObjects(game.publishers)}
-              />
-              <GamePageInfoBlock
-                header="Franchises"
-                text={formatObjects(game.franchises)}
-              />
-            </div>
-          </div>
-          <div className="col-12 col-md-4">
             {currentUser && <Form game={game} />}
           </div>
         </div>
@@ -176,7 +134,13 @@ export const GamePage = (props) => {
         <Switch>
           <Route
             path={`/games/${gameId}/info`}
-            render={(props) => <GameTabInfo {...props} game={game} />}
+            render={(props) => (
+              <GameTabInfo
+                {...props}
+                game={game}
+                playthroughTime={playthroughTime}
+              />
+            )}
           />
           <Route
             path={`/games/${gameId}/media`}

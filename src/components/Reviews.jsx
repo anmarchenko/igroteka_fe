@@ -16,7 +16,6 @@ import './Reviews.css';
 
 const Reviews = ({ rating }) => (
   <>
-    <h4>Critic reviews</h4>
     <div className="Reviews-stats">
       <div className="Reviews-stat">
         <div className="Review-stat-data">
@@ -43,14 +42,12 @@ const Reviews = ({ rating }) => (
         <div className="Review-stat-label">Top critics rating</div>
       </div>
     </div>
-    <p>
-      <ExternalLink
-        label="All reviews"
-        url={`https://opencritic.com/game/${rating.external_id}/a`}
-      >
-        <FeatherExternalLink />
-      </ExternalLink>
-    </p>
+    <ExternalLink
+      label="All reviews"
+      url={`https://opencritic.com/game/${rating.external_id}/a`}
+    >
+      <FeatherExternalLink />
+    </ExternalLink>
     {rating.summary && (
       <>
         <p className="text-description">{rating.summary}</p>

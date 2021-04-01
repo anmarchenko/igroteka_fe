@@ -57,6 +57,33 @@ h4 {
   margin-top: 1em;
 }
 
-.text-description {
-  max-width: 80ch;
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link.active:hover {
+  border-color: #fff #fff black;
+  color: black;
+}
+
+.nav-tabs .nav-link {
+  color: rgba(0, 0, 0, 0.44);
+  text-decoration: none;
+}
+
+.nav-tabs .nav-link:hover {
+  border-color: #fff #fff #dee2e6;
+  color: black;
+}
+
+a {
+  color: rgba(0, 0, 0, 0.6);
+  text-decoration: underline dotted;
+}
+
+a:hover,
+a:focus {
+  color: black;
+  text-decoration: underline solid;
+}
+
+.navbar .nav-link {
+  text-decoration: none;
 }

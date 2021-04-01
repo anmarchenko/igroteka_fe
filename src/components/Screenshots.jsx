@@ -37,7 +37,7 @@ export const Screenshots = ({ gameId }) => {
 };
 
 Screenshots.propTypes = {
-  gameId: PropTypes.string.isRequired,
+  gameId: PropTypes.number.isRequired,
 };
 
 export default Screenshots;

@@ -78,21 +78,15 @@ export class Form extends Component {
         rows={5}
       >
         <div className="BacklogForm">
-          <h5>My collection</h5>
-          <div className="row">
-            <div className="col-12">
-              <BacklogStatus
-                entryExists={isInBacklog(backlogEntry)}
-                status={backlogEntry.status}
-                onStatusChange={this.onStatusChange}
-                onDelete={this.removeFromBacklog}
-              />
-            </div>
-          </div>
-
-          <div className="row">
+          <div>
+            <BacklogStatus
+              entryExists={isInBacklog(backlogEntry)}
+              status={backlogEntry.status}
+              onStatusChange={this.onStatusChange}
+              onDelete={this.removeFromBacklog}
+            />
             {show.includes('expectationRating') && (
-              <div className="col-12">
+              <div>
                 <BacklogExpectation
                   value={backlogEntry.expectation_rating}
                   setExpectation={(rate) =>
@@ -102,7 +96,7 @@ export class Form extends Component {
               </div>
             )}
             {show.includes('platform') && (
-              <div className="col-12">
+              <div>
                 <Platform
                   platformId={backlogEntry.owned_platform_id}
                   platformName={backlogEntry.owned_platform_name}
@@ -117,7 +111,7 @@ export class Form extends Component {
               </div>
             )}
             {show.includes('score') && (
-              <div className="col-12">
+              <div>
                 <BacklogScore
                   score={backlogEntry.score}
                   setScore={(score) => updateBacklog({ score })}
@@ -125,7 +119,7 @@ export class Form extends Component {
               </div>
             )}
             {show.includes('finished') && (
-              <div className="col-12">
+              <div>
                 <DateField
                   label="Finished"
                   value={backlogEntry.finished_at}

@@ -27,16 +27,6 @@
   margin-right: 0.5ch;
 }
 
-.GamePage-platforms {
-  font-size: 1em;
-  line-height: 1.5em;
-  margin-bottom: 0.2em;
-}
-
-.GamePage-info div {
-  margin-bottom: 0.5em;
-}
-
 .GamePage-video-container iframe {
   max-width: 100%;
 }
