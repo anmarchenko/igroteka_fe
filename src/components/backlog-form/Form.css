@@ -1,3 +1,14 @@
+.BacklogForm {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.BacklogForm .form-group {
+  margin-right: 12px;
+}
+
 .BacklogForm button {
   cursor: pointer;
 }
@@ -5,3 +16,16 @@
 .BacklogForm label {
   color: rgba(0, 0, 0, 0.44);
 }
+
+.BacklogForm .backlog-finished-date {
+  max-width: 130px;
+}
+
+.BacklogForm-remove {
+  height: 38px;
+}
+
+/* @media (max-width: 816px) {
+  .BacklogForm {
+  }
+} */

@@ -10,8 +10,7 @@ export const BacklogExpectation = ({ setExpectation, value }) => (
     options={EXPECTATIONS}
     onChange={setExpectation}
     onDelete={() => setExpectation(null)}
-    label="Expectation score"
-    emptyLabel="Set your expectations"
+    emptyLabel="Expectation"
     deleteLabel="Remove expectation"
   />
 );

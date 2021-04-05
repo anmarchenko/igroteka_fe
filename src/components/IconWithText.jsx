@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 
 import './IconWithText.css';
 
-export const IconWithText = ({
-  Icon, color, size, label,
-}) => (
+export const IconWithText = ({ Icon, color, size, label }) => (
   <span className="IconWithText">
     <Icon color={color} size={size} />
     <span className="IconWithText-text">{label}</span>

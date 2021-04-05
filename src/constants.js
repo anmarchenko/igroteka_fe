@@ -39,7 +39,7 @@ export const BACKLOG_STATUSES = [
     color: '#3949AB',
   },
   {
-    label: 'Currently playing',
+    label: 'Playing',
     id: 'playing',
     icon: Gamepad,
     color: '#b71c1c',

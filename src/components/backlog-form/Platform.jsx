@@ -22,10 +22,8 @@ export const Platform = ({ platforms, platformId, platformName, onChange }) => {
 
   return (
     <div className="form-group">
-      <label>My platform</label>
-      <br />
       <UncontrolledButtonDropdown>
-        {!platformId && <DropdownToggle caret>Select...</DropdownToggle>}
+        {!platformId && <DropdownToggle caret>Platfrom</DropdownToggle>}
         {platformId && <DropdownToggle caret>{platformName}</DropdownToggle>}
         <DropdownMenu>
           {platforms.map((platform) => (

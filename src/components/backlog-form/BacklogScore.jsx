@@ -10,8 +10,7 @@ export const BacklogScore = ({ setScore, score }) => (
     options={GAME_SCORES}
     onChange={setScore}
     onDelete={() => setScore(null)}
-    label="Rating"
-    emptyLabel="Rate this game"
+    emptyLabel="Rating"
     deleteLabel="Remove score"
   />
 );

@@ -12,6 +12,7 @@
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
     "react": "^17.0",
+    "react-confirm-alert": "^2.7.0",
     "react-debounce-input": "^3.2.0",
     "react-dom": "^17.0",
     "react-feather": "^2.0.0",

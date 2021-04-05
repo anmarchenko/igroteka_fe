@@ -50,7 +50,7 @@ const Reviews = ({ rating }) => (
     </ExternalLink>
     {rating.summary && (
       <>
-        <p className="text-description">{rating.summary}</p>
+        <p className="text-description Reviews-summary">{rating.summary}</p>
         {rating.points &&
           rating.points.map((p) => (
             <p className="Reviews-point text-description" key={p.title}>
