@@ -45,6 +45,7 @@
 
 .GameListItem .game-name a {
   color: #131314;
+  text-decoration: none;
 }
 
 .GameListItem .game-name small {
