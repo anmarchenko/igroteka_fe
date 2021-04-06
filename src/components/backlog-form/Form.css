@@ -17,15 +17,12 @@
   color: rgba(0, 0, 0, 0.44);
 }
 
-.BacklogForm .backlog-finished-date {
-  max-width: 130px;
-}
-
 .BacklogForm-remove {
   height: 38px;
 }
 
-/* @media (max-width: 816px) {
+@media (max-width: 768px) {
   .BacklogForm {
+    justify-content: center;
   }
-} */
+}

@@ -2,31 +2,74 @@
   margin-bottom: 10em;
 }
 
+.GamePage-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.GamePage-header-poster {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 40%;
+  max-width: 360px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.GamePage-header-info {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 60%;
+}
+
 .GamePage-header .GamePoster {
-  width: initial;
-  max-width: 100%;
+  width: 200px;
   max-height: 600px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 1.1px 1.5px,
+    rgba(0, 0, 0, 0.1) 0px 2.8px 3.9px, rgba(0, 0, 0, 0.08) 0px 5.8px 7.9px,
+    rgba(0, 0, 0, 0.06) 0px 12.0455px 16.4px, rgba(0, 0, 0, 0.04) 0px 33px 45px;
+  border-radius: 3px;
 }
 
 .GamePage-game-name {
-  font-size: 2rem;
+  font-size: 20px;
+  line-height: 1.3;
   display: inline;
-  font-weight: 500;
-  line-height: 1.2;
-  margin-right: 1rem;
+  font-weight: 400;
 }
 
-.GamePage-release-date {
-  font-size: 1.2em;
-  line-height: 1.5em;
-  margin-bottom: 0.2em;
-}
-
-.GamePage-release-date .badge {
-  margin-left: 0.5ch;
-  margin-right: 0.5ch;
+.GamePage-extended-info {
+  margin-top: 1em;
+  font-weight: 300;
+  font-size: 0.9em;
 }
 
 .GamePage-video-container iframe {
   max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .GamePage-header {
+    display: flex;
+    flex-direction: row;
+    background-color: #f3f4f4;
+    padding-top: 64px;
+    padding-bottom: 64px;
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .GamePage-header .GamePoster {
+    width: 140px;
+    margin-bottom: 32px;
+  }
+
+  .GamePage-header-info {
+    text-align: center;
+  }
 }

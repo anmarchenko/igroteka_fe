@@ -17,8 +17,8 @@ import Poster from './Poster';
 import Flag from './Flag';
 
 import Form from './backlog-form/Form';
-import CriticsRating from './CriticsRating';
-import PlaythroughTimeBadge from './PlaythroughTimeBadge';
+import OpencriticScore from './OpencriticScore';
+import PlaythroughTimeInfo from './PlaythroughTimeInfo';
 import GameTabs from './GameTabs';
 import GameTabInfo from './GameTabInfo';
 import GameTabMedia from './GameTabMedia';
@@ -96,36 +96,28 @@ export const GamePage = (props) => {
       ready={ready}
       customPlaceholder={placeholder}
     >
+      <Helmet>
+        <title>{`${game.name} | Igroteka`}</title>
+      </Helmet>
       <div className="container GamePage">
-        <div className="row GamePage-header">
-          <Helmet>
-            <title>{`${game.name} | Igroteka`}</title>
-          </Helmet>
-          <div className="col-12 col-md-2 d-none d-sm-block">
+        <div className="GamePage-header">
+          <div className="GamePage-header-poster">
             {game.poster && <Poster url={game.poster.medium_url} />}
           </div>
-          <div className="col-12 col-md-10">
-            <div className="GamePage-header-top">
-              <div className="GamePage-game-name">{game.name}</div>
-            </div>
-            <div className="GamePage-release-date">
-              {renderDate(game.release_date)}{' '}
+          <div className="GamePage-header-info">
+            <div className="GamePage-game-name">{game.name}</div>
+            <div className="GamePage-extended-info">
+              {renderDate(game.release_date)} <>&nbsp;·&nbsp;</>
+              {playthroughTime.main && (
+                <PlaythroughTimeInfo playthroughTime={playthroughTime} />
+              )}
+              {playthroughTime.main && ratingPresent && <>&nbsp;·&nbsp;</>}
+              {ratingPresent && <OpencriticScore score={rating.score} />}
+              <>&nbsp;·&nbsp;</>
               {game.developers &&
                 countriesForGame(game).map((country) => (
-                  <Flag key={country} country={country} size={24} />
+                  <Flag key={country} country={country} size={16} />
                 ))}
-              {playthroughTime.main && (
-                <PlaythroughTimeBadge
-                  playthroughTime={playthroughTime}
-                  useLabel={true}
-                />
-              )}
-              {ratingPresent && (
-                <CriticsRating
-                  rating={rating.score}
-                  ratings_count={rating.num_reviews}
-                />
-              )}
             </div>
             {currentUser && <Form game={game} />}
           </div>

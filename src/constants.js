@@ -22,7 +22,6 @@ export const IMPORTANT_PLATFORMS = [
   { id: 167, name: 'PlayStation 5' },
   { id: 169, name: 'Xbox Series' },
   { id: 130, name: 'Nintendo Switch' },
-  { id: 39, name: 'iOS' },
 ];
 
 export const BACKLOG_STATUSES = [
@@ -144,14 +143,5 @@ export const EXPECTATIONS = [
     color: '#28a745',
   },
 ];
-
-export const PLAYTHROUGH_BADGES = {
-  'very-short': 'badge-secondary',
-  short: 'badge-success',
-  fair: 'badge-info',
-  average: 'badge-primary',
-  long: 'badge-warning',
-  'very-long': 'badge-danger',
-};
 
 export default VALIDATION_ERRORS;

@@ -5,6 +5,10 @@
   margin-top: 24px;
 }
 
+.BacklogStatus-item:last-child {
+  margin-right: 0;
+}
+
 .BacklogStatus-item {
   display: inline;
   margin-right: 3ch;

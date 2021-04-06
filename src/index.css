@@ -91,3 +91,7 @@ a:focus {
 .navbar-light .navbar-brand {
   text-decoration: none;
 }
+
+.UserMenu .dropdown-item {
+  text-decoration: none;
+}
