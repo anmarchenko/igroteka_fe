@@ -54,6 +54,8 @@ const GameTabInfo = ({ game, playthroughTime }) => (
           header="Franchises"
           text={formatObjects(game.franchises)}
         />
+        <GamePageInfoBlock header="Genres" text={formatObjects(game.genres)} />
+        <GamePageInfoBlock header="Themes" text={formatObjects(game.themes)} />
       </div>
     </div>
   </div>
@@ -82,6 +84,18 @@ GameTabInfo.propTypes = {
       })
     ),
     franchises: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+      })
+    ),
+    genres: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+      })
+    ),
+    themes: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number,
         name: PropTypes.string,

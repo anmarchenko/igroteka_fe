@@ -40,12 +40,9 @@ const placeholder = (
           style={{ width: 160, height: 200 }}
         />
       </div>
-      <div className="col-12 col-md-6">
+      <div className="col-12 col-md-8">
         <TextRow color="#ddd" style={{ height: 35 }} />
         <TextBlock color="#ddd" rows={10} />
-      </div>
-      <div className="col-12 col-md-4">
-        <TextBlock color="#ddd" rows={5} />
       </div>
     </div>
   </div>
@@ -107,17 +104,27 @@ export const GamePage = (props) => {
           <div className="GamePage-header-info">
             <div className="GamePage-game-name">{game.name}</div>
             <div className="GamePage-extended-info">
-              {renderDate(game.release_date)} <>&nbsp;·&nbsp;</>
+              {renderDate(game.release_date)}{' '}
               {playthroughTime.main && (
-                <PlaythroughTimeInfo playthroughTime={playthroughTime} />
+                <>
+                  &nbsp;·&nbsp;
+                  <PlaythroughTimeInfo playthroughTime={playthroughTime} />
+                </>
               )}
-              {playthroughTime.main && ratingPresent && <>&nbsp;·&nbsp;</>}
-              {ratingPresent && <OpencriticScore score={rating.score} />}
-              <>&nbsp;·&nbsp;</>
-              {game.developers &&
-                countriesForGame(game).map((country) => (
-                  <Flag key={country} country={country} size={16} />
-                ))}
+              {ratingPresent && (
+                <>
+                  &nbsp;·&nbsp;
+                  <OpencriticScore score={rating.score} />
+                </>
+              )}
+              {game.developers && (
+                <>
+                  &nbsp;·&nbsp;
+                  {countriesForGame(game).map((country) => (
+                    <Flag key={country} country={country} size={16} />
+                  ))}
+                </>
+              )}
             </div>
             {currentUser && <Form game={game} />}
           </div>
