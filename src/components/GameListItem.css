@@ -72,6 +72,15 @@
   box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px inset;
 }
 
+.GameListItem-game-info .IconWithText-text {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.9em;
+}
+
+.GameListItem-game-info .IconWithText svg {
+  vertical-align: middle;
+}
+
 @media (min-width: 1100px) {
   .GameListItem {
     margin-right: 2ch;

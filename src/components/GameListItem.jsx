@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Poster from './Poster';
-import { yearFromDate } from '../utils';
+import BacklogStatusLabel from './BacklogStatusLabel';
+import { yearFromDate, backlogStatusById } from '../utils';
 
 import './GameListItem.css';
 
@@ -15,7 +16,7 @@ const renderName = (name, numbered, index) => {
 
 /* eslint-disable camelcase */
 export const GameListItem = ({
-  game: { id, poster, name, release_date, developers },
+  game: { id, poster, name, release_date, developers, backlog_entries },
   numbered,
   index,
 }) => (
@@ -33,6 +34,14 @@ export const GameListItem = ({
           by {developers[0].name}
         </p>
       )}
+      {backlog_entries && backlog_entries.length > 0 && (
+        <p className="GameListItem-game-info">
+          <BacklogStatusLabel
+            status={backlogStatusById(backlog_entries[0].status)}
+            size={16}
+          />
+        </p>
+      )}
     </div>
   </div>
 );
@@ -48,6 +57,11 @@ GameListItem.propTypes = {
     developers: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
+      })
+    ),
+    backlog_entries: PropTypes.arrayOf(
+      PropTypes.shape({
+        status: PropTypes.string,
       })
     ),
   }),
