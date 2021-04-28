@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import Poster from './Poster';
 import BacklogStatusLabel from './BacklogStatusLabel';
+import PlaythroughTimeInfo from './PlaythroughTimeInfo';
+import OpencriticScore from './OpencriticScore';
 import { yearFromDate, backlogStatusById } from '../utils';
 
 import './GameListItem.css';
@@ -16,35 +18,61 @@ const renderName = (name, numbered, index) => {
 
 /* eslint-disable camelcase */
 export const GameListItem = ({
-  game: { id, poster, name, release_date, developers, backlog_entries },
+  game: {
+    id,
+    poster,
+    name,
+    release_date,
+    developers,
+    backlog_entries,
+    playthrough_time,
+    critics_rating,
+  },
   numbered,
   index,
-}) => (
-  <div className="GameListItem">
-    <div className="game-image">
-      <Poster url={poster.thumb_url} />
-    </div>
-    <div className="game-info">
-      <p className="game-name">
-        <a href={`/games/${id}/info`}>{renderName(name, numbered, index)}</a>
-        <small>{yearFromDate(release_date)}</small>
-      </p>
-      {developers && developers.length > 0 && (
-        <p className="game-developed-by text-secondary">
-          by {developers[0].name}
+}) => {
+  const backlogEntryPresent = backlog_entries && backlog_entries.length > 0;
+  const timePresent = !!playthrough_time && playthrough_time.main;
+  const ratingPresent =
+    !!critics_rating && critics_rating.score && critics_rating.score != -1;
+
+  return (
+    <div className="GameListItem">
+      <div className="game-image">
+        <Poster url={poster.thumb_url} />
+      </div>
+      <div className="game-info">
+        <p className="game-name">
+          <a href={`/games/${id}/info`}>{renderName(name, numbered, index)}</a>
+          <small>{yearFromDate(release_date)}</small>
         </p>
-      )}
-      {backlog_entries && backlog_entries.length > 0 && (
-        <p className="GameListItem-game-info">
-          <BacklogStatusLabel
-            status={backlogStatusById(backlog_entries[0].status)}
-            size={16}
-          />
-        </p>
-      )}
+        {developers && developers.length > 0 && (
+          <p className="game-developed-by text-secondary">
+            by {developers[0].name}
+          </p>
+        )}
+        {(backlogEntryPresent || timePresent || ratingPresent) && (
+          <p className="GameListItem-game-info">
+            {backlogEntryPresent && (
+              <BacklogStatusLabel
+                status={backlogStatusById(backlog_entries[0].status)}
+                size={16}
+              />
+            )}
+            {timePresent && backlogEntryPresent && <>&nbsp;·&nbsp;</>}
+            {timePresent && (
+              <PlaythroughTimeInfo playthroughTime={playthrough_time} />
+            )}
+            {(timePresent || backlogEntryPresent) && ratingPresent && (
+              <>&nbsp;·&nbsp;</>
+            )}
+            {ratingPresent && <OpencriticScore score={critics_rating.score} />}
+          </p>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 GameListItem.propTypes = {
   game: PropTypes.shape({
@@ -64,6 +92,8 @@ GameListItem.propTypes = {
         status: PropTypes.string,
       })
     ),
+    playthrough_time: PropTypes.shape(),
+    critics_rating: PropTypes.shape(),
   }),
   numbered: PropTypes.bool,
   longDate: PropTypes.bool,
