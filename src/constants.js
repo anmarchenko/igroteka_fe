@@ -2,8 +2,8 @@ import {
   Archive,
   Bookmark,
   Check,
+  ShoppingBag,
   Star,
-  Package,
   ThumbsDown,
   Meh,
   ThumbsUp,
@@ -28,13 +28,13 @@ export const BACKLOG_STATUSES = [
   {
     label: 'Wishlist',
     id: 'wishlist',
-    icon: Star,
+    icon: Bookmark,
     color: '#FFB300',
   },
   {
     label: 'To play',
     id: 'backlog',
-    icon: Package,
+    icon: ShoppingBag,
     color: '#3949AB',
   },
   {
@@ -132,7 +132,7 @@ export const EXPECTATIONS = [
     label: 'Medium',
     badgeStyle: 'badge-warning',
     id: 2,
-    icon: Bookmark,
+    icon: Star,
     color: '#ffc107',
   },
   {

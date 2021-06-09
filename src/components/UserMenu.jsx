@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { User } from 'react-feather';
 import { Link } from 'react-router-dom';
 import {
-  UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from 'reactstrap';
 
-import Avatar from './Avatar';
+import IconWithText from './IconWithText';
 
 import './UserMenu.css';
 
 export const UserMenu = ({ user, signOut }) => (
   <UncontrolledDropdown nav className="UserMenu">
     <DropdownToggle className="nav-link" tag="a">
-      <Avatar {...user} />
+      <IconWithText Icon={User} label={user.name} color={'#000'} size={24} />
     </DropdownToggle>
     <DropdownMenu right>
       <DropdownItem className="user-link" tag={Link} to="/profile">
@@ -23,14 +27,15 @@ export const UserMenu = ({ user, signOut }) => (
       <DropdownItem
         className="user-link d-xs-inline d-sm-none"
         tag={Link}
-        to="/collections/wishlist"
+        to="/new"
       >
-        My collection
-      </DropdownItem>
-      <DropdownItem className="user-link d-xs-inline d-sm-none" tag={Link} to="/new">
         New games
       </DropdownItem>
-      <DropdownItem className="user-link d-xs-inline d-sm-none" tag={Link} to="/top">
+      <DropdownItem
+        className="user-link d-xs-inline d-sm-none"
+        tag={Link}
+        to="/top"
+      >
         Top games
       </DropdownItem>
       <DropdownItem divider className="d-xs-inline d-sm-none" />
@@ -53,6 +58,7 @@ UserMenu.propTypes = {
     }),
     initials: PropTypes.string,
     color: PropTypes.string,
+    name: PropTypes.string,
   }),
   signOut: PropTypes.func.isRequired,
 };

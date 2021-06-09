@@ -18,6 +18,8 @@ import './TopGames.css';
 const FILTERS = ['year', 'platform'];
 
 const PLATFORMS = [
+  { value: 167, label: 'PlayStation 5' },
+  { value: 169, label: 'Xbox Series' },
   { value: 130, label: 'Nintendo Switch' },
   { value: 48, label: 'PlayStation 4' },
   { value: 6, label: 'PC' },

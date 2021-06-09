@@ -1,0 +1,42 @@
+.MobileNavBar {
+  position: fixed;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  z-index: 100000;
+  background-color: #fff;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.MobileNavBar ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0;
+}
+
+.MobileNavBar .IconWithText-text,
+.MobileNavBar .nav-link .IconWithText-text {
+  display: none;
+}
+
+.MobileNavBar-nav-item {
+  vertical-align: middle;
+}
+
+.MobileNavBar-nav-link {
+  opacity: 0.6;
+}
+
+.MobileNavBar .nav-link {
+  padding: 0;
+}
+
+.MobileNavBar-nav-link:hover,
+.MobileNavBar-nav-link.active {
+  opacity: 1;
+}

@@ -14,6 +14,8 @@ import {
   USER_CHANGE_PASSWORD_CLEAR_ERRORS,
 } from '../store/profile';
 
+import './ChangePassword.css';
+
 export class ChangePassword extends React.Component {
   constructor(props) {
     super(props);
@@ -95,7 +97,7 @@ export class ChangePassword extends React.Component {
     }
 
     return (
-      <div className="container">
+      <div className="container ChangePassword">
         <Helmet>
           <title>Change password | Igroteka</title>
         </Helmet>

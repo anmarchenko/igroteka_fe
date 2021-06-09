@@ -1,17 +1,6 @@
-.GlobalSearch {
-  background: white;
-  min-height: 100%;
-  padding-top: 2em;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 100%;
-  z-index: 10000;
-}
-
 .GlobalSearch input.form-control {
   border: 0;
-  font-size: 5em;
+  font-size: 4em;
   margin-top: 0.5em;
   height: inherit;
 }
@@ -25,25 +14,6 @@
   border: 0;
   margin-top: 1em;
   width: 100%;
-}
-
-.GlobalSearch .SearchClose {
-  color: black;
-  opacity: 0.5;
-}
-
-.GlobalSearch .SearchClose {
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-
-.GlobalSearch .SearchClose:hover {
-  opacity: 1;
-}
-
-.GlobalSearch .SearchClose:focus {
-  outline: none;
 }
 
 .GlobalSearch .GlobalSearchLoading,

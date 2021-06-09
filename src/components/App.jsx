@@ -9,7 +9,7 @@ import GuestRoute from './GuestRoute';
 import PrivateRoute from './PrivateRoute';
 import SessionContainer from './SessionContainer';
 import NotFound from './NotFound';
-import TopNav from './TopNav';
+import Sidebar from './Sidebar';
 import Notifications from './Notifications';
 import GlobalSearch from './GlobalSearch';
 import GamePage from './GamePage';
@@ -20,14 +20,15 @@ import NewGames from './NewGames';
 
 import store from '../store';
 import history from '../store/history';
+import MobileNavBar from './MobileNavBar';
 
 export const App = () => (
   <Provider store={store}>
     <SessionContainer>
       <Router history={history}>
+        <Sidebar />
+        <MobileNavBar />
         <main role="main">
-          <TopNav />
-
           <Switch>
             <Redirect exact from="/" to="/collections/wishlist" />
 
@@ -47,30 +48,6 @@ export const App = () => (
           <Notifications />
         </main>
       </Router>
-      <footer className="text-muted">
-        <div className="container">
-          <p>
-            Designed and built by{' '}
-            <a
-              href="https://github.com/altmer"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              @altmer
-            </a>
-          </p>
-          <p>
-            Powered by{' '}
-            <a
-              href="https://igdb.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              IGDB
-            </a>
-          </p>
-        </div>
-      </footer>
     </SessionContainer>
   </Provider>
 );

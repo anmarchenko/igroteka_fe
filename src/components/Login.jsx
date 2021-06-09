@@ -8,6 +8,7 @@ import { Helmet } from 'react-helmet';
 import { SIGN_IN_REQUESTED } from '../store/login';
 import { VALIDATION_ERRORS } from '../constants';
 import { yupToFormErrors } from '../utils';
+import './Login.css';
 
 export class Login extends React.Component {
   constructor(props) {
@@ -61,7 +62,7 @@ export class Login extends React.Component {
     const { backendErrors } = this.props;
 
     return (
-      <div className="container">
+      <div className="container Login">
         <Helmet>
           <title>Login | Igroteka</title>
         </Helmet>

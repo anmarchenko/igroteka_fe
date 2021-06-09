@@ -11,3 +11,16 @@
   padding-bottom: 7px;
   padding-top: 7px;
 }
+
+.UserMenu .nav-link {
+  text-decoration: none;
+}
+
+.UserMenu .nav-link div,
+.UserMenu .nav-link span {
+  display: inline-block;
+}
+
+.UserMenu .nav-link .Avatar {
+  margin-right: 1ch;
+}

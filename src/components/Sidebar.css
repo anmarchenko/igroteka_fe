@@ -1,0 +1,58 @@
+.Sidebar {
+  width: 224px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  transition: all 0.3s;
+  border-right: 1px solid lightgray;
+  padding-left: 32px;
+  padding-right: 16px;
+  padding-top: 16px;
+}
+
+.Sidebar-header {
+  padding-top: 18px;
+  padding-bottom: 18px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.Sidebar-nav-link:hover {
+  transform: translate3d(0px, -1px, 0px);
+}
+
+.Sidebar-nav-item {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.Sidebar-nav-link {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  border-radius: 8px;
+  text-decoration: none;
+  width: 100%;
+  display: flex;
+}
+
+.Sidebar-nav-link:hover,
+.Sidebar-nav-link.active {
+  background-color: #f3f4f4;
+}
+
+.Sidebar-nav-link:hover {
+  text-decoration: none;
+}
+
+.Sidebar-nav-link .IconWithText svg {
+  vertical-align: text-bottom;
+  margin-right: 1ch;
+}
+
+.Sidebar-footer {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+}

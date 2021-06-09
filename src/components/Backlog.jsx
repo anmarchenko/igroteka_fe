@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import ReactPlaceholder from 'react-placeholder';
 import { Helmet } from 'react-helmet';
 
-import BacklogNav from './BacklogNav';
 import BacklogList from './BacklogList';
 import BacklogFilters from './backlog/BacklogFilters';
 
@@ -107,13 +106,10 @@ export class Backlog extends Component {
           <title>{`${selectedStatus.label} | Igroteka`}</title>
         </Helmet>
         <div className="Backlog">
-          <BacklogNav />
           <div className="row">
             <div className="col-12">
               <p className="text-secondary">
-                <span className="d-xs-block d-sm-none">
-                  {selectedStatus.label}&nbsp;·&nbsp;
-                </span>
+                {selectedStatus.label}&nbsp;·&nbsp;
                 {totalCount != null && <>{totalCount}&nbsp;games</>}
                 &nbsp;·&nbsp;
                 <a

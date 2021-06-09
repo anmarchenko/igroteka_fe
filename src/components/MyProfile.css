@@ -1,3 +1,7 @@
+.MyProfile {
+  margin-top: 32px;
+}
+
 .MyProfile-header {
   display: flex;
   flex-flow: row;
