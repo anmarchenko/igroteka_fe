@@ -63,11 +63,14 @@ export const BacklogItem = (props) => {
           )}
           {entry.status === 'beaten' && (
             <>
-              {entry.score && renderScore(scoreItem)} &nbsp;·&nbsp;{' '}
+              {entry.score && renderScore(scoreItem)}
               {entry.finished_at && (
-                <span className="BacklogItem-finished-at">
-                  {renderDate(entry.finished_at)}
-                </span>
+                <>
+                  &nbsp;·&nbsp;{' '}
+                  <span className="BacklogItem-finished-at">
+                    {renderDate(entry.finished_at)}
+                  </span>
+                </>
               )}
             </>
           )}

@@ -14,10 +14,15 @@ import IconWithText from './IconWithText';
 
 import './UserMenu.css';
 
-export const UserMenu = ({ user, signOut }) => (
+export const UserMenu = ({ user, signOut, short }) => (
   <UncontrolledDropdown nav className="UserMenu">
     <DropdownToggle className="nav-link" tag="a">
-      <IconWithText Icon={User} label={user.name} color={'#000'} size={24} />
+      <IconWithText
+        Icon={User}
+        label={short ? 'Profile' : user.name}
+        color={'#000'}
+        size={24}
+      />
     </DropdownToggle>
     <DropdownMenu right>
       <DropdownItem className="user-link" tag={Link} to="/profile">
@@ -61,6 +66,7 @@ UserMenu.propTypes = {
     name: PropTypes.string,
   }),
   signOut: PropTypes.func.isRequired,
+  short: PropTypes.bool,
 };
 
 UserMenu.defaultProps = {
@@ -69,6 +75,7 @@ UserMenu.defaultProps = {
       thumb: null,
     },
   },
+  short: false,
 };
 
 export default UserMenu;

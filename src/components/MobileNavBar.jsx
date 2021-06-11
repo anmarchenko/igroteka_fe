@@ -4,8 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Search } from 'react-feather';
 
 import BacklogStatusLabel from './BacklogStatusLabel';
-import { BACKLOG_STATUSES } from '../constants';
+import IconWithText from './IconWithText';
 import UserMenu from './UserMenu';
+import { BACKLOG_STATUSES } from '../constants';
+
 import { SIGN_OUT_REQUESTED } from '../store/login';
 
 import './MobileNavBar.css';
@@ -37,12 +39,18 @@ const MobileNavBar = () => {
             className="MobileNavBar-nav-link"
             activeClassName="active"
           >
-            <Search color="black" />
+            <IconWithText
+              Icon={Search}
+              label="Search"
+              color="black"
+              size={24}
+            />
           </NavLink>
         </li>
         <UserMenu
           user={currentUser}
           signOut={() => dispatch({ type: SIGN_OUT_REQUESTED })}
+          short
         />
       </ul>
     </nav>
