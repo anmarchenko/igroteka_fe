@@ -1,0 +1,8 @@
+.OffsetPagination-inner nav,
+.OffsetPagination-inner div {
+  display: inline-block;
+}
+
+.OffsetPagination-inner div {
+  margin-right: 2ch;
+}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import GamePageLinks from './GamePageLinks';
 import GamePageInfoBlock from './GamePageInfoBlock';
+import CompaniesBlock from './CompaniesBlock';
 import { formatMinutes } from '../utils';
 
 const formatObjects = (objects) => {
@@ -42,13 +43,15 @@ const GameTabInfo = ({ game, playthroughTime }) => (
           header="Platforms"
           text={formatObjects(game.platforms)}
         />
-        <GamePageInfoBlock
+        <CompaniesBlock
           header="Developers"
-          text={formatObjects(game.developers)}
+          companies={game.developers}
+          suffix="developed"
         />
-        <GamePageInfoBlock
+        <CompaniesBlock
           header="Publishers"
-          text={formatObjects(game.publishers)}
+          companies={game.publishers}
+          suffix="published"
         />
         <GamePageInfoBlock
           header="Franchises"

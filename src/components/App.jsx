@@ -17,6 +17,7 @@ import MyProfile from './MyProfile';
 import ChangePassword from './ChangePassword';
 import TopGames from './TopGames';
 import NewGames from './NewGames';
+import CompanyPage from './CompanyPage';
 
 import store from '../store';
 import history from '../store/history';
@@ -41,6 +42,10 @@ export const App = () => (
             <PrivateRoute path="/change_password" component={ChangePassword} />
             <PrivateRoute path="/top" component={TopGames} />
             <PrivateRoute path="/new" component={NewGames} />
+            <PrivateRoute
+              path="/companies/:companyId"
+              component={CompanyPage}
+            />
 
             <Route component={NotFound} />
           </Switch>

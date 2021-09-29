@@ -15,7 +15,7 @@ export const FETCH_TOP_GAMES_ERRORED = 'FETCH_TOP_GAMES_ERRORED';
 function* fetchTopGames({ filters }) {
   yield put({ type: FETCH_TOP_GAMES_STARTED });
   try {
-    const response = yield call(Api.fetchTopGames, filters);
+    const response = yield call(Api.fetchGames, filters);
     yield put({
       type: FETCH_TOP_GAMES_FINISHED,
       data: response.data,

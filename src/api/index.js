@@ -43,6 +43,9 @@ const Api = {
   fetchGame(gameId) {
     return axios.get(`${SKARO_HOST}/api/games/${gameId}`);
   },
+  fetchCompany(companyId) {
+    return axios.get(`${SKARO_HOST}/api/companies/${companyId}`);
+  },
   fetchBacklogEntry(gameId) {
     return axios.get(`${SKARO_HOST}/api/backlog_entries/${gameId}`);
   },
@@ -101,10 +104,15 @@ const Api = {
       )}&release_date=${encodeURIComponent(releaseDate)}`
     );
   },
-  fetchTopGames(filters = {}) {
+  fetchGames(filters = {}) {
     const queryString = [
       filters.year ? `year=${filters.year}` : null,
       filters.platform ? `platform=${filters.platform}` : null,
+      filters.offset != undefined && filters.offset != null
+        ? `offset=${filters.offset}`
+        : null,
+      filters.developed ? `developer=${filters.developed}` : null,
+      filters.published ? `publisher=${filters.published}` : null,
     ]
       .filter((q) => q)
       .join('&');

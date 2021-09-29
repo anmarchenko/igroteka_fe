@@ -1,6 +1,8 @@
 help:
 	@echo "Makefile for igroteka"
-compile:
+build:
 	yarn build
-deploy:
+	docker build -f Dockerfile -t altmer/igroteka:latest .
+	docker push altmer/igroteka
+deploy: build
 	make -C $(DEPLOY_PATH) igroteka

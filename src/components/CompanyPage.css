@@ -1,0 +1,34 @@
+.CompanyPage {
+  padding-top: 32px;
+}
+
+.CompanyPage-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.CompanyPage-name {
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+.CompanyPage-logo {
+  padding-left: 2ch;
+}
+
+.CompanyPage-description {
+  max-width: 80ch;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.CompanyPage-add-info {
+  margin-top: 1em;
+  font-weight: 300;
+  font-size: 0.9em;
+}
+
+.CompanyPage-links {
+  margin-top: 1em;
+}
