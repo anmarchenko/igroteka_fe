@@ -96,7 +96,7 @@ export const CompanyPage = (props) => {
                 {company.description}
               </div>
             </div>
-            <div className="CompanyPage-logo">
+            <div className="CompanyPage-logo d-none d-md-block">
               {company.logo && <Logo url={company.logo.medium_url} />}
             </div>
           </div>
