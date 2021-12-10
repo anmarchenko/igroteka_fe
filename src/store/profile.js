@@ -31,7 +31,7 @@ function* saveUser({ userId, params }) {
     yield put({
       type: ADD_NOTIFICATION,
       message: 'Profile updated',
-      key: 'profile_update_successful',
+      key: Date.now(),
     });
     yield put({ type: CURRENT_USER_REPLACE, user: data });
   } catch (error) {
@@ -46,7 +46,7 @@ function* updatePassword({ userId, params }) {
     yield put({
       type: ADD_NOTIFICATION,
       message: 'Password changed',
-      key: 'password_change_successful',
+      key: Date.now(),
     });
   } catch (error) {
     yield* handle(error, USER_CHANGE_PASSWORD_FAILED);

@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { NotificationStack } from 'react-notification';
 import { connect } from 'react-redux';
 
+import NotificationStack from './NotificationStack';
 import { DISMISS_NOTIFICATION } from '../store/notifications';
 
 export const Notifications = ({ notifications, dismissNotification }) => (
   <NotificationStack
     notifications={notifications.toArray()}
-    onDismiss={notification => dismissNotification(notification)}
+    onDismiss={(notification) => dismissNotification(notification)}
   />
 );
 
@@ -24,16 +24,13 @@ Notifications.defaultProps = {
   notifications: undefined,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   notifications: state.notifications.list,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   dismissNotification(notification) {
     dispatch({ type: DISMISS_NOTIFICATION, notification });
   },
 });
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Notifications);
+export default connect(mapStateToProps, mapDispatchToProps)(Notifications);

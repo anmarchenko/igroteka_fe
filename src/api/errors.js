@@ -3,15 +3,17 @@ import { put } from 'redux-saga/effects';
 import history from '../store/history';
 import { ADD_NOTIFICATION } from '../store/notifications';
 
-const genericErrorNotification = {
-  type: ADD_NOTIFICATION,
-  message: 'Some error has occured. Please try again later.',
-  key: 'generic_error',
-};
-
-function* handle(error, formErrorAction = undefined, formErrorNotification = undefined) {
+function* handle(
+  error,
+  formErrorAction = undefined,
+  formErrorNotification = undefined
+) {
   if (!error.response) {
-    yield put(genericErrorNotification);
+    yield put({
+      type: ADD_NOTIFICATION,
+      message: 'Some error has occured. Please try again later.',
+      key: Date.now(),
+    });
     return;
   }
 
@@ -24,7 +26,7 @@ function* handle(error, formErrorAction = undefined, formErrorNotification = und
       yield put({
         type: ADD_NOTIFICATION,
         message: 'Please sign in again',
-        key: 'not_authorized_api',
+        key: Date.now(),
       });
       history.push('/sign_in');
       return;
@@ -39,12 +41,16 @@ function* handle(error, formErrorAction = undefined, formErrorNotification = und
         yield put({
           type: ADD_NOTIFICATION,
           message: formErrorNotification,
-          key: 'form_error_notification',
+          key: Date.now(),
         });
       }
       return;
     default:
-      yield put(genericErrorNotification);
+      yield put({
+        type: ADD_NOTIFICATION,
+        message: 'Some error has occured. Please try again later.',
+        key: Date.now(),
+      });
   }
 }
 

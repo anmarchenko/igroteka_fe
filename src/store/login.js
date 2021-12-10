@@ -56,7 +56,7 @@ function* signIn({ email, password }) {
     yield put({
       type: ADD_NOTIFICATION,
       message: 'Successfully signed in',
-      key: 'sign_in_success',
+      key: Date.now(),
     });
     history.push('/');
   } catch (error) {
@@ -69,7 +69,7 @@ function* signOut() {
   yield put({
     type: ADD_NOTIFICATION,
     message: 'Signed out',
-    key: 'sign_out_success',
+    key: Date.now(),
   });
 
   localStorage.removeItem('phoenixAuthToken');

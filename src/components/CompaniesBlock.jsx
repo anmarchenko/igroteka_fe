@@ -14,16 +14,15 @@ export const CompaniesBlock = ({ companies, header, suffix }) => {
       <span className="CompaniesBlock-label">{header}</span>
       {companies.map((company, index) => {
         return (
-          <>
+          <span key={company.id}>
             <Link
               to={`/companies/${company.id}/${suffix}`}
-              key={company.id}
               className="CompaniesBlock-link"
             >
               {company.name}
             </Link>
             {index < companies.length - 1 ? ', ' : ''}
-          </>
+          </span>
         );
       })}
     </div>
@@ -31,12 +30,13 @@ export const CompaniesBlock = ({ companies, header, suffix }) => {
 };
 
 CompaniesBlock.propTypes = {
-  companies: PropTypes.array.isRequired,
+  companies: PropTypes.array,
   suffix: PropTypes.string.isRequired,
   header: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 CompaniesBlock.defaultProps = {
+  companies: [],
   header: '',
 };
 
