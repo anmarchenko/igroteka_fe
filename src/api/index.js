@@ -3,8 +3,7 @@ import dayjs from 'dayjs';
 
 import { countriesForGame } from '../utils';
 
-const SKARO_HOST = 'https://skaro.hmstr.rocks';
-// const SKARO_HOST = 'http://localhost:4000';
+const SKARO_HOST = process.env.REACT_APP_SKARO_HOST;
 
 const Api = {
   currentUser() {
