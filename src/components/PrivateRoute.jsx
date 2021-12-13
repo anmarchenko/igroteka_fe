@@ -6,17 +6,14 @@ import { Route, Redirect } from 'react-router-dom';
 
 const isAuthenticated = () => !!localStorage.getItem('phoenixAuthToken');
 
-const PrivateRoute = ({ component, ...rest }) => (
-  <Route
-    {...rest}
-    render={
-      (props) => (isAuthenticated() ? React.createElement(component, props) : <Redirect to="/sign_in" />)
-    }
-  />
+const PrivateRoute = ({ children, ...rest }) => (
+  <Route {...rest}>
+    {isAuthenticated() ? children : <Redirect to="/sign_in" />}
+  </Route>
 );
 
 PrivateRoute.propTypes = {
-  component: PropTypes.oneOfType([PropTypes.func, PropTypes.any]).isRequired,
+  children: PropTypes.node,
 };
 
 export default PrivateRoute;

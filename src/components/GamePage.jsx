@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useParams } from 'react-router-dom';
 
 import ReactPlaceholder from 'react-placeholder';
 import {
@@ -48,8 +47,8 @@ const placeholder = (
   </div>
 );
 
-export const GamePage = (props) => {
-  const gameId = props.match.params.gameId;
+export const GamePage = () => {
+  const { gameId } = useParams();
 
   const currentUser = useSelector((state) => state.session.currentUser);
   const { gameFetching, game } = useSelector((state) => state.gamePage);
@@ -153,14 +152,6 @@ export const GamePage = (props) => {
       </div>
     </ReactPlaceholder>
   );
-};
-
-GamePage.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      gameId: PropTypes.string,
-    }),
-  }).isRequired,
 };
 
 export default GamePage;

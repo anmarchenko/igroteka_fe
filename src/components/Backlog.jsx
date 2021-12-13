@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ReactPlaceholder from 'react-placeholder';
 import { Helmet } from 'react-helmet';
+import { useParams, useLocation } from 'react-router-dom';
 
 import BacklogList from './BacklogList';
 import BacklogFilters from './backlog/BacklogFilters';
@@ -36,176 +36,103 @@ const DEFAULTS = {
   pageSize: 50,
 };
 
-const filtersChanged = (prev, next) =>
-  ALL_FILTERS.some((k) => prev[k] !== next[k]);
-
-export class Backlog extends Component {
-  constructor(props) {
-    super(props);
-
-    this.paginate = this.paginate.bind(this);
-    this.load = this.load.bind(this);
-
-    this.state = {
-      shownFilters: false,
-    };
-  }
-
-  componentDidMount() {
-    this.load();
-  }
-
-  componentDidUpdate(nextProps) {
-    const { filters } = this.props;
-    if (filtersChanged(filters, nextProps.filters)) {
-      this.load();
-    }
-  }
-
-  applyFilters(newFilters) {
-    const { filters } = this.props;
-    history.push(
-      `/collections/${filters.status}?${filtersToQueryString(
-        {
-          ...filters,
-          ...newFilters,
-        },
-        URL_FILTERS
-      )}`
-    );
-  }
-
-  load() {
-    const { fetchEntries, filters } = this.props;
-    fetchEntries(filters);
-  }
-
-  paginate(page) {
-    this.applyFilters({ page });
-  }
-
-  render() {
-    const {
-      fetching,
-      filterOptions,
-      entries,
-      totalPages,
-      totalCount,
-      filters,
-    } = this.props;
-
-    const { status, page } = filters;
-    const { shownFilters } = this.state;
-
-    const ready = !fetching;
-    const selectedStatus = backlogStatusById(status) || {};
-
-    return (
-      <div className="container">
-        <Helmet>
-          <title>{`${selectedStatus.label} | Igroteka`}</title>
-        </Helmet>
-        <div className="Backlog">
-          <div className="row">
-            <div className="col-12">
-              <p className="text-secondary">
-                {selectedStatus.label}&nbsp;·&nbsp;
-                {totalCount != null && <>{totalCount}&nbsp;games</>}
-                &nbsp;·&nbsp;
-                <a
-                  href="#"
-                  onClick={() => this.setState({ shownFilters: !shownFilters })}
-                  className="Backlog-filters-switch"
-                >
-                  {shownFilters ? 'Hide' : 'Show'} filters
-                </a>
-              </p>
-            </div>
-          </div>
-          {this.state.shownFilters && (
-            <div className="row">
-              <BacklogFilters
-                filters={filters}
-                filterOptions={filterOptions}
-                applyFilters={this.applyFilters.bind(this)}
-              />
-            </div>
-          )}
-
-          <ReactPlaceholder
-            showLoadingAnimation
-            color="#ddd"
-            ready={ready}
-            type="text"
-            rows={5}
-          >
-            <BacklogList
-              entries={entries}
-              page={parseInt(page, 10)}
-              totalPages={totalPages}
-              fetching={fetching}
-              onPaginate={this.paginate}
-            />
-          </ReactPlaceholder>
-        </div>
-      </div>
-    );
-  }
-}
-
-Backlog.propTypes = {
-  entries: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-
-  filters: PropTypes.shape({
-    page: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    status: PropTypes.string,
-    ownedPlatformId: PropTypes.string,
-    releaseYear: PropTypes.string,
-    sort: PropTypes.string,
-  }).isRequired,
-
-  filterOptions: PropTypes.shape({
-    platforms: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number,
-        name: PropTypes.string,
-      })
-    ),
-    years: PropTypes.arrayOf(PropTypes.number),
-  }),
-
-  fetching: PropTypes.bool.isRequired,
-  totalPages: PropTypes.number.isRequired,
-  totalCount: PropTypes.number.isRequired,
-
-  fetchEntries: PropTypes.func.isRequired,
+const applyFilters = (filters) => (newFilters) => {
+  history.push(
+    `/collections/${filters.status}?${filtersToQueryString(
+      {
+        ...filters,
+        ...newFilters,
+      },
+      URL_FILTERS
+    )}`
+  );
 };
 
-Backlog.defaultProps = {
-  filterOptions: {
-    platforms: [],
-    years: [],
-  },
+const paginate = (filters) => (page) => {
+  applyFilters(filters)({ page });
 };
 
-const mapStateToProps = ({ myBacklog }, ownProps) => ({
-  entries: myBacklog.entries,
+export const Backlog = () => {
+  // internal state
+  const [shownFilters, setShownFilters] = useState(false);
+  // router state
+  const { status } = useParams();
+  const location = useLocation();
+  // redux state
+  const { entries, fetching, filterOptions, totalPages, totalCount } =
+    useSelector((state) => state.myBacklog);
 
-  fetching: myBacklog.fetching,
-  totalPages: myBacklog.totalPages,
-  totalCount: myBacklog.totalCount,
-
-  filters: {
+  const filters = {
     ...DEFAULTS,
-    ...queryStringToFilters(ownProps.location.search, URL_FILTERS),
-    ...{ status: ownProps.match.params.status },
-  },
-  filterOptions: myBacklog.filterOptions,
-});
+    ...queryStringToFilters(location.search, URL_FILTERS),
+    ...{ status: status },
+  };
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchEntries: (filters) =>
-    dispatch({ type: BACKLOG_ENTRIES_FETCHING_REQUESTED, filters }),
-});
+  const dispatch = useDispatch();
 
-export default connect(mapStateToProps, mapDispatchToProps)(Backlog);
+  // fetching data
+  useEffect(
+    () => {
+      dispatch({ type: BACKLOG_ENTRIES_FETCHING_REQUESTED, filters });
+    },
+    ALL_FILTERS.map((filter) => filters[filter])
+  );
+
+  const { page } = filters;
+
+  const ready = !fetching;
+  const selectedStatus = backlogStatusById(status) || {};
+
+  return (
+    <div className="container">
+      <Helmet>
+        <title>{`${selectedStatus.label} | Igroteka`}</title>
+      </Helmet>
+      <div className="Backlog">
+        <div className="row">
+          <div className="col-12">
+            <p className="text-secondary">
+              {selectedStatus.label}&nbsp;·&nbsp;
+              {totalCount != null && <>{totalCount}&nbsp;games</>}
+              &nbsp;·&nbsp;
+              <a
+                href="#"
+                onClick={() => setShownFilters(!shownFilters)}
+                className="Backlog-filters-switch"
+              >
+                {shownFilters ? 'Hide' : 'Show'} filters
+              </a>
+            </p>
+          </div>
+        </div>
+        {shownFilters && (
+          <div className="row">
+            <BacklogFilters
+              filters={filters}
+              filterOptions={filterOptions}
+              applyFilters={applyFilters(filters)}
+            />
+          </div>
+        )}
+
+        <ReactPlaceholder
+          showLoadingAnimation
+          color="#ddd"
+          ready={ready}
+          type="text"
+          rows={5}
+        >
+          <BacklogList
+            entries={entries}
+            page={parseInt(page, 10)}
+            totalPages={totalPages}
+            fetching={fetching}
+            onPaginate={paginate(filters)}
+          />
+        </ReactPlaceholder>
+      </div>
+    </div>
+  );
+};
+
+export default Backlog;

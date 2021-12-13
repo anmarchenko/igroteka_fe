@@ -33,12 +33,22 @@ export const App = () => (
           <Switch>
             <Redirect exact from="/" to="/collections/wishlist" />
 
-            <GuestRoute path="/sign_in" component={Login} />
+            <GuestRoute path="/sign_in">
+              <Login />
+            </GuestRoute>
 
-            <PrivateRoute path="/search" component={GlobalSearch} />
-            <PrivateRoute path="/collections/:status" component={Backlog} />
-            <PrivateRoute path="/games/:gameId" component={GamePage} />
-            <PrivateRoute path="/profile" component={MyProfile} />
+            <PrivateRoute path="/search">
+              <GlobalSearch />
+            </PrivateRoute>
+            <PrivateRoute path="/collections/:status">
+              <Backlog />
+            </PrivateRoute>
+            <PrivateRoute path="/games/:gameId">
+              <GamePage />
+            </PrivateRoute>
+            <PrivateRoute path="/profile">
+              <MyProfile />
+            </PrivateRoute>
             <PrivateRoute path="/change_password" component={ChangePassword} />
             <PrivateRoute path="/top" component={TopGames} />
             <PrivateRoute path="/new" component={NewGames} />
@@ -47,7 +57,9 @@ export const App = () => (
               component={CompanyPage}
             />
 
-            <Route component={NotFound} />
+            <Route>
+              <NotFound />
+            </Route>
           </Switch>
 
           <Notifications />

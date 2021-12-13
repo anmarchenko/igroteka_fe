@@ -6,21 +6,14 @@ import { Route, Redirect } from 'react-router-dom';
 
 const isAuthenticated = () => !!localStorage.getItem('phoenixAuthToken');
 
-const GuestRoute = ({ component, ...rest }) => (
-  <Route
-    {...rest}
-    render={(props) =>
-      isAuthenticated() ? (
-        <Redirect to="/" push />
-      ) : (
-        React.createElement(component, props)
-      )
-    }
-  />
+const GuestRoute = ({ children, ...rest }) => (
+  <Route {...rest}>
+    {isAuthenticated() ? <Redirect to="/" push /> : children}
+  </Route>
 );
 
 GuestRoute.propTypes = {
-  component: PropTypes.oneOfType([PropTypes.func, PropTypes.any]).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default GuestRoute;
