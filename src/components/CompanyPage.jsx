@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -11,7 +10,7 @@ import {
 } from 'react-placeholder/lib/placeholders';
 import { Helmet } from 'react-helmet';
 import { Info, ExternalLink as FeatherExternalLink } from 'react-feather';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useParams } from 'react-router-dom';
 
 import Logo from './Logo';
 import Flag from './Flag';
@@ -43,8 +42,8 @@ const placeholder = (
   </div>
 );
 
-export const CompanyPage = (props) => {
-  const companyId = props.match.params.companyId;
+export const CompanyPage = () => {
+  const { companyId } = useParams();
 
   const { companyFetching, company } = useSelector(
     (state) => state.companyPage
@@ -102,31 +101,17 @@ export const CompanyPage = (props) => {
           </div>
           <CompanyTabs companyId={company.id} />
           <Switch>
-            <Route
-              path={`/companies/${companyId}/developed`}
-              render={(props) => (
-                <CompanyTabsDeveloped {...props} company={company} />
-              )}
-            />
-            <Route
-              path={`/companies/${companyId}/published`}
-              render={(props) => (
-                <CompanyTabPublished {...props} company={company} />
-              )}
-            />
+            <Route path={`/companies/${companyId}/developed`}>
+              <CompanyTabsDeveloped company={company} />
+            </Route>
+            <Route path={`/companies/${companyId}/published`}>
+              <CompanyTabPublished company={company} />
+            </Route>
           </Switch>
         </div>
       )}
     </ReactPlaceholder>
   );
-};
-
-CompanyPage.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      companyId: PropTypes.string,
-    }),
-  }).isRequired,
 };
 
 export default CompanyPage;

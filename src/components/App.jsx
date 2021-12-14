@@ -49,13 +49,18 @@ export const App = () => (
             <PrivateRoute path="/profile">
               <MyProfile />
             </PrivateRoute>
-            <PrivateRoute path="/change_password" component={ChangePassword} />
-            <PrivateRoute path="/top" component={TopGames} />
-            <PrivateRoute path="/new" component={NewGames} />
-            <PrivateRoute
-              path="/companies/:companyId"
-              component={CompanyPage}
-            />
+            <PrivateRoute path="/change_password">
+              <ChangePassword />
+            </PrivateRoute>
+            <PrivateRoute path="/top">
+              <TopGames />
+            </PrivateRoute>
+            <PrivateRoute path="/new">
+              <NewGames />
+            </PrivateRoute>
+            <PrivateRoute path="/companies/:companyId">
+              <CompanyPage />
+            </PrivateRoute>
 
             <Route>
               <NotFound />

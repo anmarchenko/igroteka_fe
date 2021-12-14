@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ReactPlaceholder from 'react-placeholder';
 import { Helmet } from 'react-helmet';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 
 import BacklogList from './BacklogList';
 import BacklogFilters from './backlog/BacklogFilters';
@@ -13,8 +13,6 @@ import {
   queryStringToFilters,
   filtersToQueryString,
 } from '../utils';
-
-import history from '../store/history';
 
 import { BACKLOG_ENTRIES_FETCHING_REQUESTED } from '../store/myBacklog';
 
@@ -36,7 +34,7 @@ const DEFAULTS = {
   pageSize: 50,
 };
 
-const applyFilters = (filters) => (newFilters) => {
+const applyFilters = (history, filters) => (newFilters) => {
   history.push(
     `/collections/${filters.status}?${filtersToQueryString(
       {
@@ -48,8 +46,8 @@ const applyFilters = (filters) => (newFilters) => {
   );
 };
 
-const paginate = (filters) => (page) => {
-  applyFilters(filters)({ page });
+const paginate = (history, filters) => (page) => {
+  applyFilters(history, filters)({ page });
 };
 
 export const Backlog = () => {
@@ -58,6 +56,7 @@ export const Backlog = () => {
   // router state
   const { status } = useParams();
   const location = useLocation();
+  const history = useHistory();
   // redux state
   const { entries, fetching, filterOptions, totalPages, totalCount } =
     useSelector((state) => state.myBacklog);
@@ -110,7 +109,7 @@ export const Backlog = () => {
             <BacklogFilters
               filters={filters}
               filterOptions={filterOptions}
-              applyFilters={applyFilters(filters)}
+              applyFilters={applyFilters(history, filters)}
             />
           </div>
         )}
@@ -127,7 +126,7 @@ export const Backlog = () => {
             page={parseInt(page, 10)}
             totalPages={totalPages}
             fetching={fetching}
-            onPaginate={paginate(filters)}
+            onPaginate={paginate(history, filters)}
           />
         </ReactPlaceholder>
       </div>

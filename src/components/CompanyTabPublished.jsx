@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { useLocation, useHistory } from 'react-router-dom';
 
 import ReactPlaceholder from 'react-placeholder';
 
@@ -9,18 +10,19 @@ import { COMPANY_PUBLISHED_FETCH_REQUESTED } from '../store/companyPage';
 import GameListItem from './GameListItem';
 import OffsetPagination from './OffsetPagination';
 import { queryStringToFilters, filtersToQueryString } from '../utils';
-import history from '../store/history';
 
 const URL_FILTERS = ['offset'];
 
 export const CompanyTabPublished = (props) => {
+  const history = useHistory();
   const company = props.company;
+  const location = useLocation();
   const { publishedFetching, published } = useSelector(
     (state) => state.companyPage
   );
   const filters = {
     ...{ offset: 0 },
-    ...queryStringToFilters(props.location.search, URL_FILTERS),
+    ...queryStringToFilters(location.search, URL_FILTERS),
     ...{ companyId: company.id },
   };
 
@@ -70,9 +72,6 @@ export const CompanyTabPublished = (props) => {
 CompanyTabPublished.propTypes = {
   company: PropTypes.shape({
     id: PropTypes.number,
-  }).isRequired,
-  location: PropTypes.shape({
-    search: PropTypes.string,
   }).isRequired,
 };
 

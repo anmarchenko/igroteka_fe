@@ -130,24 +130,15 @@ export const GamePage = () => {
         </div>
         <GameTabs gameId={gameId} showReviews={ratingPresent} />
         <Switch>
-          <Route
-            path={`/games/${gameId}/info`}
-            render={(props) => (
-              <GameTabInfo
-                {...props}
-                game={game}
-                playthroughTime={playthroughTime}
-              />
-            )}
-          />
-          <Route
-            path={`/games/${gameId}/media`}
-            render={(props) => <GameTabMedia {...props} game={game} />}
-          />
-          <Route
-            path={`/games/${gameId}/reviews`}
-            render={(props) => <GameTabReviews {...props} rating={rating} />}
-          />
+          <Route path={`/games/${gameId}/info`}>
+            <GameTabInfo game={game} playthroughTime={playthroughTime} />
+          </Route>
+          <Route path={`/games/${gameId}/media`}>
+            <GameTabMedia game={game} />
+          </Route>
+          <Route path={`/games/${gameId}/reviews`}>
+            <GameTabReviews rating={rating} />
+          </Route>
         </Switch>
       </div>
     </ReactPlaceholder>

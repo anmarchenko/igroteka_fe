@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { useLocation, useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import ReactPlaceholder from 'react-placeholder';
 import range from 'lodash/range';
@@ -11,7 +11,6 @@ import FilterSelect from './forms/FilterSelect';
 
 import { FETCH_TOP_GAMES_REQUESTED } from '../store/topGames';
 import { queryStringToFilters, filtersToQueryString } from '../utils';
-import history from '../store/history';
 
 import './TopGames.css';
 
@@ -36,11 +35,13 @@ const PLATFORMS = [
   { value: 46, label: 'PlayStation Vita' },
 ];
 
-const applyFilters = (newFilters) => {
+const applyFilters = (history, newFilters) => {
   history.push(`/top?${filtersToQueryString(newFilters, FILTERS)}`);
 };
 
-export const TopGames = ({ location: { search } }) => {
+export const TopGames = () => {
+  const history = useHistory();
+  const location = useLocation();
   const { games, fetching } = useSelector((state) => ({
     games: state.topGames.data,
     fetching: state.topGames.fetching,
@@ -48,7 +49,7 @@ export const TopGames = ({ location: { search } }) => {
 
   const dispatch = useDispatch();
 
-  const filters = queryStringToFilters(search, FILTERS);
+  const filters = queryStringToFilters(location.search, FILTERS);
 
   useEffect(
     () => {
@@ -78,7 +79,7 @@ export const TopGames = ({ location: { search } }) => {
               }))}
             selectedValue={filters.year}
             onChange={(value) => {
-              applyFilters({
+              applyFilters(history, {
                 ...filters,
                 ...{
                   year: value,
@@ -92,7 +93,7 @@ export const TopGames = ({ location: { search } }) => {
             options={PLATFORMS}
             selectedValue={filters.platform}
             onChange={(value) => {
-              applyFilters({
+              applyFilters(history, {
                 ...filters,
                 ...{
                   platform: value,
@@ -125,16 +126,6 @@ export const TopGames = ({ location: { search } }) => {
       </ReactPlaceholder>
     </div>
   );
-};
-
-TopGames.propTypes = {
-  location: PropTypes.shape({
-    search: PropTypes.string,
-  }),
-};
-
-TopGames.defaultProps = {
-  location: {},
 };
 
 export default TopGames;
