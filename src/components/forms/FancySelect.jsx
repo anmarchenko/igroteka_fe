@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,
+  UncontrolledButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from 'reactstrap';
 
 import IconWithText from '../IconWithText';
@@ -20,7 +23,7 @@ export const FancySelect = ({
 }) => {
   const currentItem = valueById(options, value);
   return (
-    <div className="form-group FancySelect">
+    <div className="mb-3 FancySelect">
       {label && (
         <>
           <label>{label}</label>
@@ -46,7 +49,12 @@ export const FancySelect = ({
         <DropdownMenu>
           {options.map((item) => (
             <DropdownItem key={item.id} onClick={() => onChange(item.id)}>
-              <IconWithText Icon={item.icon} color={item.color} label={item.label} size={22} />
+              <IconWithText
+                Icon={item.icon}
+                color={item.color}
+                label={item.label}
+                size={22}
+              />
             </DropdownItem>
           ))}
           {value && <DropdownItem divider />}

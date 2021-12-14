@@ -21,7 +21,7 @@ export const Platform = ({ platforms, platformId, platformName, onChange }) => {
   );
 
   return (
-    <div className="form-group">
+    <div className="mb-3">
       <UncontrolledButtonDropdown>
         {!platformId && <DropdownToggle caret>Platfrom</DropdownToggle>}
         {platformId && <DropdownToggle caret>{platformName}</DropdownToggle>}

@@ -5,6 +5,11 @@
   margin-top: 24px;
 }
 
+.BacklogStatus .btn-light:hover {
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+}
+
 .BacklogStatus-item:last-child {
   margin-right: 0;
 }

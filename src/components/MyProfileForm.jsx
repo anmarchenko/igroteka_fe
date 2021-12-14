@@ -59,7 +59,7 @@ export class MyProfileForm extends Component {
 
     return (
       <form onSubmit={this.submit} className="MyProfileForm">
-        <div className="form-group">
+        <div className="mb-3">
           <label htmlFor="name">Name</label>
           <input
             id="name"
@@ -73,7 +73,7 @@ export class MyProfileForm extends Component {
             {(backendErrors.name || []).join(',')}
           </span>
         </div>
-        <div className="form-group MyProfile-edit-controls">
+        <div className="mb-3 MyProfile-edit-controls">
           <button type="submit" className="btn btn-outline-success">
             Save
           </button>

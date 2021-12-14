@@ -19,13 +19,15 @@ import {
 import './BacklogItem.css';
 
 const renderExpectationRating = (expectationItem) => (
-  <span className={`badge badge-pill ${expectationItem.badgeStyle}`}>
+  <span className={`badge rounded-pill ${expectationItem.badgeStyle}`}>
     {expectationItem.label}
   </span>
 );
 
 const renderScore = (score) => (
-  <span className={`badge badge-pill ${score.badgeStyle}`}>{score.label}</span>
+  <span className={`badge rounded-pill ${score.badgeStyle}`}>
+    {score.label}
+  </span>
 );
 
 export const BacklogItem = (props) => {

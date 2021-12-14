@@ -7,7 +7,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 import 'flatpickr/dist/themes/light.css';
 
 export const DateField = ({ value, onChange, label }) => (
-  <div className="form-group backlog-finished-date">
+  <div className="mb-3 backlog-finished-date">
     {label && (
       <>
         <label htmlFor="backlog_finished_date">{label}</label>

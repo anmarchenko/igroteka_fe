@@ -40,7 +40,7 @@ body {
   color: red;
 }
 
-.form-group .error-message {
+.error-message {
   color: red;
   font-style: italic;
 }
@@ -73,13 +73,15 @@ h4 {
   color: black;
 }
 
-a {
+a,
+.nav-link {
   color: rgba(0, 0, 0, 0.6);
   text-decoration: underline dotted;
 }
 
 a:hover,
-a:focus {
+a:focus,
+.nav-link:hover {
   color: black;
   text-decoration: underline solid;
 }

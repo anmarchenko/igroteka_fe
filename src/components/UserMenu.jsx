@@ -24,7 +24,7 @@ export const UserMenu = ({ user, signOut, short }) => (
         size={24}
       />
     </DropdownToggle>
-    <DropdownMenu right>
+    <DropdownMenu end>
       <DropdownItem className="user-link" tag={Link} to="/profile">
         My profile
       </DropdownItem>

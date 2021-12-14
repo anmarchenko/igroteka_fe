@@ -69,7 +69,7 @@ export class Login extends React.Component {
         <div className="row justify-content-center">
           <div className="col-12 col-lg-8 col-xl-6">
             <form onSubmit={this.submit} className="login-form">
-              <div className="form-group">
+              <div className="mb-3">
                 <label htmlFor="email">Email</label>
                 <input
                   name="email"
@@ -82,7 +82,7 @@ export class Login extends React.Component {
 
                 <span className="error-message">{errors.email}</span>
               </div>
-              <div className="form-group">
+              <div className="mb-3">
                 <label htmlFor="password">Password</label>
                 <input
                   name="password"
@@ -93,7 +93,7 @@ export class Login extends React.Component {
                 />
                 <span className="error-message">{errors.password}</span>
               </div>
-              <div className="form-group">
+              <div className="mb-3">
                 <button
                   type="submit"
                   className="btn btn-outline-success btn-lg btn-block"

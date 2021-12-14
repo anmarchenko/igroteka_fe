@@ -104,7 +104,7 @@ export class ChangePassword extends React.Component {
         <div className="row justify-content-center">
           <div className="col-md-12 col-lg-8 col-xl-6">
             <form onSubmit={this.submit}>
-              <div className="form-group">
+              <div className="mb-3">
                 <label htmlFor="oldPassword">Current password</label>
                 <input
                   name="oldPassword"
@@ -118,7 +118,7 @@ export class ChangePassword extends React.Component {
                   {(backendErrors.old_password || []).join(',')}
                 </span>
               </div>
-              <div className="form-group">
+              <div className="mb-3">
                 <label htmlFor="password">New password</label>
                 <input
                   name="password"
@@ -132,7 +132,7 @@ export class ChangePassword extends React.Component {
                   {(backendErrors.password || []).join(',')}
                 </span>
               </div>
-              <div className="form-group">
+              <div className="mb-3">
                 <label htmlFor="passwordConfirmation">Confirm password</label>
                 <input
                   name="passwordConfirmation"

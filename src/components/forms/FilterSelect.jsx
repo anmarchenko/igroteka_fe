@@ -37,11 +37,11 @@ export const FilterSelect = ({
 
   return (
     <div className="FilterSelect">
-      <div className="form-group">
+      <div className="mb-3">
         <label htmlFor="backlog_owned_platform_filter">{label}</label>
         <br />
         <select
-          className="form-control"
+          className="form-select"
           value={selectedValue || ''}
           onChange={(e) => onChange(e.target.value)}
         >
