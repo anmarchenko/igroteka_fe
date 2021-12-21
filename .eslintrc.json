@@ -3,16 +3,21 @@
     "browser": true,
     "commonjs": true,
     "es6": true,
-    "node": true,
-    "jest": true
+    "node": true
   },
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaVersion": 8,
     "ecmaFeatures": {
       "jsx": true
     },
-    "sourceType": "module"
+    "babelOptions": {
+      "presets": [
+        "@babel/preset-react"
+      ]
+    },
+    "sourceType": "module",
+    "requireConfigFile": false
   },
   "rules": {
     "import/no-named-as-default": 0,
@@ -32,14 +37,14 @@
   },
   "extends": [
     "prettier",
-    "plugin:react/recommended",
     "eslint:recommended",
+    "plugin:react/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/react",
     "plugin:import/recommended"
   ],
-  "plugins": ["react", "import"],
+  "plugins": ["react", "import", "react-hooks"],
   "settings": {
     "import/resolver": {
       "node": {
