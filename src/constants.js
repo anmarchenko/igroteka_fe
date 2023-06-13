@@ -22,6 +22,7 @@ export const IMPORTANT_PLATFORMS = [
   { id: 167, name: 'PlayStation 5' },
   { id: 169, name: 'Xbox Series' },
   { id: 130, name: 'Nintendo Switch' },
+  { id: 390, name: 'PlayStation VR2' },
 ];
 
 export const BACKLOG_STATUSES = [
