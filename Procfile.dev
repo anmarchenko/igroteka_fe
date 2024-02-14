@@ -1,0 +1,2 @@
+api: cd ../igroteka && mix phx.server
+web: npm run start
