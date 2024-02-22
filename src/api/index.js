@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 
 import { countriesForGame } from '../utils';
 
-const SKARO_HOST = process.env.REACT_APP_SKARO_HOST;
+const SKARO_HOST = import.meta.env.VITE_SKARO_HOST;
 
 const Api = {
   currentUser() {
