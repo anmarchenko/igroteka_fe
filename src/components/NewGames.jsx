@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import ReactPlaceholder from 'react-placeholder';
 
 import GameListItem from './GameListItem';
 
 import { FETCH_NEW_GAMES_REQUESTED } from '../store/newGames';
+import { Loading } from './Loading';
 
 export const NewGames = () => {
   const { games, fetching } = useSelector((state) => ({
@@ -30,13 +30,7 @@ export const NewGames = () => {
         <title>New games | Igroteka</title>
       </Helmet>
       <h4>New and noteworthy games</h4>
-      <ReactPlaceholder
-        showLoadingAnimation
-        color="#ddd"
-        ready={!fetching}
-        type="text"
-        rows={20}
-      >
+      {!fetching && (
         <div className="row">
           <div className="col-12 GameList">
             {games.map((game) => (
@@ -44,7 +38,8 @@ export const NewGames = () => {
             ))}
           </div>
         </div>
-      </ReactPlaceholder>
+      )}
+      <Loading visible={fetching} />
     </div>
   );
 };

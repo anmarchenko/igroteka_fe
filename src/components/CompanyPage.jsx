@@ -2,12 +2,6 @@ import React, { useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import ReactPlaceholder from 'react-placeholder';
-import {
-  TextBlock,
-  TextRow,
-  RectShape,
-} from 'react-placeholder/lib/placeholders';
 import { Helmet } from 'react-helmet';
 import { Info, ExternalLink as FeatherExternalLink } from 'react-feather';
 import { Switch, Route, useParams } from 'react-router-dom';
@@ -23,24 +17,7 @@ import CompanyTabsDeveloped from './CompanyTabDeveloped';
 import CompanyTabPublished from './CompanyTabPublished';
 
 import './CompanyPage.css';
-
-const placeholder = (
-  <div className="container CompanyPage">
-    <div className="row">
-      <div className="col-12 col-md-8">
-        <TextRow color="#ddd" style={{ height: 35 }} />
-        <TextBlock color="#ddd" rows={10} />
-      </div>
-      <div className="col-12 col-md-2 d-none d-sm-block">
-        <RectShape
-          showLoadingAnimation
-          color="#ddd"
-          style={{ width: 160, height: 200 }}
-        />
-      </div>
-    </div>
-  </div>
-);
+import { Loading } from './Loading';
 
 export const CompanyPage = () => {
   const { companyId } = useParams();
@@ -58,15 +35,11 @@ export const CompanyPage = () => {
   const ready = !companyFetching && !!company.name;
 
   return (
-    <ReactPlaceholder
-      showLoadingAnimation
-      ready={ready}
-      customPlaceholder={placeholder}
-    >
+    <div>
       <Helmet>
         <title>{`${company.name} | Igroteka`}</title>
       </Helmet>
-      {company.id && (
+      {ready && company.id && (
         <div className="container CompanyPage">
           <div className="CompanyPage-header">
             <div className="CompanyPage-info">
@@ -110,7 +83,8 @@ export const CompanyPage = () => {
           </Switch>
         </div>
       )}
-    </ReactPlaceholder>
+      <Loading visible={!ready} />
+    </div>
   );
 };
 

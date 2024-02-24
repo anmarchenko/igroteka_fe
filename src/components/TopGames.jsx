@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import ReactPlaceholder from 'react-placeholder';
 import range from 'lodash/range';
 
 import GameListItem from './GameListItem';
@@ -13,6 +12,7 @@ import { FETCH_TOP_GAMES_REQUESTED } from '../store/topGames';
 import { queryStringToFilters, filtersToQueryString } from '../utils';
 
 import './TopGames.css';
+import { Loading } from './Loading';
 
 const FILTERS = ['year', 'platform'];
 
@@ -103,13 +103,7 @@ export const TopGames = () => {
           />
         </div>
       </div>
-      <ReactPlaceholder
-        showLoadingAnimation
-        color="#ddd"
-        ready={!fetching}
-        type="text"
-        rows={20}
-      >
+      {!fetching && (
         <div className="row">
           <div className="col-12 GameList">
             {games.map((game, index) => (
@@ -123,7 +117,8 @@ export const TopGames = () => {
             ))}
           </div>
         </div>
-      </ReactPlaceholder>
+      )}
+      <Loading visible={fetching} />
     </div>
   );
 };

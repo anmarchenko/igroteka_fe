@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import ReactPlaceholder from 'react-placeholder';
 import dayjs from 'dayjs';
 
 import { XCircle } from 'react-feather';
@@ -24,6 +23,7 @@ import {
 import { BACKLOG_FIELDS } from '../../constants';
 
 import './Form.css';
+import { Loading } from '../Loading';
 
 const isInBacklog = (entry) => !!entry.id;
 
@@ -87,72 +87,71 @@ export class Form extends Component {
       ],
     };
     return (
-      <ReactPlaceholder
-        showLoadingAnimation
-        color="#ddd"
-        ready={ready}
-        type="text"
-        rows={5}
-      >
-        <BacklogStatus
-          status={backlogEntry.status}
-          onStatusChange={this.onStatusChange}
-        />
-        <div className="BacklogForm">
-          {show.includes('platform') && (
-            <Platform
-              platformId={backlogEntry.owned_platform_id}
-              platformName={backlogEntry.owned_platform_name}
-              onChange={(platformId, platformName) =>
-                updateBacklog({
-                  owned_platform_id: platformId,
-                  owned_platform_name: platformName,
-                })
-              }
-              platforms={game.platforms}
+      <div>
+        {ready && (
+          <div>
+            <BacklogStatus
+              status={backlogEntry.status}
+              onStatusChange={this.onStatusChange}
             />
-          )}
-          {show.includes('expectationRating') && (
-            <BacklogExpectation
-              value={backlogEntry.expectation_rating}
-              setExpectation={(rate) =>
-                updateBacklog({ expectation_rating: rate })
-              }
-            />
-          )}
-          {show.includes('score') && (
-            <BacklogScore
-              score={backlogEntry.score}
-              setScore={(score) => updateBacklog({ score })}
-            />
-          )}
-          {show.includes('finished') && (
-            <DateField
-              value={backlogEntry.finished_at}
-              onChange={(date) => {
-                if (date.length > 0) {
-                  updateBacklog({
-                    finished_at: dayjs(date[0]).format('YYYY-MM-DD'),
-                  });
-                } else {
-                  updateBacklog({
-                    finished_at: null,
-                  });
-                }
-              }}
-            />
-          )}
-          {isInBacklog(backlogEntry) && (
-            <button
-              type="button"
-              className="btn btn-light btn-sm BacklogForm-remove"
-              onClick={() => confirmAlert(alertOptions)}
-            >
-              <XCircle color="red" size={20} />
-            </button>
-          )}
-        </div>
-      </ReactPlaceholder>
+            <div className="BacklogForm">
+              {show.includes('platform') && (
+                <Platform
+                  platformId={backlogEntry.owned_platform_id}
+                  platformName={backlogEntry.owned_platform_name}
+                  onChange={(platformId, platformName) =>
+                    updateBacklog({
+                      owned_platform_id: platformId,
+                      owned_platform_name: platformName,
+                    })
+                  }
+                  platforms={game.platforms}
+                />
+              )}
+              {show.includes('expectationRating') && (
+                <BacklogExpectation
+                  value={backlogEntry.expectation_rating}
+                  setExpectation={(rate) =>
+                    updateBacklog({ expectation_rating: rate })
+                  }
+                />
+              )}
+              {show.includes('score') && (
+                <BacklogScore
+                  score={backlogEntry.score}
+                  setScore={(score) => updateBacklog({ score })}
+                />
+              )}
+              {show.includes('finished') && (
+                <DateField
+                  value={backlogEntry.finished_at}
+                  onChange={(date) => {
+                    if (date.length > 0) {
+                      updateBacklog({
+                        finished_at: dayjs(date[0]).format('YYYY-MM-DD'),
+                      });
+                    } else {
+                      updateBacklog({
+                        finished_at: null,
+                      });
+                    }
+                  }}
+                />
+              )}
+              {isInBacklog(backlogEntry) && (
+                <button
+                  type="button"
+                  className="btn btn-light btn-sm BacklogForm-remove"
+                  onClick={() => confirmAlert(alertOptions)}
+                >
+                  <XCircle color="red" size={20} />
+                </button>
+              )}
+            </div>
+          </div>
+        )}
+        <Loading visible={!ready} />
+      </div>
     );
   }
 }

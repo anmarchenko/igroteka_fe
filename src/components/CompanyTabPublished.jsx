@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
 
-import ReactPlaceholder from 'react-placeholder';
-
 import { COMPANY_PUBLISHED_FETCH_REQUESTED } from '../store/companyPage';
 import GameListItem from './GameListItem';
 import OffsetPagination from './OffsetPagination';
 import { queryStringToFilters, filtersToQueryString } from '../utils';
+import Loading from './Loading';
 
 const URL_FILTERS = ['offset'];
 
@@ -36,36 +35,35 @@ export const CompanyTabPublished = (props) => {
   }, [dispatch, company.id, filters.offset]);
 
   return (
-    <ReactPlaceholder
-      showLoadingAnimation
-      color="#ddd"
-      ready={!publishedFetching}
-      type="text"
-      rows={20}
-    >
-      {published.length == 0 && (
-        <span className="text-secondary">No games found</span>
-      )}
-      <div className="row">
-        <div className="col-12 GameList">
-          {published.map((game) => (
-            <GameListItem key={game.id} game={game} />
-          ))}
+    <div>
+      {!publishedFetching && (
+        <div>
+          {published.length == 0 && (
+            <span className="text-secondary">No games found</span>
+          )}
+          <div className="row">
+            <div className="col-12 GameList">
+              {published.map((game) => (
+                <GameListItem key={game.id} game={game} />
+              ))}
+            </div>
+          </div>
+          <OffsetPagination
+            offset={parseInt(filters.offset)}
+            resultsCount={published.length}
+            onOffsetChange={(offset) =>
+              history.push(
+                `/companies/${company.id}/published?${filtersToQueryString(
+                  { offset },
+                  URL_FILTERS
+                )}`
+              )
+            }
+          />
         </div>
-      </div>
-      <OffsetPagination
-        offset={parseInt(filters.offset)}
-        resultsCount={published.length}
-        onOffsetChange={(offset) =>
-          history.push(
-            `/companies/${company.id}/published?${filtersToQueryString(
-              { offset },
-              URL_FILTERS
-            )}`
-          )
-        }
-      />
-    </ReactPlaceholder>
+      )}
+      <Loading visible={publishedFetching} />
+    </div>
   );
 };
 

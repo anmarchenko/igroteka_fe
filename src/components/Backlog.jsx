@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import ReactPlaceholder from 'react-placeholder';
 import { Helmet } from 'react-helmet';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 
@@ -17,6 +16,7 @@ import {
 import { BACKLOG_ENTRIES_FETCHING_REQUESTED } from '../store/myBacklog';
 
 import './Backlog.css';
+import { Loading } from './Loading';
 
 const ALL_FILTERS = [
   'status',
@@ -113,14 +113,7 @@ export const Backlog = () => {
             />
           </div>
         )}
-
-        <ReactPlaceholder
-          showLoadingAnimation
-          color="#ddd"
-          ready={ready}
-          type="text"
-          rows={5}
-        >
+        {ready && (
           <BacklogList
             entries={entries}
             page={parseInt(page, 10)}
@@ -128,7 +121,8 @@ export const Backlog = () => {
             fetching={fetching}
             onPaginate={paginate(history, filters)}
           />
-        </ReactPlaceholder>
+        )}
+        <Loading visible={!ready} />
       </div>
     </div>
   );
