@@ -1,0 +1,18 @@
+# fly.toml app configuration file generated for igroteka-fe on 2024-02-24T21:13:18+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'igroteka-fe'
+primary_region = 'ams'
+
+[build]
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  min_machines_running = 1
+  processes = ['app']
+
+[[vm]]
+  size = 'shared-cpu-1x'
