@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+
 import axios from 'axios';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -17,4 +18,6 @@ axios.interceptors.request.use((config) => {
   return config;
 });
 
-ReactDOM.render(<App />, document.getElementById('root')); // eslint-disable-line react/jsx-filename-extension
+let container = document.getElementById('root');
+let root = createRoot(container);
+root.render(<App />); // eslint-disable-line react/jsx-filename-extension
